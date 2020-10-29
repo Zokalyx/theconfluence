@@ -1,0 +1,23 @@
+-Retention over time (number of people and percentage of population)
+
+-Average flair of people leaving over time (people and percentage)
+
+-Average flair of people joining over time (people and percentage)
+
+-Lowest flair of people leaving over time  (people and percentage)
+
+-Total population over time 
+
+-Time stayed in the sub over amount of people (distribution)
+
+-List of all members and their flair (current)
+
+-List of all historic members and the number in which they left
+
+-Leaderboard of current members who have been in here for the longest
+
+-Leaderboard of all members throughout time who have been in here for the longest
+
+-Leaderboard of historic members who have been in here for the longest
+
+-Lists of all people who have had 1, 2, 3, 4, 5 as their flair and for how long
