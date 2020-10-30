@@ -45,6 +45,10 @@ raw.close()
 for i in range(len(percentage)):
     percentage[i] *= 100
 
+average = sum(percentage)/len(percentage) #Write overal averagee
+with open("average.txt", "w") as note:
+    note.write(str(average))
+
 # USING MATPLOTLIB FOR NOW
 percentage = np.array(percentage)
 
