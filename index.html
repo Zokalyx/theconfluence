@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>
+            The Confluence
+        </title>
         <script type="text/javascript" src="website/script.js"></script>
 
         <link rel="stylesheet" href="website/styles.css">
 
         <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
     </head>
-    <body>
+    <body onload="showTime()">
         <div class="topnav">
             <div id="home">
                 <a href="index.html">
                     <img src="website/images/logo.png">
                 </a>
+            </div>
+            <div id="time">
+                    <p id="timi">
+                    </p>
             </div>
             <div class="smol">
                 <a href="https://www.reddit.com/r/TheConfluence/">
@@ -26,11 +33,10 @@
             </div>
         </div>
         <div id="leaders">
-            <h1 id="leaderstitle">Leaderboard</h1>
-            <iframe style="width:30%; height:220px; overflow:auto;" src="graphs/leaderboard/lead.html" frameborder="0"></iframe>
+            <a id="leaderstitle" href="website/leaderboard.html">
+                See complete leaderboard
+            </a>
         </div>
-
-        <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg">
 
         <footer style="height:auto;">
             <div id="footer" >

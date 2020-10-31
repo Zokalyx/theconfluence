@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Leaderboard
+        </title>
+        <script type="text/javascript" src="script.js"></script>
+
+        <link rel="stylesheet" href="leaderstyle.css">
+
+        <link rel="shortcut icon" type="image/ico" href="../favicon.ico"/>
+    </head>
+    <body onload="showTime()">
+        <div class="topnav">
+            <div id="home">
+                <a href="../index.html">
+                    <img src="../website/images/logo.png">
+                </a>
+            </div>
+            <div id="time">
+                    <p id="timi">
+                    </p>
+            </div>
+            <div class="smol">
+                <a href="https://www.reddit.com/r/TheConfluence/">
+                    <img src="../website/images/reddit.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://github.com/Zokalyx/theconfluence">
+                    <img src="../website/images/github.png">
+                </a>
+            </div>
+        </div>
+        <div id="leaders">
+            <h1 id="leaderstitle">Complete leaderboard</h1>
+            <iframe style="width:30%; height:2960px; overflow:auto;" src="../graphs/leaderboard/lead.html" frameborder="0"></iframe>
+        </div>
+    </body>
+</html>
