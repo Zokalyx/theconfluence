@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="website/script.js"></script>
+
+        <link rel="stylesheet" href="website/styles.css">
+
         <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
     </head>
     <body>
-        <a href="index.html">
-            <img src="website/images/logo.png" width="15%">
-        </a>
+        <div class="topnav">
+            <div id="home">
+                <a href="index.html">
+                    <img src="website/images/logo.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://www.reddit.com/r/TheConfluence/">
+                    <img src="website/images/reddit.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://github.com/Zokalyx/theconfluence">
+                    <img src="website/images/github.png">
+                </a>
+            </div>
+        </div>
+        <div id="leaders">
+            <h1 id="leaderstitle">Leaderboard</h1>
+            <iframe style="width:30%; height:220px; overflow:auto;" src="graphs/leaderboard/lead.html" frameborder="0"></iframe>
+        </div>
+
+        <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg">
+
+        <footer style="height:auto;">
+            <div id="footer" >
+                <img src="website/images/shh.png" style="width:7%; margin-left:5%;">
+            </div>
+        </footer>
     </body>
 </html>

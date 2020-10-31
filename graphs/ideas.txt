@@ -14,6 +14,8 @@
 
 -List of all historic members and the number in which they left
 
+-Distribution of flair of people leaving
+
 -Leaderboard of current members who have been in here for the longest
 
 -Leaderboard of all members throughout time who have been in here for the longest
