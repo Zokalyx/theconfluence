@@ -1,2 +1,3 @@
 # theconfluence statistics
-WIP
+
+Website: https://zokalyx.github.io/theconfluence/
