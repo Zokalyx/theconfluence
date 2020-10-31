@@ -1,5 +1,6 @@
 cd leaderboard
-python htmlcreator.py
+python -m htmlcreator
 cd ..\retention
-python creategraph.py
+python -m creategraph
+cd ..
 pause

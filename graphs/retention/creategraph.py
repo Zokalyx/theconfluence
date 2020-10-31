@@ -4,6 +4,7 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 w = open(str(Path(__file__).parents[2]) + "/week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
 w.close()
