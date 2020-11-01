@@ -9,7 +9,18 @@ body {
     overflow: auto;
 }
 
+.botnav {
+    background-color: #202020;
+    overflow: auto;
+}
+
 #home {
+    float: left;
+    width: 200px;
+    margin-left: 0.5%
+}
+
+#shh {
     float: left;
     width: 200px;
     margin-left: 0.5%
@@ -22,6 +33,13 @@ body {
     margin-top: 13px;
     margin-right: 1.5%;
     width: 40px;
+}
+
+.smol2 {
+    float: left;
+    margin-top: 0.7%;
+    margin-left: 1.5%;
+    text-align: center;
 }
 
 .smol:hover {
@@ -44,15 +62,30 @@ img {
     margin-block-end: 1%;
 }
 
-#footer {
+.footer {
     background-color:#303030;
 }
 
 #shh {
     float: left;
+    width: 75px;
+    margin-left: 35%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
 }
 
 #time {
   float:left;
   text-align: center;
+  font-family: Tahoma;
+}
+
+#message {
+  float:left;
+  text-align: center;
+}
+
+#sign {
+    font-family: Arial;
+    color: #A0A0A0;
 }

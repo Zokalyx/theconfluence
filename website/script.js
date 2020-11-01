@@ -17,5 +17,5 @@ if (week == actualweek) {
 
 function showTime() {
     document.getElementById("timi").innerHTML = isUpdated;
-    document.getElementById("time").style.marginLeft = window.innerWidth/2 - 200 - 75 + "px";
+    document.getElementById("time").style.marginLeft = window.innerWidth/2 - 285 + "px" ;
 };
