@@ -54,12 +54,15 @@ img {
 }
 
 #leaders {
-    padding-left:2%;
+    padding-left:42%;
     font-family: "Arial black","Lucida Grande",sans-serif;
+    font-size: 20px;
 }
 
 #leaderstitle {
     margin-block-end: 1%;
+    color: #3EF1ED;
+    text-decoration: none;
 }
 
 .footer {
@@ -88,4 +91,8 @@ img {
 #sign {
     font-family: Arial;
     color: #A0A0A0;
+}
+
+#video {
+    margin-left: 10%
 }

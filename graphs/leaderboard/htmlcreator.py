@@ -29,3 +29,8 @@ for i in range(pop):
     lead.write(str(i+1) + ". " + leaders[i] + "<br>")
 lead.write("</body></html>")
 lead.close()
+
+names = open("names.txt", "w")
+for leader in leaders[:5]:
+    names.write(leader+"\n")
+names.close()
