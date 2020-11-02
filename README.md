@@ -1,4 +1,4 @@
-# theconfluence website and statistics
+# theconfluence website
 
 Website: https://zokalyx.github.io/theconfluence/
 
