@@ -8,7 +8,7 @@ Search by flair number and see all of the people who have had that flair.
 
 Search by username. Get flair when joining, get flair when leaving (if they left) and lifespan. Also minigraph of their flair journey with p5.js.
 
-Mega video condensing all of the history of the sub into a single animated chart made with manim.
+Mega video condensing all of the history of the sub into a single animated chart made with manim. Might have to use p5 if the video turns out to be too large :/
 
 (Maybe when I learn about Reddit's API) Add images and other info to users.
 
