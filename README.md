@@ -4,7 +4,7 @@ Website: https://zokalyx.github.io/theconfluence/
 
 Upcoming features: 
 
-Search by flair number and see all of the people who have had that flair.
+Search by flair number and see all of the people who have had that flair (Not sure about this one. Is not very interesting, maybe only top 10 or so).
 
 Search by username. Get flair when joining, get flair when leaving (if they left) and lifespan. Also minigraph of their flair journey with p5.js.
 
