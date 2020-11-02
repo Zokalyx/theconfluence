@@ -14,4 +14,6 @@ Mega video condensing all of the history of the sub into a single animated chart
 
 Various graphs/charts about many statistics made with manim or matplotlib.
 
+"Notes" section for clarifications and explanations of the data.
+
 (If requested) "About" section where I explain technical details.
