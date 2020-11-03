@@ -2,9 +2,9 @@
 
 import csv
 
-w = open("../week.txt","r")
-week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
-w.close()
+
+
+
 
 p = open("../arrivals/" + str(week) + ".txt", "r") # Get population
 for last_line in p:

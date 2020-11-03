@@ -53,13 +53,13 @@ img {
         display: block;
 }
 
-#leaders {
+.leaders {
     padding-left:42%;
-    font-family: "Arial black","Lucida Grande",sans-serif;
+    font-family: "Arial black", "Lucida Grande",sans-serif;
     font-size: 20px;
 }
 
-#leaderstitle {
+.leaderstitle {
     margin-block-end: 1%;
     color: #3EF1ED;
     text-decoration: none;
@@ -94,5 +94,17 @@ img {
 }
 
 #video {
-    margin-left: 10%
+    margin-left: 10%;
+}
+
+#graph {
+    margin-top: 4%;
+    margin-left: 3.5%;
+    margin-bottom: 4%;
+}
+
+#more {
+    margin-top: 4%;
+    margin-left: -0.5%;
+    margin-bottom: 4%;
 }

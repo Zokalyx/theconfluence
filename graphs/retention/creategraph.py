@@ -4,6 +4,11 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import numpy as np
 
+import math
+def truncate(number, digits) -> float:
+    stepper = 10.0 ** digits
+    return math.trunc(stepper * number) / stepper
+
 
 w = open(str(Path(__file__).parents[2]) + "/week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
@@ -46,9 +51,30 @@ raw.close()
 for i in range(len(percentage)):
     percentage[i] *= 100
 
-average = sum(percentage)/len(percentage) #Write overal averagee
+#fix broken weeks
+percentage[4] = (percentage[3] + percentage[5])/2
+percentage[10] = (percentage[9] + percentage[11])/2
+
+minimumIndex = 0 #Stuff for min and max
+minimum = 100
+maximumIndex = 0
+maximum = 0
+
+for i in range(len(percentage)):
+    if percentage[i] > maximum:
+        maximum = percentage[i]
+        maximumIndex = i
+    elif percentage[i] < minimum:
+        minimum = percentage[i]
+        minimumIndex = i
+
+average = sum(percentage)/len(percentage) #Write minimum and it's index value, average and maximum and it's index value
 with open("average.txt", "w") as note:
-    note.write(str(average))
+    note.write(str(minimum)+"\n")
+    note.write(str(minimumIndex + 1) + "\n")
+    note.write(str(average)+"\n")
+    note.write(str(maximum) + "\n")
+    note.write(str(maximumIndex + 1) + "\n")
 
 # USING MATPLOTLIB FOR NOW
 percentage = np.array(percentage)
@@ -68,12 +94,18 @@ g = fig.add_subplot()
 g.set_ylabel("Retention Percentage (%)")
 g.set_xlabel("Week")
 #g.plot(xnew, f(xnew))
-plt.plot(x,percentage)
+plt.axvline(minimumIndex+1,0,minimum/100, color='black', linestyle='-.', linewidth=1)
+plt.axvline(maximumIndex+1,0,maximum/100, color='black', linestyle='-.', linewidth=1)
+#plt.axhline(minimum, 0, (minimumIndex+1)/week, color='black', linestyle='-.', linewidth=1)
+#plt.axhline(maximum, 0, (maximumIndex+1)/week, color='black', linestyle='-.', linewidth=1)
+plt.plot(x,percentage,linewidth=3)
 plt.plot(x,percentage,"ro")
 plt.grid(True)
 g.set_ylim(ymin=0,ymax=1)
 g.set_xlim(xmin=0,xmax=week)
 plt.xticks(np.arange(0, week, 5))
 plt.yticks(np.arange(0, 110, 10))
+
+plt.figtext(0.16, 0.93, "Minimum = " + str(truncate(minimum,2)) +"%   Average = " + str(truncate(average,2)) + "%   Maximum = " + str(truncate(maximum,2)) + "%")
 #plt.show()
 plt.savefig("graph.png")

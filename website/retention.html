@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            Leaderboard
+            Retention
         </title>
         <script type="text/javascript" src="script.js"></script>
 
@@ -38,10 +38,19 @@
             </div>
         </div>
         <div id="leaders">
-            <h1 id="leaderstitle">Current standings</h1>
-            <iframe style="width:30%; height:3000px; overflow:auto;" src="../graphs/leaderboard/lead.html" frameborder="0">
-
-            </iframe>
+            <h1 id="leaderstitle">Retention over time</h1>
+            <img src="../graphs/retention/graph.png">
+            <p id="explanation">
+                Retention is how much people that were part of the community at a given week stayed in the following
+                one. Since total amount of users is a changing number, it is meaningful to represent this number as
+                a percentage of the total, instead of the simple amount of people.
+                <br>
+                <br>
+                There is a notable upwards trend, which makes sense, since you can think of people as sediments going
+                through a river. Most of them flow away, but some stay. Maybe for good, maybe for a while. But the key
+                is that after some time, the sediments start accumulating and become something bigger. If given
+                enough time, they can create a delta or a small island, and this becomes a solid community.
+            </p>
         </div>
     </body>
 </html>
