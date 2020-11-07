@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Population
+        </title>
+        <script type="text/javascript" src="script.js"></script>
+
+        <link rel="stylesheet" href="leaderstyle.css">
+
+        <link rel="shortcut icon" type="image/ico" href="../favicon.ico"/>
+    </head>
+    <body onload="showTime()">
+        <div class="topnav">
+            <div id="home">
+                <a href="../index.html">
+                    <img src="images/logo.png">
+                </a>
+            </div>
+            <div id="time">
+                    <p id="timi">
+                    </p>
+            </div>
+            <div class="smol">
+                <a href="https://www.reddit.com/r/TheConfluence/">
+                    <img src="images/reddit.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://github.com/Zokalyx/theconfluence">
+                    <img src="images/github.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://discord.gg/K2ykw9K">
+                    <img src="images/discord.png">
+                </a>
+            </div>
+        </div>
+        <div id="leaders">
+            <h1 id="leaderstitle">Population over time</h1>
+            <img src="../graphs/population/graph.png">
+            <p id="explanation">
+                This graph represents a very basic thing: Amount of members in the sub. The number is not random; it
+                is fixed by Moscamye. During the first weeks, the population increased drastically, but to retain the
+                sensation of a small village, this has stopped in recent weeks.
+                <br>
+                <br>
+                The blue line represents the limit between newcomers (above the line) and dwellers (below the line).
+                This means that, for example, in week 3, there where 70 people of which 15 were already part of the sub
+                and 55 were new. The dashed line is a reference line that indicates half of the population at the time.
+                Note how similar the blue line is to the one in the retention graph. They are, in essence, representing
+                the same thing.
+                <br>
+                <br>
+                Note 1: If you look close enough, you might find something out of place: weeks 26 and weeks 35 have
+                151 (and not 150), and 161 (not 160) people. The case of week 26 is documented in
+                <a href="https://www.reddit.com/r/TheConfluence/comments/ik4e8s/rumours_of_wehooper4s_death_were_greatly/">
+                    this post
+                </a> about u/wehooper4's "death" (leaving the sub). There was a mistake and they were removed from
+                the group. People were picked for the next week to get a total of 150, and then wehooper had to be
+                reincorporated, giving a total of 151 people. Now on week 35 what happened was something I call
+                "out of protocol" incorporations. This is not the first time that happens, but basically, Moscamye
+                adds people who were part of the sub and want back in after leaving. They are added out of the regular
+                schedule, and this can mess up the beatiful round numbers. However, it's up to me to decide whether
+                they are part of this week's fold or the following one. For historic examples I just made them go in the
+                following one. But for the case of Ishotagrapefruit7, I decided to incorporate them to the previous one.
+                Other cases are: Aurallius, Tim19678, Grognak_the_Orc. These members possess the special sloth flair.
+                <br>
+                <br>
+                Note 2: "But wait a second, what's going on in week 5, wasn't there more than 50% retention?". That's a
+                great question. You see, the blue line looks a lot like retention, but it is not. Retention is a ratio
+                between the people who stayed divided by the total amount of people from LAST week. In terms of this
+                graph, retention would be people below the blue line divided by people above the blue line IN THE
+                PREVIOUS week. That's why the blue line does not quite reach the dashed one.
+            </p>
+        </div>
+    </body>
+</html>

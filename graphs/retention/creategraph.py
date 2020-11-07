@@ -109,3 +109,5 @@ plt.yticks(np.arange(0, 110, 10))
 plt.figtext(0.16, 0.93, "Minimum = " + str(truncate(minimum,2)) +"%   Average = " + str(truncate(average,2)) + "%   Maximum = " + str(truncate(maximum,2)) + "%")
 #plt.show()
 plt.savefig("graph.png")
+
+print(percentage)
