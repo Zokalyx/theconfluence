@@ -8,7 +8,7 @@ var nowTime = now.getTime();
 var milliseconds = Math.abs(inceptionTime - nowTime);
 var days = Math.floor(milliseconds/(1000 * 60 * 60  * 24));
 
-var actualweek = Math.ceil((days+2)/7);
+var actualweek = Math.ceil((days)/7);
 
 var isUpdated = days + " days since inception<br>Data will be updated soon";
 if (week == actualweek) {
