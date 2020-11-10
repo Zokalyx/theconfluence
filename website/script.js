@@ -1,4 +1,4 @@
-var week = 35;
+var week = 36;
 var inception = "2020-03-10T00:00:00Z";
 
 var now = new Date();

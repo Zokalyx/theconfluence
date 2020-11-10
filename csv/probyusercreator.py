@@ -2,9 +2,9 @@
 
 import csv
 
-
-
-
+w = open("../week.txt","r")
+week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
+w.close()
 
 p = open("../arrivals/" + str(week) + ".txt", "r") # Get population
 for last_line in p:
@@ -12,6 +12,7 @@ for last_line in p:
 p.close()
 space = last_line.find(" ")
 pop = int(last_line[0:space])
+#pop = 162
 
 bynum = [] # contains the info of pro.csv
 pro = open("pro.csv","r",newline="")
@@ -20,7 +21,6 @@ with pro:
     for row in reader:
         bynum.append(row)
 pro.close()
-# week = 3
 # pop = 5
 mega = [] # to be written onto the file
 for i in range(week):

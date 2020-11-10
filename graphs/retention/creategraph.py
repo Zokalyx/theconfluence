@@ -52,8 +52,12 @@ for i in range(len(percentage)):
     percentage[i] *= 100
 
 #fix broken weeks
-percentage[4] = (percentage[3] + percentage[5])/2
-percentage[10] = (percentage[9] + percentage[11])/2
+brokenWeeks = (4, 10, 34)
+for broken in brokenWeeks:
+    if broken + 2 == week:
+        percentage[broken] = percentage[broken-1]
+    else:
+        percentage[broken] = (percentage[broken-1]+percentage[broken+1])/2
 
 minimumIndex = 0 #Stuff for min and max
 minimum = 100

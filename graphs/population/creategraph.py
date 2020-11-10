@@ -44,8 +44,12 @@ with raw:
 raw.close()
 
 #fix broken weeks
-limitvalue[5] = (limitvalue[4] + limitvalue[6])/2
-limitvalue[10] = (limitvalue[9] + limitvalue[11])/2
+brokenWeeks = (5, 11, 35)
+for broken in brokenWeeks:
+    if broken + 1 == week:
+        limitvalue[broken] = limitvalue[broken-1]
+    else:
+        limitvalue[broken] = (limitvalue[broken-1]+limitvalue[broken+1])/2
 
 average = sum(limitvalue)/len(limitvalue) # Write average
 with open("average.txt", "w") as note:

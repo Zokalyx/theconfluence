@@ -11,6 +11,7 @@ for last_line in p:
 p.close()
 space = last_line.find(" ")
 pop = int(last_line[0:space])
+#pop = 162
 
 leaders = []
 
