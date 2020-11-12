@@ -11,3 +11,11 @@ data[0] = "var week = " + str(week) + ";\n"
 
 with open("script.js","w") as jsfile:
     jsfile.writelines(data)
+
+with open("searchbyuser.js","r") as jsfile:
+    data = jsfile.readlines()
+
+data[0] = "var week = " + str(week) + ";\n"
+
+with open("searchbyuser.js","w") as jsfile:
+    jsfile.writelines(data)

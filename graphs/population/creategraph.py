@@ -84,7 +84,7 @@ plt.plot(x, people,"ro",markersize=4 , color="#306C48")
 
 plt.grid(True)
 g.set_ylim(ymin=0,ymax=100)
-g.set_xlim(xmin=0,xmax=week)
+g.set_xlim(xmin=0,xmax=week+1)
 plt.xticks(np.arange(0, week, 5))
 plt.yticks(np.arange(0, people[len(people)-1] + 15, 10))
 

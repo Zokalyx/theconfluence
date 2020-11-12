@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Search
+        </title>
+        <script type="text/javascript" src="script.js"></script>
+
+        <link rel="stylesheet" href="leaderstyle.css">
+
+        <link rel="shortcut icon" type="image/ico" href="../favicon.ico"/>
+
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript" src="searchbyuser.js"></script>
+    </head>
+    <body onload="showTime()">
+        <div class="topnav">
+            <div id="home">
+                <a href="../index.html">
+                    <img src="images/logo.png">
+                </a>
+            </div>
+            <div id="time">
+                    <p id="timi">
+                    </p>
+            </div>
+            <div class="smol">
+                <a href="https://www.reddit.com/r/TheConfluence/">
+                    <img src="images/reddit.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://github.com/Zokalyx/theconfluence">
+                    <img src="images/github.png">
+                </a>
+            </div>
+            <div class="smol">
+                <a href="https://discord.gg/K2ykw9K">
+                    <img src="images/discord.png">
+                </a>
+            </div>
+        </div>
+        <div id="leaders">
+            <h1 id="leaderstitle">Search by username</h1>
+            <input type="text" placeholder="Username" id="input" spellcheck="false">
+            <button type="button" onclick="getRandom()" id="random">Choose random user</button>
+            <div id="canvas"></div>
+            <p style="font-family: Arial">Note: People that stayed for 1 or 2 weeks only do not show up when clicking the random button (for the sake of fun).
+            <br>
+            Note 2: A provisional list of all historic and active users as well as all their flair values on all weeks can be found <a href="https://github.com/Zokalyx/theconfluence/blob/main/csv/probyuser.csv">here</a>. (Might take a while to load.)
+            <br>
+            Note 3: The exact flair numbers of the user on screen appear in the console. (F12 > "Console"). 0 means not part of the sub.
+            </p>
+        </div>
+    </body>
+</html>
