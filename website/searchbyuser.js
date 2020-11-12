@@ -279,7 +279,7 @@ function draw() {
             if (week - joining[i][0] > 1) {
                 plural = "s"
             }
-            followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr.split(",")[arr.split(",").length-1] + ")";
+            followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr.split(",")[arr.split(",").length-1].trim() + ")";
          }
         text(previousText + "Joined: week " + joining[i][0] + " (flair: " + joining[i][1] + ") - Stayed: " + followingText, 4*width/7+75, 6*height/7 - 3 + 30*i);
     }
