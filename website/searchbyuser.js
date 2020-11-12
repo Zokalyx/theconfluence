@@ -153,7 +153,7 @@ function draw() {
     /*BLACK LINES*/
     strokeWeight(1);
     stroke(0);
-    line(0, -5/9*height-10, (week-1)/week*9/10*width, -5/9*height-10);
+    line(0, -5/9*height-5, (week-1)/week*9/10*width, -5/9*height-5);
     if (thisweek > 0) {
         var bro = 1;
     } else {
@@ -165,8 +165,8 @@ function draw() {
         var brolast = 0;
     }
     stroke(0,300*smoothFunc(brolast, bro, alphavalue));
-    line(0, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-10,
-          (week-1)/week*9/10*width, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-10);
+    line(0, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-5,
+          (week-1)/week*9/10*width, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-5);
 
     /*DRAW POINTS*/
     strokeWeight(9);
@@ -185,15 +185,15 @@ function draw() {
             var brolast = 0;
         }
         stroke(255,0,255,300*smoothFunc(brolast, bro, alphavalue));
-        point((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-10);
+        point((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-5);
         for (var j = 0; j < joining.length; j++) {
             if (i + 1 == joining[j][0]) {
                 stroke(255,0,255,300*smoothFunc(brolast, 0, alphavalue));
             }
         }
         if (i > 0 && actualvalues[i-1] !== 0) {
-            line((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-10,
-                 (i)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i-1]-10);
+            line((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-5,
+                 (i)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i-1]-5);
         }
 
     }
@@ -209,12 +209,12 @@ function draw() {
     }
     stroke(255,300*smoothFunc(brolast, bro, alphavalue));
     strokeWeight(5);
-    line(-height/50, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-10,
-          height/50, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-10);
+    line(-height/50, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-5,
+          height/50, -5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-5);
     fill(255,300*smoothFunc(brolast, bro, alphavalue));
     textSize(20);
     strokeWeight(0);
-    text(thisweek,-33,-5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)-4);
+    text(thisweek,-33,-5/9*height*smoothFunc(lastweek, thisweek/validmaximus, alphavalue)+1);
 
 
     /* MAKE AXES */
@@ -225,7 +225,7 @@ function draw() {
     line((week-1)/week*9/10*width, height/50, (week-1)/week*9/10*width, -height/50);
 
     line(0,0,0,-3*height/5);
-    line(-height/50, -5/9*height-10, height/50, -5/9*height-10);
+    line(-height/50, -5/9*height-5, height/50, -5/9*height-5);
 
     strokeWeight(0);
     fill(255);
@@ -243,7 +243,7 @@ function draw() {
         var brolast = 0;
     }
     fill(255,300*smoothFunc(brolast, bro, alphavalue));
-    text(validmaximus,-33,-5/9*height-4);
+    text(validmaximus,-33,-5/9*height+1);
 
 
     pop();
@@ -257,7 +257,7 @@ function draw() {
     strokeWeight(0);
     textAlign(CENTER);
     textSize(35);
-    text(name, width/7+50, 6*height/7);
+    text(name, width/7+25, 6*height/7);
     textSize(20);
     fill(255);
     for (var i = 0; i < joining.length; i++) {
@@ -279,9 +279,9 @@ function draw() {
             if (week - joining[i][0] > 1) {
                 plural = "s"
             }
-            followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr.split(",")[arr.split(",").length-1] + ")";
+            followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr.split(",")[arr.split(",").length-1].split("").pop() + ")";
          }
-        text(previousText + "Joined: week " + joining[i][0] + " (flair: " + joining[i][1] + ") - Stayed: " + followingText, 4*width/7+50, 6*height/7 - 3 + 30*i);
+        text(previousText + "Joined: week " + joining[i][0] + " (flair: " + joining[i][1] + ") - Stayed: " + followingText, 4*width/7+75, 6*height/7 - 3 + 30*i);
     }
 
     /* MANAGE ALPHA */
