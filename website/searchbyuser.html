@@ -47,15 +47,41 @@
             <h1 id="leaderstitle">Search by username</h1>
             <input type="text" placeholder="Username" id="input" spellcheck="false">
             <button type="button" onclick="getRandom()" id="random">Choose random user</button>
+            <span id="filler">You found me!</span>
+            <select id="choose">
+                <option>All</option>
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+            <input type="range" min="1" max="50" id="weekSlider" value="1">
+            <input type="range" min="1" max="200" id="flairSlider" value="200">
+            <br>
+            <label for="weekSlider" id="labelForWeekSlider">Min. stay = 1 week</label>
+            <br>
+            <label for="flairSlider" id="labelForFlairSlider">Max. lowest flair = </label>
             <div id="canvas"></div>
-            <p style="font-family: Arial">Upcoming features: Filter by active or historic users. Autocomplete suggestions. Filter by minimum and maximum flair. Filter by minimum weeks stayed (right now it is fixed on 3 for the random button).
-            <br>
-               Note: People that stayed for 1 or 2 weeks only do not show up when clicking the random button (for the sake of fun).
-            <br>
-            Note 2: A provisional list of all historic and active users as well as all their flair values on all weeks can be found <a href="https://github.com/Zokalyx/theconfluence/blob/main/csv/probyuser.csv">here</a>. (Might take a while to load.)
-            <br>
-            Note 3: The exact flair numbers of the user on screen appear in the console. (F12 > "Console"). 0 means not part of the sub.
-            </p>
+            <div id="notess">
+                <h3>Filter instructions and notes</h3>
+                <p style="font-family: Arial">
+                You can press enter to autocomplete when there is only one possible user for the given filters.
+                <br>
+                The random button only selects people that satisfy all the filters.
+                <br>
+                On the bottom right the names of people that satisfy all the filters, including name, appear.
+                <br>
+                <br>
+                Use the "minimum stay" filter to remove from possible results people that have not stayed long enough in the sub.
+                <br>
+                Use the "maximum lowest flair" filter to remove from possible results people that have never reached a flair number lower than the one selected.
+                <br>
+                You can manually type the name of someone even if they don't satisfy the filters.
+                <br>
+                <br>
+                The source data for this graph can be found <a href="https://github.com/Zokalyx/theconfluence/blob/main/csv/probyuser.csv">here</a>. (Might take a while to load.)
+                <br>
+                The exact flair numbers of the user on screen appear in the console. (F12 > "Console"). 0 means not part of the sub.
+                </p>
+            </div>
         </div>
     </body>
 </html>

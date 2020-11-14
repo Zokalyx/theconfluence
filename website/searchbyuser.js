@@ -1,4 +1,5 @@
 var week = 36;
+var population = 0;
 
 /* LOGIC VARIABLES */
 var array = []; /* Array of all csv data */
@@ -11,7 +12,9 @@ var specialIndex = 0; /* last week alive (defaults to week when user is still ac
 
 /* FILTER VARIABLES */
 var name = $("#input").val();
-var minimumWeeksAllowed = 3;
+var minimumWeeksAllowed = 1;
+var chooseFrom = "All";
+var maxLowestFlair = population;
 var validIndices = []; /* List of all indexes of users that passed the filter */
 
 /* RENDER VARIABLES */
@@ -29,8 +32,25 @@ var joining = [];
 var leaving = [];
 var thisweek = 0; /* Current y value for y axis tick */
 var lastweek = 0; /* Last y value for y axis tick */
+var weekheight;
+var thisjoilea = [0,36]; /* Current x values for x value ticks */
+var lastjoilea = [0,36];
+var joiwidth;
+var leawidth;
+var bro; /* Aux */
 
-/* GET CSV DATA AND STORE IT IN VARIABLE ARRAY */
+/* LENGTHS */
+var blackLineHeight;
+var blackLineWidth;
+var axisWidth;
+var axisHeight;
+
+/* MISC */
+var divisor = 5;
+var firstRow = [];
+var secondRow = [];
+
+/* GET CSV DATA AND STORE IT IN VARIABLE ARRAY ALSO ADJUST SLIDERS*/
 $(document).ready(function() {
     $.ajax({
         method: "GET",
@@ -44,11 +64,22 @@ $(document).ready(function() {
                         array[i].push(primodialArr[0]);
                         for (var j = 1; j < primodialArr.length; j++) {
                             array[i].push(Number(primodialArr[j]));
+                            if (j == primodialArr.length-1) {
+                                if (Number(primodialArr[j]) !== 0) {
+                                    population++;
+                                }
+                            }
                         }
                     }
                     loaded = true;
+                    $("#flairSlider").attr({
+                        "max": population,
+                    });
                  }
-     });
+    });
+    $("#weekSlider").attr({
+        "max": week,
+    });
 });
 
 /* CHECK IF NAME IS LIST, UPDATE "ARR" AND "NUMBER" IF SO */
@@ -69,6 +100,8 @@ function updateSuccess() {
 function updateJoilea() {
     joining = [];
     leaving = [];
+    lastjoilea = [...thisjoilea];
+    thisjoilea[1] = week;
     if (success) {
         var last = 0;
         for (var i = 1; i < week+1; i++) {
@@ -81,8 +114,15 @@ function updateJoilea() {
             }
             if ((actual === 0 || actual > last) && last > 0) {
                 leaving.push([i,last]);
+                thisjoilea[1] = i-1;
             }
         }
+        thisjoilea[0] = joining[0][0];
+        if (leaving.length < joining.length) {
+            thisjoilea[1] = week;
+        }
+    } else {
+        thisjoilea[0] = 0;
     }
 }
 
@@ -147,11 +187,30 @@ function sameStart(x, y) {
 
 /* CHECKS IF THE USER HAS CHANGED ANY OF THE FILTERS EXCLUDING NAME */
 function filtersChanged() {
-    return true;
+    var answer = false;
+    if (Number($("#weekSlider").val()) !== minimumWeeksAllowed) {
+        answer = true;
+        minimumWeeksAllowed = Number($("#weekSlider").val());
+        var plural = "";
+        if (minimumWeeksAllowed > 1) {
+            plural = "s"
+        }
+        $("#labelForWeekSlider").html("Min. stay = " + minimumWeeksAllowed + " week" + plural);
+    }
+    if ($("#choose").val() !== chooseFrom) {
+        answer = true;
+        chooseFrom = $("#choose").val();
+    }
+    if (Number($("#flairSlider").val()) !== maxLowestFlair) {
+        answer = true;
+        maxLowestFlair = Number($("#flairSlider").val());
+        $("#labelForFlairSlider").html("Max. lowest flair = " + maxLowestFlair);
+    }
+    return answer;
 }
 
-/* CHANGES VALIDINDICES TO WHATEVER MATCHES THE FILTERS */
-function runFilter() {
+/* FILTERS BY NAME START */
+function runNameFilter() {
     var auxvalid;
     auxvalid = [...validIndices];
     validIndices = [];
@@ -161,7 +220,10 @@ function runFilter() {
             validIndices.push(i);
         }
     }
+}
 
+/* CHANGES VALIDINDICES TO WHATEVER MATCHES THE FILTERS */
+function runFilter() {
     auxvalid = [...validIndices];
     validIndices = [];
     /* BY TIME STAYED */
@@ -177,6 +239,36 @@ function runFilter() {
             }
         }
     }
+
+    /* BY ALL/ACTIVE/INACTIVE */
+    if (chooseFrom !== "All") {
+        auxvalid = [...validIndices];
+        validIndices = [];
+        if (chooseFrom === "Active") {
+            for (var i = 0; i < auxvalid.length; i++) {
+                if (array[auxvalid[i]][week] !== 0) {
+                    validIndices.push(auxvalid[i]);
+                }
+            }
+        } else if (chooseFrom === "Inactive") {
+            for (var i = 0; i < auxvalid.length; i++) {
+                if (array[auxvalid[i]][week] == 0) {
+                    validIndices.push(auxvalid[i]);
+                }
+            }
+        }
+    }
+
+    /* BY MAXIMUM LOWEST FLAIR */
+    if (maxLowestFlair < population) {
+        auxvalid = [...validIndices];
+        validIndices = [];
+        for (var i = 0; i < auxvalid.length; i++) {
+            if (Math.min(...array[auxvalid[i]].slice(1).filter(num => num > 0)) <= maxLowestFlair) {
+                validIndices.push(auxvalid[i]);
+            }
+        }
+    }
 }
 
 /* GETS CALLED EVERY TIME THERE IS A NEW NAME */
@@ -188,28 +280,88 @@ function processData() {
     updateValues();
 }
 
+/* SELECTS A RANDOM USER FROM VALIDINDICES */
 function getRandom() {
-    var foundIt = false;
-    while (!foundIt) {
-        number = Math.floor(Math.random() * array.length);
+    name = "";
+    runNameFilter();
+    runFilter();
+    if (validIndices.length > 1) {
+        number = findAnother(number, validIndices.length);
         var auxname = array[number][0];
-        var numberCount = 0;
-        for (var i = 1; i < week+1; i++) {
-            if (array[number][i] > 0) {
-                numberCount++;
-                if (numberCount == 3) {
-                    foundIt = true;
-                    break
-                }
-            }
+        $("#input").val(auxname);
+    } else if ((number !== validIndices[0]) || !success) {
+        number = validIndices[0];
+        var auxname = array[number][0];
+        $("#input").val(auxname);
+    }
+}
+
+/* GETS A USER THAT IS NOT THE ON SCREEN */
+function findAnother(differentThan, maxi) {
+    var num;
+    while (true) {
+        num = Math.floor(Math.random()*maxi);
+        if (validIndices[num] !== differentThan) {
+            break;
         }
     }
-    $("#input").val(auxname);
+    return validIndices[num];
 }
 
 /* RETURNS SMOOTH DISTRIBUTION OF POINTS */
 function smoothFunc(original, target, percentage) {
+
     return original + (target-original)*0.5*(1-Math.cos(percentage*Math.PI));
+}
+
+/* AUXILIARY FUNCTION FOR DRAWING */
+function biop(last, now) {
+    var bro = [0,0];
+    if (last > 0) {
+        bro[0] = 1;
+    }
+    if (now > 0) {
+        bro[1] = 1;
+    }
+    return bro;
+}
+
+/* WRITE WORD IN TWO COLORS */
+function twoColors(word, secondword, x, y) {
+    var firstWidth = textWidth(word);
+    var word2 = secondword.slice(word.length);
+    var totalWidth = firstWidth + textWidth(word2);
+    fill(50,200,0);
+    text(word, x - totalWidth/2, y);
+    fill(200);
+    text(word2, x + firstWidth  - totalWidth/2, y);
+}
+
+/* WRITE SENTENCE IN TWO COLORS */
+function twoSentence(word, sentence, x, y) {
+    var totalWidth = 0;
+    for (var i = 0; i < sentence.length; i++) {
+        totalWidth += textWidth(sentence[i]);
+        if (i !== sentence.length-1) {
+            totalWidth += textWidth(", ");
+        }
+    }
+    totalWidth = -totalWidth/2;
+    var widthCounter = 0;
+    for (var i = 0; i < sentence.length; i++) {
+        var firstPart = sentence[i].slice(0,word.length+1);
+        var secondPart = sentence[i].slice(word.length+1);
+        fill(50,200,0);
+        text(firstPart, x + widthCounter + totalWidth, y);
+        widthCounter += textWidth(firstPart);
+        fill(200);
+        text(secondPart, x + widthCounter + totalWidth, y);
+        widthCounter += textWidth(secondPart);
+        if (i !== sentence.length-1) {
+            text(", ", x + widthCounter + totalWidth, y);
+            widthCounter += textWidth(", ");
+        }
+    }
 }
 
 /* CREATE CANVAS */
@@ -217,140 +369,194 @@ function setup() {
     var canvas = createCanvas(1200,500);
     canvas.parent("canvas");
     background(96);
+
+    /* LENGTHS VARIABLES */
+    blackLineHeight = -5/9*height;
+    blackLineWidth = (week-1)/week*9/10*width;
+    axisWidth = 9/10*width;
+    axisHeight = -3/5*height;
 }
 
 /* UPDATE DRAWING AND LOGIC */
 function draw() {
     /* CHECK WHEN THERE IS A NEW NAME */
-    var nameChanged = false;
     if ($("#input").val() !== name && loaded) {
         name = $("#input").val();
-        nameChanged = true;
         processData();
-    }
-    /* RUN THE FILTER IF NAME OR FILTERS HAVE CHANGED AND SUCCESS IS FALSE */
-    if (!success && (filtersChanged() || nameChanged)) {
+        if (success) {
+            name = array[number][0];
+            $("#input").val(name);
+        }
+        runNameFilter();
         runFilter();
     }
+    /* RUN THE FILTER IF NAME OR FILTERS HAVE CHANGED */
+    if (filtersChanged()) {
+        runNameFilter();
+        runFilter();
+    }
+    /* UPDATE ACTUALVALUES */
+    for (var i = 0; i < week; i++) {
+        actualvalues[i] = smoothFunc(lastvalues[i], targetvalues[i], alphavalue);
+    }
+    /* UPDATE VARIABLES THAT MOVE */
+    weekheight = blackLineHeight*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5;
+    joiwidth = blackLineWidth*smoothFunc(lastjoilea[0], thisjoilea[0], alphavalue)/week;
+    leawidth = blackLineWidth*smoothFunc(lastjoilea[1], thisjoilea[1], alphavalue)/week;
 
     /* RENDER GRAPH */
     background(96);
     push();
     translate(width/20, 11*height/16);
+    textAlign(CENTER);
 
         /*BLACK LINES*/
         strokeWeight(1);
         stroke(0);
-        line(0, -5/9*height-5, (week-1)/week*9/10*width, -5/9*height-5);
-        if (thisweek > 0) {
-            var bro = 1;
-        } else {
-            var bro = 0;
-        }
-        if (lastweek > 0) {
-            var brolast = 1;
-        } else {
-            var brolast = 0;
-        }
-        stroke(0,300*smoothFunc(brolast, bro, alphavalue));
-        line(0, -5/9*height*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5,
-              (week-1)/week*9/10*width, -5/9*height*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5);
+        line(0, blackLineHeight-5, axisWidth, blackLineHeight-5);
+        bro = [...biop(lastweek, thisweek)];
+        stroke(0,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(0, weekheight, blackLineWidth*(1+1/week), weekheight);
+        /* VERTICAL BLACK LINES */
+        bro = [...biop(lastjoilea[0], thisjoilea[0])];
+        stroke(0,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(joiwidth, 0, joiwidth, axisHeight);
+        bro = [...biop(week-lastjoilea[1], week-thisjoilea[1])];
+        if (lastsuccess) { bro[0] = 1; }
+        if (success) { bro[1] = 1; }
+        stroke(0,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(leawidth, 0, leawidth, axisHeight);
 
-        /*DRAW POINTS*/
-        strokeWeight(9);
+        /* DRAW POINTS AND LINES */
         for (var i = 0; i < week; i++) {
-            actualvalues[i] = smoothFunc(lastvalues[i], targetvalues[i], alphavalue);
-        }
-        for (var i = 0; i < week; i++) {
-            if (targetvalues[i] > 0) {
-                var bro = 1;
-            } else {
-                var bro = 0;
-            }
-            if (lastvalues[i] > 0) {
-                var brolast = 1;
-            } else {
-                var brolast = 0;
-            }
-            stroke(255,0,255,300*smoothFunc(brolast, bro, alphavalue));
-            point((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-5);
+            bro = [...biop(lastvalues[i], targetvalues[i])];
+            strokeWeight(8);
+            stroke(255,0,255,300*smoothFunc(bro[0], bro[1], alphavalue));
+            point((i+1)/week*blackLineWidth, blackLineHeight*actualvalues[i]-5);
             for (var j = 0; j < joining.length; j++) {
                 if (i + 1 == joining[j][0]) {
-                    stroke(255,0,255,300*smoothFunc(brolast, 0, alphavalue));
+                    stroke(255,0,255,300*smoothFunc(bro[0], 0, alphavalue));
                 }
             }
+            strokeWeight(9);
             if (i > 0 && actualvalues[i-1] !== 0) {
-                line((i+1)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i]-5,
-                     (i)/week*(9/10-1/week)*width, -5/9*height*actualvalues[i-1]-5);
+                line((i+1)/week*blackLineWidth, blackLineHeight*actualvalues[i]-5,
+                     (i)/week*blackLineWidth, blackLineHeight*actualvalues[i-1]-5);
             }
 
         }
-        if (thisweek > 0) {
-            var bro = 1;
-        } else {
-            var bro = 0;
-        }
-        if (lastweek > 0) {
-            var brolast = 1;
-        } else {
-            var brolast = 0;
-        }
-        stroke(255,300*smoothFunc(brolast, bro, alphavalue));
+
+        /* MOVING TICK MARKS */
         strokeWeight(5);
-        line(-height/50, -5/9*height*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5,
-              height/50, -5/9*height*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5);
-        fill(255,300*smoothFunc(brolast, bro, alphavalue));
+        bro = [...biop(lastweek, thisweek)];
+        stroke(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(-height/50, weekheight, height/50, weekheight);
+        fill(255,300*smoothFunc(bro[0], bro[1], alphavalue));
         textSize(20);
         strokeWeight(0);
-        text(thisweek,-33,-5/9*height*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)+1);
+        text(thisweek,-33,weekheight+5);
+        /* VERTICAL */
+        strokeWeight(5);
+        bro = [...biop(lastjoilea[0], thisjoilea[0])];
+        stroke(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(joiwidth, height/50, joiwidth, -height/50);
+        fill(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        strokeWeight(0);
+        text(thisjoilea[0],joiwidth,30);
+
+        strokeWeight(5);
+        bro = [...biop(week-lastjoilea[1], week-thisjoilea[1])];
+        if (lastsuccess) { bro[0] = 1; }
+        if (success) { bro[1] = 1; }
+        stroke(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        line(leawidth, height/50, leawidth, -height/50);
+        fill(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        strokeWeight(0);
+        text(thisjoilea[1],leawidth,30);
 
 
         /* MAKE AXES */
         strokeWeight(5);
         stroke(255);
 
-        line(0,0,9*width/10,0);
-        line((week-1)/week*9/10*width, height/50, (week-1)/week*9/10*width, -height/50);
+        line(0,0,axisWidth,0);
+        line(blackLineWidth, height/50, blackLineWidth, -height/50);
 
-        line(0,0,0,-3*height/5);
-        line(-height/50, -5/9*height-5, height/50, -5/9*height-5);
+        line(0,0,0,axisHeight);
+        line(-height/50, blackLineHeight-5, height/50, blackLineHeight-5);
 
         strokeWeight(0);
         fill(255);
         textSize(20);
-        text(week,(week-1)/week*9/10*width,30);
+        text(week,blackLineWidth,30);
 
-        if (thisweek > 0) {
-            var bro = 1;
-        } else {
-            var bro = 0;
-        }
-        if (lastweek > 0) {
-            var brolast = 1;
-        } else {
-            var brolast = 0;
-        }
-        fill(255,300*smoothFunc(brolast, bro, alphavalue));
-        text(maximus,-33,-5/9*height+1);
+        fill(255,300*smoothFunc(bro[0], bro[1], alphavalue));
+        text(maximus,-33,blackLineHeight+1);
 
-        pop();
+    pop();
 
-        /* WRITE NAME */
-        if (success) {
-            fill(0,255,0);
-        } else {
-            fill(255,100,100);
-        }
-        strokeWeight(0);
-        textAlign(CENTER);
-        textSize(35);
+    /* WRITE NAME */
+    strokeWeight(0);
+    textSize(40);
+    textAlign(CENTER);
+    if (success) {
+        fill(0,255,0);
         text(name, width/7+25, 6*height/7);
-        textSize(20);
+    } else if (validIndices.length == 1) {
+        textAlign(LEFT);
+        twoColors(name, array[validIndices[0]][0], width/7+25, 6*height/7)
+        textAlign(CENTER);
+    } else if (validIndices.length == 0) {
+        fill(255,100,100);
+        text(name, width/7+25, 6*height/7);
+    } else {
+        fill(50,200,50);
+        text(name, width/7+25, 6*height/7);
+    }
+
+    textSize(20);
+    fill(200);
+    /* WRITE INDICATION TO PRESS ENTER */
+    if (!success && validIndices.length == 1) {
+        text("Press enter to autocomplete", 4*width/7+75, 6*height/7 - 3);
+    }
+
+    /* WRITE WARNING */
+    if (validIndices.length == 0 && !success) {
+        text("No users match both that name and those filters", 4*width/7+75, 6*height/7 - 3);
+    }
+
+    /* WRITE SUGGESTIONS */
+    if (!success && validIndices.length > 1) {
+        textAlign(LEFT);
+        firstRow = [];
+        secondRow = [];
+        for (var i = 0; i < validIndices.length; i++) {
+            if (i == divisor) {
+                break;
+            }
+            firstRow.push(" "+array[validIndices[i]][0]);
+        }
+        twoSentence(name, firstRow, 4*width/7+75, 6*height/7 - 3);
+        if (validIndices.length > divisor) {
+            for (var i = divisor; i < validIndices.length; i++) {
+            if (i == divisor*2) {
+                break;
+            }
+            secondRow.push(" "+array[validIndices[i]][0]);
+            }
+            twoSentence(name, secondRow, 4*width/7+75, 6*height/7 - 3 - 30);
+        }
+        textAlign(CENTER);
+        if (validIndices.length > divisor*2) {
+            text("(and " + (validIndices.length - 2*divisor + " more)"), 4*width/7+75, 6*height/7 - 3 + 30);
+        }
+    }
+
+    /* WRITE DATA */
+    if (success) {
         fill(255);
         for (var i = 0; i < joining.length; i++) {
-             if (joining.length == 0) {
-                break
-             }
              var followingText;
              var previousText = "";
              if (i > 0) {
@@ -366,15 +572,26 @@ function draw() {
                 if (week - joining[i][0] > 1) {
                     plural = "s"
                 }
-                followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr[arr.length-1] + ")";
+                followingText = (week+1 - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr[arr.length-1] + ")";
              }
             text(previousText + "Joined: week " + joining[i][0] + " (flair: " + joining[i][1] + ") - Stayed: " + followingText, 4*width/7+75, 6*height/7 - 3 + 30*i);
         }
+    }
 
     /* MANAGE ALPHA AND COPY LAST VALUES IF ANIMATION IS COMPLETE  */
     if (alphavalue < 1) {
         alphavalue += dt;
     } else {
         lastvalues = [...targetvalues];
+    }
+}
+
+/* HANDLE ENTER */
+function keyPressed() {
+    if (keyCode === ENTER) {
+        if (validIndices.length === 1 && !success) {
+            name = "";
+            $("#input").val(array[validIndices[0]][0]);
+        }
     }
 }

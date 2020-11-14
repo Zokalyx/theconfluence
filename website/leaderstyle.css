@@ -99,3 +99,58 @@ img {
   color: #919191;
   opacity: 1;
 }
+
+#weekSlider {
+    position: relative;
+    top: -5px;
+    width: 200px;
+}
+
+#flairSlider {
+    position: relative;
+    top: -5px;
+    width: 200px;
+}
+
+#flairSlider:focus {
+    outline: none;
+}
+
+#labelForWeekSlider {
+    position: relative;
+    text-align: center;
+    top: -25px;
+    left: 635px;
+    font-family: Arial;
+}
+
+#labelForFlairSlider {
+    position: relative;
+    text-align: center;
+    top: -47px;
+    left: 830px;
+    font-family: Arial;
+}
+
+#choose {
+    position: relative;
+    top: 0px;
+    width: 100px;
+    padding-left; 200px;
+    height: 30px;
+    font-size: 18px;
+}
+
+#filler {
+    color: #606060;
+}
+
+#canvas {
+    position: relative;
+    top: -35px;
+}
+
+#notess {
+    position: relative;
+    top: -35px;
+}
