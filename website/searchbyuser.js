@@ -569,7 +569,7 @@ function draw() {
                 }
                 followingText = (leaving[i][0] - joining[i][0]) + " week" + plural + " - Left: week " + leaving[i][0] + " (flair: " + leaving[i][1] + ")";
              } else {
-                if (week - joining[i][0] > 1) {
+                if (week - joining[i][0] > 0) {
                     plural = "s"
                 }
                 followingText = (week+1 - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr[arr.length-1] + ")";
