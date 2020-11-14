@@ -1,7 +1,7 @@
 var week = 36;
 
 /* LOGIC VARIABLES */
-var array; /* Array of all csv data */
+var array = []; /* Array of all csv data */
 var arr; /* Array of the user on screen */
 var number; /* Index in variable array of user on screen */
 var success = false;
@@ -36,7 +36,18 @@ $(document).ready(function() {
         method: "GET",
         url: "../csv/probyuser.csv",
         dataType: "text",
-        success: function(data) {array = data.split("\n"); loaded = true;}
+        success: function(data) {
+                    var primodialArray = data.split("\n");
+                    for (var i = 0; i < primodialArray.length - 1; i++) {
+                        array.push([]);
+                        var primodialArr = primodialArray[i].split(",");
+                        array[i].push(primodialArr[0]);
+                        for (var j = 1; j < primodialArr.length; j++) {
+                            array[i].push(Number(primodialArr[j]));
+                        }
+                    }
+                    loaded = true;
+                 }
      });
 });
 
@@ -44,10 +55,10 @@ $(document).ready(function() {
 function updateSuccess() {
     lastsuccess = success;
     success = false;
-    for (var i = 0; i < array.length-1; i++) {
-        if (array[i].split(",")[0].toUpperCase() == name.toUpperCase()) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][0].toUpperCase() == name.toUpperCase()) {
             success = true;
-            arr = array[i];
+            arr = [...array[i]];
             number = i;
             break;
         }
@@ -62,9 +73,9 @@ function updateJoilea() {
         var last = 0;
         for (var i = 1; i < week+1; i++) {
             if (i != 1) {
-                last = parseInt(arr.split(",")[i-1]);
+                last = arr[i-1];
             }
-            var actual = Number(arr.split(",")[i]);
+            var actual = arr[i];
             if (actual > last) {
                 joining.push([i, actual]);
             }
@@ -79,7 +90,7 @@ function updateJoilea() {
 function updateWeek() {
     lastweek = thisweek;
     if (success) {
-        thisweek = parseInt(arr.split(",")[arr.split(",").length-1]);
+        thisweek = arr[arr.length-1];
         specialIndex = week;
         if (thisweek === 0) {
             thisweek = leaving[leaving.length-1][1];
@@ -103,16 +114,16 @@ function resetAlpha() {
 function updateValues() {
     lastmaximus = maximus;
     if (success) {
-        targetvalues = arr.split(",");
+        targetvalues = [...arr];
         targetvalues.splice(0, 1);
         for (var i = 0; i < week; i++) {
-            targetvalues[i] = parseInt(targetvalues[i]);
+            targetvalues[i] = targetvalues[i];
         }
         maximus = Math.max(...targetvalues);
+        console.log(arr);
         for (var i = 0; i < week; i++) {
             targetvalues[i] /= maximus;
         }
-        console.log(arr);
     } else {
         for (var i = 0; i < week; i++) {
             targetvalues[i] = 0;
@@ -136,28 +147,36 @@ function sameStart(x, y) {
 
 /* CHECKS IF THE USER HAS CHANGED ANY OF THE FILTERS EXCLUDING NAME */
 function filtersChanged() {
-
-}
-
-/* AUX FUNCTION FOR RUNFILTER */
-function interchange(a, b) {
-    a = [...b];
-    b = [];
+    return true;
 }
 
 /* CHANGES VALIDINDICES TO WHATEVER MATCHES THE FILTERS */
 function runFilter() {
     var auxvalid;
-    interchange(auxvalid, validIndices);
+    auxvalid = [...validIndices];
+    validIndices = [];
     /* BY NAME */
     for (var i = 0; i < array.length; i++) {
-        if (sameStart(name.toUpperCase(), array[i].split(",")[0].toUpperCase())) {
+        if (sameStart(name.toUpperCase(), array[i][0].toUpperCase())) {
             validIndices.push(i);
         }
     }
-    /*interchange(auxvalid, validIndices);
-    /* BY TIME STAYED */
 
+    auxvalid = [...validIndices];
+    validIndices = [];
+    /* BY TIME STAYED */
+    for (var i = 0; i < auxvalid.length; i++) {
+        var numberCount = 0;
+        for (var j = 1; j < week+1; j++) {
+            if (array[auxvalid[i]][j] > 0) {
+                numberCount++;
+                if (numberCount == minimumWeeksAllowed) {
+                    validIndices.push(auxvalid[i]);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 /* GETS CALLED EVERY TIME THERE IS A NEW NAME */
@@ -173,10 +192,10 @@ function getRandom() {
     var foundIt = false;
     while (!foundIt) {
         number = Math.floor(Math.random() * array.length);
-        var auxname = array[number].split(",")[0];
+        var auxname = array[number][0];
         var numberCount = 0;
         for (var i = 1; i < week+1; i++) {
-            if (array[number].split(",")[i] > 0) {
+            if (array[number][i] > 0) {
                 numberCount++;
                 if (numberCount == 3) {
                     foundIt = true;
@@ -203,9 +222,15 @@ function setup() {
 /* UPDATE DRAWING AND LOGIC */
 function draw() {
     /* CHECK WHEN THERE IS A NEW NAME */
+    var nameChanged = false;
     if ($("#input").val() !== name && loaded) {
         name = $("#input").val();
+        nameChanged = true;
         processData();
+    }
+    /* RUN THE FILTER IF NAME OR FILTERS HAVE CHANGED AND SUCCESS IS FALSE */
+    if (!success && (filtersChanged() || nameChanged)) {
+        runFilter();
     }
 
     /* RENDER GRAPH */
@@ -341,7 +366,7 @@ function draw() {
                 if (week - joining[i][0] > 1) {
                     plural = "s"
                 }
-                followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr.split(",")[arr.split(",").length-1].trim() + ")";
+                followingText = (week - joining[i][0]) + " week" + plural + " - Currently a member (flair: " + arr[arr.length-1] + ")";
              }
             text(previousText + "Joined: week " + joining[i][0] + " (flair: " + joining[i][1] + ") - Stayed: " + followingText, 4*width/7+75, 6*height/7 - 3 + 30*i);
         }
