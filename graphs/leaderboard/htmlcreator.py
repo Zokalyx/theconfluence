@@ -23,9 +23,9 @@ p = open(str(Path(__file__).parents[2]) + "/arrivals/" + str(week) + ".txt", "r"
 for last_line in p:
     pass
 p.close()
-# space = last_line.find(" ")
-# pop = int(last_line[0:space])
-pop = 162
+space = last_line.find(" ")
+pop = int(last_line[0:space])
+# pop = 162
 
 leaders = []
 
