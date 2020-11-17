@@ -1,4 +1,21 @@
 body {
-     font-family: Arial, Helvetica, sans-serif;
+     font-family: Arial , Helvetica, sans-serif;
+     font-size: 20px;
      color: white;
+}
+
+h {
+    font-family: "Arial Black";
+}
+
+a {
+    color: #00FF54;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

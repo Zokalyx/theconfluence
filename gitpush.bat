@@ -1,4 +1,5 @@
 git add .
-git commit -m "weekly update"
+set /p id="Commit message: "
+git commit -m %id%
 git push
 pause
