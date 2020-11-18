@@ -13,7 +13,7 @@ bools = []
 links = []
 times = []
 wk = 0
-with open("../csv/pro.csv", "r") as pro:
+with open("https://raw.githubusercontent.com/Zokalyx/theconfluence/main/csv/pro.csv", "r") as pro:
     reader = csv.reader(pro)
     for row in reader:
         if not wk:
