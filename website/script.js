@@ -1,18 +1,16 @@
 var week = 37;
-var inception = "2020-03-10T00:00:00Z";
+var inception = 1583877600000;
+var updatal = inception + week*604800000;
 
-var now = new Date();
-var inceptionTime = (new Date(inception)).getTime();
-var nowTime = now.getTime();
+var now = Date.now();
 
-var milliseconds = Math.abs(inceptionTime - nowTime);
+
+var milliseconds = now - inception;
 var days = Math.floor(milliseconds/(1000 * 60 * 60  * 24));
 
-var actualweek = Math.ceil((days)/7);
-
-var isUpdated = days + " days since inception<br>Data will be updated soon";
-if (week == actualweek) {
-    isUpdated = days + " days since inception<br>Data is up to date";
+var isUpdated = days + " days since inception<br>Data is up to date";
+if (now > updatal) {
+    isUpdated = days + " days since inception<br>Data will be updated soon";
 }
 
 function showTime() {
