@@ -3,6 +3,7 @@ import time
 import csv
 import math
 import os
+import requests
 from os import environ
 
 s = time.time()  # time
@@ -13,15 +14,16 @@ bools = []
 links = []
 times = []
 wk = 0
-with open("https://raw.githubusercontent.com/Zokalyx/theconfluence/main/csv/pro.csv", "r") as pro:
-    reader = csv.reader(pro)
-    for row in reader:
-        if not wk:
-            wk = len(row)
-        names.append(row[-1])
-        bools.append(False)
-        links.append("")
-        times.append(0)
+
+pro = requests.get("https://raw.githubusercontent.com/Zokalyx/theconfluence/main/csv/pro.csv").content
+reader = csv.reader(pro)
+for row in reader:
+    if not wk:
+        wk = len(row)
+    names.append(row[-1])
+    bools.append(False)
+    links.append("")
+    times.append(0)
 
 with open("shh.txt", "r") as secret:
     secrets = secret.readlines()
