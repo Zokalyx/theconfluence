@@ -33,8 +33,8 @@ var leaving = [];
 var thisweek = 0; /* Current y value for y axis tick */
 var lastweek = 0; /* Last y value for y axis tick */
 var weekheight;
-var thisjoilea = [0,36]; /* Current x values for x value ticks */
-var lastjoilea = [0,36];
+var thisjoilea = [0,week]; /* Current x values for x value ticks */
+var lastjoilea = [0,week];
 var joiwidth;
 var leawidth;
 var bro; /* Aux */
