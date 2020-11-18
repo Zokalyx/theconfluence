@@ -2,6 +2,7 @@ import praw
 import time
 import csv
 import math
+import os
 from os import environ
 
 s = time.time()  # time

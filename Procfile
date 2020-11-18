@@ -1,1 +1,1 @@
-worker: bot/checkcomment.py
+worker: python bot/checkcomment.py
