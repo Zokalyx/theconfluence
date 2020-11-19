@@ -25,7 +25,7 @@ with open(str(Path(__file__).parents[2]) + "/csv/pro.csv", "r") as pro:
 with open("shh.txt", "r") as secret:
     secrets = secret.readlines()
 
-reddit = praw.Reddit(client_id="1J-bRPTlSfQIcw",
+reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
                      client_secret=secrets[1],
                      username="Zokalyx",
                      password=secrets[0].strip(),
