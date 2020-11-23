@@ -46,7 +46,7 @@ for run in runs:
 for post in posts:
     if post.created_utc > smm:
         if post.created_utc > last_run_start:
-            # print(post.title)
+            print(post.title)
             print(str(math.trunc(10*((s - post.created_utc) / (s - last_run_start) * 100))/10) + "%")
             if post.author == "yo-whatupmofo":
                 ind = names.index("Or-Your-Money-Back")
