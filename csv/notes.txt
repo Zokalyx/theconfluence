@@ -73,3 +73,6 @@ Of course: theconfluencer too.
 
 ElbowDeepInAFeline does not appear in arrivals 35.
 Had to be manually inserted.
+
+SquirrelSultan does not appear in arrivals 38.
+Had to be manually inserted.
