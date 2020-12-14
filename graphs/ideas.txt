@@ -1,4 +1,4 @@
--Retention over time (number of people and percentage of population)
+-Retention over time (number of people and percentage of population) DONE
 
 -Average flair of people leaving over time (people and percentage)
 
@@ -6,13 +6,13 @@
 
 -Lowest flair of people leaving over time  (people and percentage)
 
--Total population over time 
+-Total population over time DONE
 
--Time stayed in the sub over amount of people (distribution)
+-Time stayed in the sub over amount of people (distribution) DONE
 
--List of all members and their flair (current)
+-List of all members and their flair (current) DONE
 
--List of all historic members and the number in which they left
+-List of all historic members and the number in which they left DONE
 
 -Distribution of flair of people leaving
 
