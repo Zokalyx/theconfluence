@@ -1,4 +1,4 @@
-var week = 40;
+var week = 41;
 var inception = 1583877600000;
 var updatal = inception + week*604800000;
 
