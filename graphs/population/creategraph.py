@@ -44,7 +44,7 @@ with raw:
 raw.close()
 
 #fix broken weeks
-brokenWeeks = (5, 11, 35)
+brokenWeeks = (5, 11, 35, 41)
 for broken in brokenWeeks:
     if broken + 1 == week:
         limitvalue[broken] = limitvalue[broken-1]
