@@ -1,6 +1,8 @@
 cd leaderboard
 python -m htmlcreator
 call rendervideo.bat
+cd ..\anniversaries
+python -m htmlcreator
 cd ..\retention
 python -m creategraph
 cd ..\population
