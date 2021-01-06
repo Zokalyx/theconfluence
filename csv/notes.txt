@@ -76,3 +76,6 @@ Had to be manually inserted.
 
 SquirrelSultan does not appear in arrivals 38.
 Had to be manually inserted.
+
+Furfty was accidentally marked as removed from the sub in departures 44.
+All numbers above 83 in arrivals (all) have to be manually increased by one.
