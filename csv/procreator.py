@@ -30,7 +30,7 @@ with raw:
         # Departures logic, does not apply for first run
         namerow = next(reader)
         numrow = next(reader)
-        people-=len(numrow)
+        people -= len(numrow)
 
         if i != 0:
             # first get the previous week members as they are and make it a list

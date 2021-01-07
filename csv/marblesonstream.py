@@ -1,5 +1,4 @@
 import csv
-from pathlib import Path
 
 w = open("../week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
@@ -25,5 +24,5 @@ pro.close()
 
 names = open("marblesonstream.csv", "w", newline="")
 for leader in leaders[:64]:
-    names.write(leader+"\n")
+    names.write(leader + "\n")
 names.close()

@@ -6,6 +6,8 @@
 
 -Lowest flair of people leaving over time  (people and percentage)
 
+-Neighbours and cousins graph.
+
 -Total population over time DONE
 
 -Time stayed in the sub over amount of people (distribution) DONE
