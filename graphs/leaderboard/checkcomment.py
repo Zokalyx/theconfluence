@@ -6,6 +6,8 @@ from pathlib import Path
 
 s = time.time()  # time
 smm = s - 2592000  # time minus one month
+smm = s - 1296000 # time minus two weeks
+smm = s - 1.5*1296000 # time minus three weeks
 
 names = []
 bools = []
@@ -44,39 +46,50 @@ for run in runs:
             break
 
 for post in posts:
+
     if post.created_utc > smm:
+
+        print(post.title)
+        print(str(math.trunc(10 * ((s - post.created_utc) / (s - smm) * 100)) / 10) + "%")
+
         if post.created_utc > last_run_start:
-            print(post.title)
-            print(str(math.trunc(10*((s - post.created_utc) / (s - last_run_start) * 100))/10) + "%")
+
             if post.author == "yo-whatupmofo":
                 ind = names.index("Or-Your-Money-Back")
                 if not bools[ind]:
                     links[ind] = "reddit.com" + post.permalink
                     times[ind] = (s - post.created_utc)/86400
                 bools[ind] = True
+
             if post.author in names:
                 ind = names.index(post.author)
                 if not bools[ind]:
                     links[ind] = "reddit.com" + post.permalink
                     times[ind] = (s - post.created_utc)/86400
                 bools[ind] = True
-            comments = post.comments
-            comments.replace_more(limit=None)
-            for comment in comments.list():
-                if comment.created_utc > last_run_start:
-                    if comment.author == "yo-whatupmofo":
-                        ind = names.index("Or-Your-Money-Back")
-                        if not bools[ind]:
-                            links[ind] = "reddit.com" + post.permalink
-                            times[ind] = (s - post.created_utc) / 86400
-                        bools[ind] = True
-                    if comment.author in names:
-                        ind = names.index(comment.author)
-                        if not bools[ind]:
-                            links[ind] = "reddit.com" + post.permalink
-                            times[ind] = (s - comment.created_utc)/86400
-                        bools[ind] = True
+
+        comments = post.comments
+        comments.replace_more(limit=None)
+
+        for comment in comments.list():
+
+            if comment.created_utc > last_run_start:
+
+                if comment.author == "yo-whatupmofo":
+                    ind = names.index("Or-Your-Money-Back")
+                    if not bools[ind]:
+                        links[ind] = "reddit.com" + post.permalink
+                        times[ind] = (s - post.created_utc) / 86400
+                    bools[ind] = True
+                if comment.author in names:
+                    ind = names.index(comment.author)
+                    if not bools[ind]:
+                        links[ind] = "reddit.com" + post.permalink
+                        times[ind] = (s - comment.created_utc)/86400
+                    bools[ind] = True
+
     else:
+
         break
 
 com = zip(names, bools, links, times)
