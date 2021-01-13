@@ -12,7 +12,7 @@ for last_line in p:
 p.close()
 space = last_line.find(" ")
 pop = int(last_line[0:space])
-#pop = 175
+# pop = 180
 
 mega = [] # array containing the arranged information of all the raw file (to be saved in pro.csv)
 for i in range(pop):
@@ -44,6 +44,7 @@ with raw:
                 if current[int(numrow[j])-1] != namerow[j]:
                     print("error in departure " + str(i+1) + " entry " + numrow[j] + " " + namerow[j] + " (vs " + current[int(numrow[j])-1] + " in arrival)")
                 current.pop(int(numrow[j])-1)
+
             # now make the rest of the weeks like that
             for j in range(len(current)):
                 for k in range(i,week):

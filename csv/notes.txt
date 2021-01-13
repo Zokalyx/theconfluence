@@ -79,3 +79,7 @@ Had to be manually inserted.
 
 Furfty was accidentally marked as removed from the sub in departures 44.
 All numbers above 83 in arrivals (all) have to be manually increased by one.
+
+A bug is causing trouble when decreasing population (181 > 180 in week 45) due 
+to Furfty's mistake. I'll delete Elle181 out of the system (sorry!) until I
+make a proper solution. Who knows when :p.
