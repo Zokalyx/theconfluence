@@ -47,7 +47,7 @@ for row in mega:
         row.pop(wk+1)
 
 def plot_user(index, ax):
-    d = 75
+    d = 50
     color = colorsys.hsv_to_rgb((index % d)/d, 0.70, 0.70)
     data = separate(mega[index][1:])
     for i in range(len(data[0])):

@@ -10,4 +10,6 @@ python -m creategraph
 cd ..\time-stayed
 python -m creategraph
 python -m creategraph2
+cd ..\allgraph
+python -m allgraphfix
 pause
