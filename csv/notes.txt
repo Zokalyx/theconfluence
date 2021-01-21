@@ -82,4 +82,8 @@ All numbers above 83 in arrivals (all) have to be manually increased by one.
 
 A bug is causing trouble when decreasing population (181 > 180 in week 45) due 
 to Furfty's mistake. I'll delete Elle181 out of the system (sorry!) until I
-make a proper solution. Who knows when :p.
+make a proper solution. Who knows when :p. UPDATE: I'll keep Elle181 in
+and they'll appear for one week more than they should have.
+UPDATE 2: I added a placeholder because graph looked weird.
+
+I have replaced Or-Your-Money-Back with yo-whatupmofo

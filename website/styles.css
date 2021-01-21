@@ -98,7 +98,7 @@ img {
 }
 
 #graph {
-    margin-top: 4%;
+    margin-top: 1%;
     margin-left: 3.5%;
     margin-bottom: 1%;
 }
@@ -131,6 +131,12 @@ img {
 #graph7 {
     margin-top: 1%;
     margin-left: 4.7%;
+    margin-bottom: 1%;
+}
+
+#graph8 {
+    margin-top: 1%;
+    margin-left: 5.25%;
     margin-bottom: 1%;
 }
 
