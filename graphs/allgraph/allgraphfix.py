@@ -57,7 +57,7 @@ def plot_user(index, ax):
 
 
 plt.style.use('dark_background')
-fig, ax = plt.subplots(figsize=(16, 9))
+fig, ax = plt.subplots(figsize=(19, 7))
 ax.set_xlabel("Run")
 ax.set_ylabel("Flair number")
 for i in range(len(mega)):
