@@ -12,4 +12,5 @@ python -m creategraph
 python -m creategraph2
 cd ..\allgraph
 python -m allgraphfix
+python -m allgraphvariation
 pause
