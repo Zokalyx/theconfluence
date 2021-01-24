@@ -46,8 +46,11 @@ for row in mega:
     for wk in brokenWeeks:
         row.pop(wk+1)
 
+lines = ("-", "--", "-.", ":")
+
 
 def plot_user(index, ax):
+    line_style = lines[index % 4]
     d = 50
     color = colorsys.hsv_to_rgb((index % d)/d, 0.70, 0.70)
     data = separate(mega[index][1:])
