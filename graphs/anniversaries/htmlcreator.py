@@ -20,7 +20,7 @@ with pro:
         mega.append(row)
 pro.close()
 
-original = 1583712000000
+original = 1583722800000
 
 
 def get_ms_from_week(wk):

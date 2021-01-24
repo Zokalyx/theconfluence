@@ -16,9 +16,10 @@ let change = false;
 let who = -1;
 
 let original = 1583712000000;
+let originalprior = 1583722800000;
 
 function weekToMs(week) {
-    let ans = original + (week-1)*604800000
+    let ans = originalprior + (week-1)*604800000;
     if (week >= 36) {
         ans += 172800000;
     }
