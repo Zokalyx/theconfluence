@@ -53,13 +53,14 @@ for post in posts:
         print(str(math.trunc(10 * ((s - post.created_utc) / (s - smm) * 100)) / 10) + "%")
 
         if post.created_utc > last_run_start:
-
+            """
             if post.author == "yo-whatupmofo":
                 ind = names.index("Or-Your-Money-Back")
                 if not bools[ind]:
                     links[ind] = "reddit.com" + post.permalink
                     times[ind] = (s - post.created_utc)/86400
                 bools[ind] = True
+            """
 
             if post.author in names:
                 ind = names.index(post.author)
@@ -75,12 +76,15 @@ for post in posts:
 
             if comment.created_utc > last_run_start:
 
+                """
                 if comment.author == "yo-whatupmofo":
                     ind = names.index("Or-Your-Money-Back")
                     if not bools[ind]:
                         links[ind] = "reddit.com" + post.permalink
                         times[ind] = (s - post.created_utc) / 86400
                     bools[ind] = True
+                """
+
                 if comment.author in names:
                     ind = names.index(comment.author)
                     if not bools[ind]:
