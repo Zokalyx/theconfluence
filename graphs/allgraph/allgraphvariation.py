@@ -51,8 +51,10 @@ lines = ("-", "--", "-.", ":")
 
 def plot_user(index, ax):
     line_style = lines[index % 4]
-    d = 50
-    color = colorsys.hsv_to_rgb((index % d)/d, 0.70, 0.70)
+    d = 56
+    e = 33
+    f = 10
+    color = colorsys.hsv_to_rgb((index % d)/d, 0.50 + 0.5*(index % e)/e, 0.50 + 0.5*(index % f)/f)
     data = separate(mega[index][1:])
     for i in range(len(data[0])):
         ax.plot(data[1][i], data[0][i], "o", ms=0.5, c=color)
