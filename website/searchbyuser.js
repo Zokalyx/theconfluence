@@ -1,4 +1,4 @@
-var week = 47;
+var week = 48;
 var population = 0;
 
 /* LOGIC VARIABLES */
