@@ -87,3 +87,6 @@ and they'll appear for one week more than they should have.
 UPDATE 2: I added a placeholder because graph looked weird.
 
 I have replaced Or-Your-Money-Back with yo-whatupmofo
+
+TheMaggotGuy was accidentaly listed in departures 48. All numbers
+above 106 have been adjusted to make way for 107 The_Maggot_Guy
