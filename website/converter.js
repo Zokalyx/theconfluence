@@ -1,4 +1,4 @@
-var week = 48;
+var week = 49;
 let wkch, rnch, dtch;
 $(document).ready(function() {
     $("#week_place").attr({
