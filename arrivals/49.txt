@@ -154,4 +154,6 @@
 
 190 SonnySaveCalvin
 
-191 [PLACEHOLDER]
+191 CaptainN_GameMaster
+
+192 SkullDaisyGimp
