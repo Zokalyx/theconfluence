@@ -57,7 +57,8 @@ for fake_post in posts:
     postsday[tim] += 1
 
     totalposts += 1
-    print(totalposts)
+    print(totalposts/len(posts)*100)
+    print(post.title)
 
     comments = post.comments
     comments.replace_more(limit=None)
