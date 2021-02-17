@@ -88,7 +88,7 @@ for post in posts:
                 if comment.author in names:
                     ind = names.index(comment.author)
                     if not bools[ind]:
-                        links[ind] = "reddit.com" + post.permalink
+                        links[ind] = "reddit.com" + post.permalink + comment.id
                         times[ind] = (s - comment.created_utc)/86400
                     bools[ind] = True
 

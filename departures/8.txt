@@ -2,9 +2,9 @@
 
 12 i-yeetus-that-fetus
 
-13 pie-rate_pear-rot
+13 Pie-rate_Pear-rot
 
-14 Doomsdaysushi
+14 doomsdaysushi
 
 16 IsItSupposedToDoThat
 
@@ -32,7 +32,7 @@
 
 32 intrusive_r
 
-33 UNKNOWN1
+33 [UNKNOWN]
 
 34 rabbilewin
 

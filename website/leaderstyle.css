@@ -168,3 +168,11 @@ img {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+#oldestcomment {
+    color: #3EF1ED;
+}
+
+#oldestpost {
+    color: #3EF1ED;
+}

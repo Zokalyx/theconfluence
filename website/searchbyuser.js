@@ -3,6 +3,7 @@ var population = 0;
 
 /* LOGIC VARIABLES */
 var array = []; /* Array of all csv data */
+var timemachine = [];
 var arr; /* Array of the user on screen */
 var number; /* Index in variable array of user on screen */
 var success = false;
@@ -71,16 +72,77 @@ $(document).ready(function() {
                             }
                         }
                     }
-                    loaded = true;
                     $("#flairSlider").attr({
                         "max": population,
                     });
+                 }
+    });
+    $.ajax({
+        method: "GET",
+        url: "../csv/timemachine.csv",
+        dataType: "text",
+        success: function(data) {
+                    var primodialArray = data.split("\n");
+                    for (var i = 0; i < primodialArray.length - 1; i++) {
+                        timemachine.push([]);
+                        var primodialArr = primodialArray[i].split(",");
+                        for (var j = 0; j < primodialArr.length; j++) {
+                            timemachine[i].push(primodialArr[j]);
+                        }
+                    }
+                    loaded = true;
                  }
     });
     $("#weekSlider").attr({
         "max": week,
     });
 });
+
+/* GET TEXT VERSION OF TIME FOR TIME MACHINE */
+function getDate(seconds) {
+    let dat = "";
+    let err = "";
+    if (seconds != 0) {
+        time = new Date(seconds * 1000);
+        dat = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+    } else {
+        err = "Not found"
+    }
+    return [dat, err]
+}
+
+/* UPDATE TIME MACHINE */
+function updateTimeMachine() {
+    let important = timemachine[number];
+    if (success) {
+        let comres = getDate(Number(important[4]));
+        let urlx = "https://www.reddit.com/comments/" + important[5] + "/_/" + important[3];
+        $("#oldestcomment").html(comres[0]);
+        $("#oldestcomment").attr({
+            "href": urlx,
+        });
+        $("#commenterror").html(comres[1]);
+
+        let posres = getDate(Number(important[2]));
+        let urly = "https://www.reddit.com/comments/" + important[1];
+        $("#oldestpost").html(posres[0]);
+        $("#oldestpost").attr({
+            "href": urly,
+        });
+        $("#posterror").html(posres[1]);
+    } else {
+        $("#oldestcomment").html("");
+        $("#oldestcomment").attr({
+            "href": "",
+        });
+        $("#commenterror").html("");
+        $("#oldestpost").html("");
+        $("#oldestpost").attr({
+            "href": "",
+        });
+        $("#posterror").html("");
+    }
+}
 
 /* CHECK IF NAME IS LIST, UPDATE "ARR" AND "NUMBER" IF SO */
 function updateSuccess() {
@@ -403,6 +465,8 @@ function draw() {
     weekheight = blackLineHeight*smoothFunc(lastweek/lastmaximus, thisweek/maximus, alphavalue)-5;
     joiwidth = blackLineWidth*smoothFunc(lastjoilea[0], thisjoilea[0], alphavalue)/week;
     leawidth = blackLineWidth*smoothFunc(lastjoilea[1], thisjoilea[1], alphavalue)/week;
+    /* UPDATE TIME MACHINE */
+    updateTimeMachine();
 
     /* RENDER GRAPH */
     background(96);

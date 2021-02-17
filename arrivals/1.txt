@@ -1,4 +1,4 @@
-Moscamye
+MoscaMye
 
 juankunder
 
@@ -30,7 +30,7 @@ mdb_la
 
 sirelagnithgin
 
-Firecow75
+firecow75
 
 itsme_raypurchase
 
@@ -54,7 +54,7 @@ Birb_from_BOTD
 
 GlitchyMcGlitchFace
 
-Luna404
+luna404
 
 SUPERWAFFLEFRISBEE
 

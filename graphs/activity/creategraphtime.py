@@ -1,4 +1,7 @@
 import numpy as np
+from pathlib import Path
+import csv
+import math
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, RegularPolygon
@@ -19,8 +22,13 @@ reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
                      username="Zokalyx",
                      password=secrets[0].strip(),
                      user_agent="theconfluenceBOT")
-sub = reddit.subreddit("TheConfluence")
-posts = sub.new(limit=None)
+
+posts = []  # List containing all the post data (important = id)
+with open("../../csv/posts.csv", "r", encoding="utf-8") as lol:
+    reader = csv.reader(lol)
+    for row in reader:
+        posts.append(row)
+
 totalposts = 0
 totalcomments = 0
 last_utc = 0
@@ -35,7 +43,8 @@ for i in range(7):
     postsday.append(0)
     commentsday.append(0)
 
-for post in posts:
+for fake_post in posts:
+    post = reddit.submission(fake_post[0])
     tim = round((post.created_utc / 3600) % 24)
     if tim == 24:
         tim = 0
