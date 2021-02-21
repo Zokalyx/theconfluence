@@ -142,7 +142,6 @@ before = """<!DOCTYPE html>
 after = """
 
     </p>
-    </div>
     <section class="content">
         <span> Notes </span>
         <p>
@@ -151,6 +150,7 @@ after = """
         </p>
     </section>
     
+    </div>
     <!-- footer -->
     <footer>
         <div id="container">
