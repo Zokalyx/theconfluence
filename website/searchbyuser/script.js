@@ -54,7 +54,7 @@ var secondRow = [];
 $(document).ready(function() {
     $.ajax({
         method: "GET",
-        url: "data/csv/probyuser.csv",
+        url: "data/basic/probyuser.csv",
         dataType: "text",
         success: function(data) {
                     var primodialArray = data.split("\n");
@@ -78,7 +78,7 @@ $(document).ready(function() {
     });
     $.ajax({
         method: "GET",
-        url: "data/csv/timemachine.csv",
+        url: "data/misc/timemachine.csv",
         dataType: "text",
         success: function(data) {
                     var primodialArray = data.split("\n");
