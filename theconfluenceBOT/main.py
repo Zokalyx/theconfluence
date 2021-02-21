@@ -21,7 +21,7 @@ while True:
         found_new_message = True
 
     if found_new_message:
-        if author.name not in ["Zokalyx", "Moscamye, theconfluencer"]:
+        if author.name not in ["Zokalyx", "MoscaMye", "theconfluencer"]:
             continue
     else:
         continue
@@ -97,9 +97,11 @@ while True:
 
             if post.created_utc > last_run_start:
 
+                """
                 if post.author == "yo-whatupmofo":
                     ind = reference_list.index("Or-Your-Money-Back")
                     departures[ind][1] = False
+                """
 
                 if post.author in reference_list:
                     ind = reference_list.index(post.author)
@@ -112,9 +114,11 @@ while True:
 
                 if comment.created_utc > last_run_start:
 
+                    """
                     if comment.author == "yo-whatupmofo":
                         ind = reference_list.index("Or-Your-Money-Back")
                         departures[ind][1] = False
+                    """
 
                     if comment.author in reference_list:
                         ind = reference_list.index(comment.author)
@@ -138,7 +142,7 @@ while True:
         reached_count = False
         while not reached_count:
             res = random_redditor()
-            if res[0] not in botAccounts:
+            if res[0] not in botAccounts and res[0] not in reference_list:
                 randoms.append(res)
                 count += 1
                 print(res[0])
@@ -252,7 +256,7 @@ while True:
                     text2 += " (OP)"
             text2 += "\n\n"
 
-        text2 += "\n\n**Extra random users if you to add or replace some:**\n\n"
+        text2 += "\n\n**Extra random users if you need to add or replace some:**\n\n"
 
         for i in range(amount, amount + extra):
             u = names[i]

@@ -4,6 +4,8 @@ Website: https://zokalyx.github.io/theconfluence/
 
 Upcoming features: 
 
+Making the search by user mobile-compatible
+
 Search by flair number and see all of the people who have had that flair (Not sure about this one. Is not very interesting, maybe only top 10 or so).
 
 Interactive and/or animated version of the Colorful Number Timecourse graph

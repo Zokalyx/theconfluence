@@ -1,0 +1,163 @@
+/* header */
+header {
+    background-color: #505050;
+    overflow: auto;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+#home {
+    height: 10vh;
+    float: left;
+}
+.external {
+    border-radius: 15%;
+    margin: 1.5vh 1vh 1.5vh 1vh;
+    padding: 0.5vh;
+    height: 6vh;
+    float: right;
+}
+.external:hover {
+    background-color: #606060;
+}
+#days {
+    position: absolute;
+    left: 50vw;
+    top: 5vh;
+    transform: translate(-50%, -50%);
+    font-family: Tahoma;
+    font-size: 2.5vh;
+}
+
+/* main */
+body {
+    background-color: #606060;
+    margin: 0;
+    color: white;
+    font-family: Arial;
+    position: relative;
+    min-height: 100vh;
+}
+video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4vh;
+    max-width: 150vh;
+    width: 90%;
+}
+section {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4vh;
+    width: 60vh;
+    max-width: 70%;
+    background-color: #707070;
+    text-align: center;
+    font-family: Arial;
+    font-size: 2.75vh;
+    border-radius: 10px;
+    line-height: 1.5;
+}
+section p {
+    margin: 1vh 1.5vh;
+    padding-bottom: 1vh;
+    font-size: 2.5vh;
+}
+section ul {
+    font-size: 2.5vh;
+    margin-left: -2vh;
+}
+.content {
+    text-align: left;
+    margin-left: 3vh;
+    max-width: 90%;
+    width: 150vmin;
+    line-height: normal;
+}
+.content span {
+    margin-top: 1.5vh;
+    margin-left: 1.5vh;
+}
+.content {
+    text:decoration: underline;
+}
+section span {
+    font-weight: 900;
+    font-size: 3vh;
+}
+a {
+    text-decoration: none;
+    color: #3EF1ED;
+    font-weight: bold;
+}
+h1 {
+    margin-left: 3vh;
+    font-size: 4vmin;
+    font-family: "Arial Black";
+}
+.smallcontent {
+    margin-left: 3vh;
+    margin-bottom: 3vh;
+    height: 65vmin;
+}
+.bigcontent {
+    margin-left: 3vh;
+    margin-bottom: 3vh;
+    max-width: 92%;
+    width: 142vmin;
+}
+.important {
+    margin-left: 3vh;
+    margin-top: 0vh;
+    font-size: 2.5vh;
+    max-width: 90%;
+    width: 200vmin;
+}
+.converter {
+    font-size: 2vh;
+    width: 50vh;
+    max-width: 50%;
+    padding: 2vh 2vh;
+    margin: 0vh 0vh 5vh 3vh;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.text {
+    font-size: 2.5vh;
+}
+#wrapper {
+    padding-bottom: 13vh;
+}
+
+/* footer */
+footer {
+    width: 100%;
+    height: 13vh;
+    position: absolute;
+    background-color: #202020;
+    bottom: -5vh;
+}
+#container {
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: auto;
+}
+#shh {
+    float: left;
+    width: 11vh;
+    margin: 1vh 1vh 1vh 0vh;
+}
+#secret {
+    margin: 4vh 0vh;
+    display: inline-block;
+    position: relative;
+    color: grey;
+    font-size: 2vh;
+    font-family: Arial;
+}

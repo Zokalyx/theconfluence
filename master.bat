@@ -1,10 +1,7 @@
-cd website
-python -m scriptupdater
+echo off
+cd executables
+call createbasic.bat
+call updatelast.bat
+call updatewebsite.bat
+call gitpush.bat
 cd ..
-cd csv
-call generateallcsv.bat
-cd ..
-cd graphs
-call runall.bat
-cd..
-pause

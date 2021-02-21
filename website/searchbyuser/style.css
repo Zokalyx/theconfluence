@@ -1,0 +1,99 @@
+#input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 1vh 2vh 1vh 1vh;
+    color: white;
+    font-size: 2.5vh;
+    margin-left: 0vh;
+    margin-bottom: 3vh;
+    width: 20vh;
+}
+#input:focus {
+    outline: none;
+}
+
+#random {
+    border: 2px solid #247D8D;
+    border-radius: 1vh;
+    font-size: 2.5vh;
+    padding: 1.5vh;
+    margin-left: 2vh;
+    margin-bottom: 3vh;
+    text-align: center;
+    transition-duration: 0.2s;
+}
+#random:focus {
+    outline: none;
+}
+#random:hover {
+    background-color: #247D8D;
+    color: white;
+    cursor: pointer;
+}
+
+::placeholder {
+  color: #919191;
+  opacity: 1;
+}
+
+#weekSlider {
+    position: relative;
+    top: 1.5vh;
+    width: 30vh;
+    display: block;
+}
+
+#labelForWeekSlider {
+    position: relative;
+    top: 1.5vh;
+}
+
+#flairSlider {
+    position: relative;
+    top: 1.5vh;
+    width: 30vh;
+    display: block;
+}
+
+#labelForFlairSlider {
+    position: relative;
+    top: 1.5vh;
+}
+
+#flairSlider:focus {
+    outline: none;
+}
+
+#weekStuff {
+    display: inline-block;
+    text-align: center;
+}
+
+#flairStuff {
+    display: inline-block;
+    text-align: center;
+}
+
+#choose {
+    width: 12vh;
+    margin-left; 3vh;
+    margin-bottom: 3vh;
+    height: 5vh;
+    font-size: 2.5vh;
+}
+
+#filler {
+    color: #606060;
+}
+
+#controls {
+    margin-left: 3vh;
+}
+
+#canvas {
+    width: 175vh;
+    height: 73vh;
+    max-width: 90%;
+}
+

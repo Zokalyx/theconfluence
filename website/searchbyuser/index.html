@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="https://zokalyx.github.io/theconfluence/">
+
+    <!-- tab -->
+    <title>Search by username</title>
+    <link rel="shortcut icon" type="image/ico" href="website/images/favicon.ico"/>
+
+    <!-- external files -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="website/script.js"></script>
+    <script type="text/javascript" src="website/searchbyuser/script.js"></script>
+    <link rel="stylesheet" href="website/style.css">
+    <link rel="stylesheet" href="website/searchbyuser/style.css">
+</head>
+<body onload="loaded()">
+    <div id="wrapper">
+    <!-- header -->
+    <header>
+        <a href="">
+            <img id="home" src="">
+        </a>
+        <a id="github" href="https://github.com/Zokalyx/theconfluence">
+            <img class="external" src="website/images/github.png">
+        </a>
+        <a href="https://discord.gg/K2ykw9K">
+            <img class="external" src="website/images/discord.png">
+        </a>
+        <a href="https://www.reddit.com/r/TheConfluence">
+            <img class="external" src="website/images/reddit.png">
+        </a>
+        <span id="days">
+        </span>
+    </header>
+
+    <!-- main -->
+    <h1>
+        Search by username
+    </h1>
+    <div id="controls">
+        <input type="text" placeholder="Username" id="input" spellcheck="false">
+        <button type="button" onclick="getRandom()" id="random">Random user</button>
+        <span id="filler">You found me!</span>
+        <select id="choose">
+            <option>All</option>
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+        <div id="weekStuff">
+            <input type="range" min="1" max="50" id="weekSlider" value="1">
+            <label for="weekSlider" id="labelForWeekSlider">Min. stay = 1 week</label>
+        </div>
+        <div id="flairStuff">
+            <input type="range" min="1" max="200" id="flairSlider" value="200">
+            <label for="flairSlider" id="labelForFlairSlider">Max. lowest flair = </label>
+        </div>
+        <div id="canvas"></div>
+        <p class="important">
+            Oldest comment: <a href="" id="oldestcomment" target="_blank"></a> <span id="commenterror"></span><br>
+            Oldest post: <a href="" id="oldestpost" target="_blank"></a> <span id="posterror"></span>
+        </p>
+    </div>
+    <section class="content">
+        <span>Instructions</span>
+            <ul>
+                <li>On the bottom right the names of people that satisfy all the filters, including name, appear</li>
+                <li>You can press enter to autocomplete when there is only one possible user for the given filters</li>
+                <li>The random button only selects people that satisfy all the filters</li>
+                <li>You can manually type the name of someone even if they don't satisfy the filters</li>
+                <li>Use the "minimum stay" filter to remove from possible results people that have not stayed long enough in the sub</li>
+                <li>Use the "maximum lowest flair" filter to remove from possible results people that have never reached a flair number lower than the one selected</li>
+            </ul>
+    </section>
+    <section class="content">
+        <span>Notes</span>
+        <p>
+            The exact flair numbers of the user on screen appear in the console. (F12 > "Console"). 0 means not part of the sub.<br><br>
+            The source data for this graph can be found <a href="https://github.com/Zokalyx/theconfluence/blob/main/csv/probyuser.csv">here</a>. (Might take a while to load)
+        </p>
+    </section>
+
+    </div>
+    <!-- footer -->
+    <footer>
+        <div id="container">
+            <img id="shh" src="website/images/shh.png">
+            <p id="secret">
+                This is a private community, so keep this a secret ;) <br>
+                Website design and content by u/Zokalyx
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
