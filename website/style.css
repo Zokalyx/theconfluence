@@ -26,7 +26,7 @@ header {
     top: 5vh;
     transform: translate(-50%, -50%);
     font-family: Tahoma;
-    font-size: 2.5vh;
+    font-size: 2.5vmin;
 }
 
 /* main */
@@ -158,6 +158,6 @@ footer {
     display: inline-block;
     position: relative;
     color: grey;
-    font-size: 2vh;
+    font-size: 2vmin;
     font-family: Arial;
 }
