@@ -15,7 +15,7 @@ function showDays() {
 
 /* adjust logo image */
 function resize() {
-    if ($(window).width() < 768) {
+    if ($(window).width() < $(window).height()) {
         $("#home").attr("src", "website/images/mobilelogo.png");
         $("#github").css("display", "none");
     } else {
