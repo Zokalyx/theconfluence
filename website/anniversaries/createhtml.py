@@ -113,6 +113,7 @@ before = """<!DOCTYPE html>
     <link rel="stylesheet" href="website/style.css">
 </head>
 <body onload="loaded()">
+    <div id="wrapper">
     <!-- header -->
     <header>
         <a href="https://zokalyx.github.io/theconfluence">
@@ -139,7 +140,9 @@ before = """<!DOCTYPE html>
 """
 
 after = """
+
     </p>
+    </div>
     <section class="content">
         <span> Notes </span>
         <p>
