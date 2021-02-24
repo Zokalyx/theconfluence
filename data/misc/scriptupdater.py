@@ -7,5 +7,5 @@ with open("../../website/script.js","r") as jsfile:
 
 data[0] = "let week = " + str(week) + ";\n"
 
-with open("script.js","w") as jsfile:
+with open("../../website/script.js","w") as jsfile:
     jsfile.writelines(data)

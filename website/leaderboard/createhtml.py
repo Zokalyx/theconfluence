@@ -46,7 +46,7 @@ before = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <base href="http://localhost:63342/new/">
+    <base href="https://zokalyx.github.io/theconfluence/">
 
     <!-- tab -->
     <title>Leaderboard</title>
