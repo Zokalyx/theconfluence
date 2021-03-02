@@ -12,10 +12,10 @@ for last_line in p:
 p.close()
 space = last_line.find(" ")
 pop = int(last_line[0:space])
-#pop = 175
+# pop = 175
 
-bynum = [] # contains the info of pro.csv
-pro = open("pro.csv","r",newline="")
+bynum = []  # contains the info of pro.csv
+pro = open("pro.csv", "r", newline="")
 with pro:
     reader = csv.reader(pro)
     for row in reader:
