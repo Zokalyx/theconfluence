@@ -40,10 +40,13 @@ posts = sub.new(limit=300)
 
 for run in runs:
     if run.stickied:
-        if "Run" in run.title or "Run!" in run.title:
+        if "Run" in run.title or "Run!" in run.title or "run" in run.title or "run!" in run.title:
             print(run.title)
             last_run_start = run.created_utc
             break
+else:
+    print("Last run not found!")
+    exit(2)
 
 for post in posts:
 
