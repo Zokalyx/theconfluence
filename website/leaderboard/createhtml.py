@@ -1,5 +1,6 @@
 import csv
 from pathlib import Path
+from math import floor
 
 w = open("../../data/week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
@@ -109,7 +110,7 @@ for i in range(pop):
     lead.write(str(i+1) + ". " + leaders[i])
     if wk == week:
         if comment_array[i][1] == "True":
-            lead.write(" <a href=https://www.{} target=\"_parent\"><b>&checkmark;</b></a>".format(comment_array[i][2]))
+            lead.write(" <a href=https://www.{} title='{} day{} ago' target=\"_parent\"><b>&checkmark;</b></a>".format(comment_array[i][2], floor(float(comment_array[i][3])), "" if floor(float(comment_array[i][3])) == 1  else "s"))
         else:
             lead.write(" <span style=\"color: #FF5901;\"><b>&cross;</b></span>")
     lead.write("<br>\n")
