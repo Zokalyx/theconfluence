@@ -29,6 +29,19 @@ with pro:
         names.append(row[0])
 pro.close()
 
+newones = []  # Array for new members
+pro = open("../basic/probyuser.csv")
+with pro:
+    reader = csv.reader(pro)
+    for row in reader:
+        newones.append(row[0])
+pro.close()
+
+for person in newones:
+    if person not in names:
+        tm.append([person, "noposts", 0, "nocomments", 0, ""])
+        names.append(person)
+
 last_time = float(pb[-1][1])
 aux = []
 
