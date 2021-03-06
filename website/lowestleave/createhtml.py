@@ -32,7 +32,7 @@ before = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <base href="https://zokalyx.github.io/theconfluence">
+    <base href="https://zokalyx.github.io/theconfluence/">
 
     <!-- tab -->
     <title>Departures analysis</title>
