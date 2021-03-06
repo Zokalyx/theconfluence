@@ -12,7 +12,7 @@ arr = arrfile.readlines()
 arrfile.close()
 arrfix = [i for i in arr if i != "\n"]
 for i in range(len(arrfix)):
-    arrfix[i] = arrfix[i].replace("\n","")
+    arrfix[i] = arrfix[i].replace("\n", "")
 
 # Csv file writing
 raw = open("raw.csv","w",newline="")

@@ -97,6 +97,10 @@ h1 {
     font-size: 4vmin;
     font-family: "Arial Black";
 }
+h2 {
+    margin-left: 3vh;
+    font-size: 3vmin;
+}
 .smallcontent {
     margin-left: 3vh;
     margin-bottom: 3vh;
