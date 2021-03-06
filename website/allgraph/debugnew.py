@@ -90,7 +90,7 @@ for i in range(len(mega)):
     if mega[i][-1] != "0":
         # ax.text(week - 4 + 0.075, int(user[-1]) - 0.2, user[-1] + " " + user[0], fontsize=1.5)
         pass
-plt.savefig("highresvariant.png", dpi=500, bbox_inches='tight')
-plt.savefig("lowresvariant.png", dpi=150, bbox_inches="tight")
+plt.savefig("highresvariantdebug.png", dpi=500, bbox_inches='tight')
+plt.savefig("lowresvariantdebug.png", dpi=150, bbox_inches="tight")
 
 

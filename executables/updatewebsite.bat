@@ -17,6 +17,10 @@ cd ..
 cd leaderboard
 python createhtml.py
 cd ..
+cd lowestleave.py
+python creategraph.py
+python createhtml.py
+cd ..
 cd population
 python creategraph.py
 cd ..
