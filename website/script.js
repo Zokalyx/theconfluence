@@ -3,7 +3,7 @@ let inception = 1583877600000;
 let updated = inception + week*604800000;
 let now = Date.now();
 let millis = now - inception;
-let days = Math.floor(millis/(1000 * 60 * 60  * 24)) + 1;
+let days = Math.floor(millis/(1000 * 60 * 60  * 24));
 
 let daysText = days + " days since inception<br>";
 daysText += (now > updated) ? "Data will be updated soon" : "Data is up to date";
