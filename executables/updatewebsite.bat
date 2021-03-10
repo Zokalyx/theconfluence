@@ -17,7 +17,7 @@ cd ..
 cd leaderboard
 python createhtml.py
 cd ..
-cd lowestleave.py
+cd lowestleave
 python creategraph.py
 python createhtml.py
 cd ..
