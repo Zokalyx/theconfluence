@@ -35,8 +35,16 @@ for i in text_arr:
     if i != "":
         fix_text_arr.append(i)
 
-first_index = fix_text_arr.index("**Departures:**")
-second_index = fix_text_arr.index("**Arrivals:**")
+try:
+    first_index = fix_text_arr.index("**Departures:**")
+except:
+    first_index = fix_text_arr.index("**Departures**")
+
+try:
+    second_index = fix_text_arr.index("**Arrivals:**")
+except:
+    second_index = fix_text_arr.index("**Arrivals**")
+
 for i, el in enumerate(fix_text_arr[second_index+1:]):
     try:
         int(el.split(" ")[0])
