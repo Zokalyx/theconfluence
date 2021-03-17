@@ -2,6 +2,15 @@ import csv
 
 week = int(open("../../data/week.txt", "r").readline())  # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
 
+cur = []
+with open("../../data/basic/probyuser.csv") as po:
+    for line in po:
+        cur.append(line.split(","))
+
+names = []
+for c in cur:
+    names.append(c[0])
+
 text = ""
 for i in range(week - 1, 0, -1):
     with open("../../data/departures/{}.txt".format(i+1), "r") as dep:
@@ -9,6 +18,7 @@ for i in range(week - 1, 0, -1):
         arr = [i for i in file if i != "\n"]
         arr = [i.replace("\n", "") for i in arr]
         arr = [i.replace(".", "") for i in arr]
+        arr = [i + " (Rejoined)" if cur[names.index(i.split()[1])][-1] != "0\n" else i for i in arr]
         if len(arr) == 0:
             continue
         else:
