@@ -45,6 +45,6 @@ for post in profile.new(limit=10):
         post.delete()
         break
 
-profile.submit("Last (" + str(week - 4) + ")", text)
+profile.submit("Last (" + str(week - 5) + ")", text)
 
 print("Done")

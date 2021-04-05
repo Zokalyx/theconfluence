@@ -52,7 +52,7 @@ for i in range(len(percentage)):
     percentage[i] *= 100
 
 #fix broken weeks
-brokenWeeks = (4, 10, 34, 40)
+brokenWeeks = (4, 10, 34, 40, 53)
 for broken in brokenWeeks:
     if broken + 2 == week:
         percentage[broken] = percentage[broken-1]

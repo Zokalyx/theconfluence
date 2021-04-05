@@ -31,8 +31,10 @@ for i in range(week - 1, 0, -1):
                 off = 2
             elif wk < 42:
                 off = 3
-            else:
+            elif wk < 55:
                 off = 4
+            else:
+                off = 5
             run = wk - off
             text += "<h2>Run {}</h2> \n <p class='important'> {} <br> {} <br> {} </p> \n"\
                 .format(run, arr[0], arr[1], arr[2])

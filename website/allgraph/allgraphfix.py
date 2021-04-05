@@ -42,7 +42,7 @@ def separate(array):
             start_new = True
     return [ans, starting]
 
-brokenWeeks = (40, 34, 10 ,4)
+brokenWeeks = (53, 40, 34, 10 ,4)
 for row in mega:
     for wk in brokenWeeks:
         row.pop(wk+1)
