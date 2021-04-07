@@ -24,7 +24,7 @@ else:
 print(title)
 
 title_arr = title.split(" ")
-week = int(title_arr[1][0:-2]) + 4
+week = int(title_arr[1][0:-2]) + 5
 with open("../week.txt", "w") as wk:
     wk.write(str(week))
 print(f"week {week}")
@@ -35,13 +35,15 @@ for i in text_arr:
     if i != "":
         fix_text_arr.append(i)
 
+print(fix_text_arr)
+
 try:
     first_index = fix_text_arr.index("**Departures:**")
 except:
     first_index = fix_text_arr.index("**Departures**")
 
 try:
-    second_index = fix_text_arr.index("**Arrivals:**")
+    second_index = fix_text_arr.index("**Arrivals:** ")
 except:
     second_index = fix_text_arr.index("**Arrivals**")
 
