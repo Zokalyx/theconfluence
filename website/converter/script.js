@@ -64,6 +64,8 @@ function weekToRun(week) {
         ans = week - 3;
     } else if (week < 55) {
         ans = week - 4;
+    } else {
+	ans = week - 5;
     }
     return ans;
 }
@@ -77,8 +79,10 @@ function runToWeek(run) {
         ans = run - (-2);
     } else if (run < 39) {
         ans = run - (-3);
-    } else {
+    } else if (run < 52) {
         ans = run - (-4);
+    } else {
+	ans = run - (-5);
     }
     return ans;
 }
