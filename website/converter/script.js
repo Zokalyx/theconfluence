@@ -6,7 +6,7 @@ $(document).ready(function() {
     $("#info_week").html(week)
     $("#info_run").html(week-4)
     $("#run_place").attr({
-       "max" : week - 4
+       "max" : week - 5
     });
 });
 
@@ -62,7 +62,7 @@ function weekToRun(week) {
         ans = week - 2;
     } else if (week < 42) {
         ans = week - 3;
-    } else {
+    } else if (week < 55) {
         ans = week - 4;
     }
     return ans;
