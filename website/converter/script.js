@@ -4,7 +4,7 @@ $(document).ready(function() {
        "max" : week
     });
     $("#info_week").html(week)
-    $("#info_run").html(week-4)
+    $("#info_run").html(week-5)
     $("#run_place").attr({
        "max" : week - 5
     });
