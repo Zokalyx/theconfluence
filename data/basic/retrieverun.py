@@ -43,7 +43,7 @@ except:
     first_index = fix_text_arr.index("**Departures**")
 
 try:
-    second_index = fix_text_arr.index("**Arrivals:** ")
+    second_index = fix_text_arr.index("**Arrivals:**   ")
 except:
     second_index = fix_text_arr.index("**Arrivals**")
 
