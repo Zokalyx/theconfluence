@@ -1,4 +1,5 @@
 import praw
+import re
 
 with open("../shh.txt", "r") as secret:
     secrets = secret.readlines()
@@ -37,15 +38,18 @@ for i in text_arr:
 
 print(fix_text_arr)
 
-try:
-    first_index = fix_text_arr.index("**Departures:**")
-except:
-    first_index = fix_text_arr.index("**Departures**")
 
-try:
-    second_index = fix_text_arr.index("**Arrivals:**   ")
-except:
-    second_index = fix_text_arr.index("**Arrivals**")
+def find_word(arr, word):
+    p = re.compile(r"\w*\*\*" + word + ":*" + r"\*\*\w*", re.IGNORECASE)
+    for a in arr:
+        if p.search(a):
+            print(a)
+            return arr.index(a)
+
+
+first_index = find_word(fix_text_arr, "Departures")
+
+second_index = find_word(fix_text_arr, "Arrivals")
 
 for i, el in enumerate(fix_text_arr[second_index+1:]):
     try:
@@ -54,7 +58,7 @@ for i, el in enumerate(fix_text_arr[second_index+1:]):
         third_index = second_index + 1 + i
         break
 
-deps = fix_text_arr[first_index + 1:second_index]
+deps = fix_text_arr[first_index + 1:second_index-1]
 arrs = fix_text_arr[second_index + 1:third_index]
 
 deps = [dep.replace("\\", "") for dep in deps]
