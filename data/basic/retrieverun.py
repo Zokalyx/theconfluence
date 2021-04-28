@@ -58,7 +58,7 @@ for i, el in enumerate(fix_text_arr[second_index+1:]):
         third_index = second_index + 1 + i
         break
 
-deps = fix_text_arr[first_index + 1:second_index-1]
+deps = fix_text_arr[first_index + 1:second_index]
 arrs = fix_text_arr[second_index + 1:third_index]
 
 deps = [dep.replace("\\", "") for dep in deps]
