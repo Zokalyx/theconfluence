@@ -1,5 +1,6 @@
 import praw
 from praw.models import MoreComments
+from prawcore.exceptions import Forbidden
 import random
 import time
 import math
@@ -10,7 +11,7 @@ reddit = praw.Reddit(client_id="0S1WpGMeuyOQkg",
                      client_secret=env["BOT_TOKEN"],
                      username="theconfluenceBOT",
                      password=env["BOT_PASS"],
-                     user_agent="theconfluenceBOT")
+                     user_agent="The Confluence Bot")
 
 while True:
     found_new_message = False
@@ -38,7 +39,7 @@ while True:
                          client_secret=env["ZOKA_TOKEN"],
                          username="Zokalyx",
                          password=env["ZOKA_PASS"],
-                         user_agent="theconfluenceBOT")
+                         user_agent="The Confluence Bot")
 
     conbot = reddit.subreddit("U_theconfluenceBOT")
     newest = conbot.new(limit=10)
@@ -72,7 +73,7 @@ while True:
     posts = sub.new(limit=500)
     for run in runs:
         if run.stickied:
-            if "Run" in run.title or "Run!" in run.title:
+            if "Run" in run.title or "Run!" in run.title or "run" in run.title or "run!" in run.title:
                 print(run.title)
                 last_run_start = run.created_utc
 
@@ -84,6 +85,10 @@ while True:
                     index = string_arr.index("Run") - 1
                 elif "Run!" in string_arr:
                     index = string_arr.index("Run!") - 1
+                elif "run" in string_arr:
+                    index = string_arr.index("run") - 1
+                elif "run!" in string_arr:
+                    index = string_arr.index("run!") - 1
 
                 lastrun = string_arr[index][:len(string_arr[index]) - 2]
 
@@ -141,7 +146,11 @@ while True:
         count = 0
         reached_count = False
         while not reached_count:
-            res = random_redditor()
+            try:
+                res = random_redditor()
+            except Forbidden:
+                print("403, continuing")
+                continue
             if res[0] not in botAccounts and res[0] not in reference_list:
                 randoms.append(res)
                 count += 1
@@ -311,7 +320,7 @@ while True:
                          client_secret=env["BOT_TOKEN"],
                          username="theconfluenceBOT",
                          password=env["BOT_PASS"],
-                         user_agent="theconfluenceBOT")
+                         user_agent="The Confluence Bot")
     reddit.validate_on_submit = True
     profile = reddit.subreddit("U_theconfluenceBOT")
 
@@ -326,6 +335,9 @@ while True:
 # ----------------------------------------- Posting Data -----------------------------------------------------------
 
     print("Posting submissions")
+    print(detailed_text)
+    print(new_flairs)
+    print(summary_text)
     profile.submit("Run " + str(newrun) + " detailed arrivals + extra randoms", detailed_text)
     profile.submit("Run " + str(newrun) + " new flairs for old members", new_flairs)
     to_pin = profile.submit("Run " + str(newrun) + " summary - " + str(retention) + "% retention", summary_text)
