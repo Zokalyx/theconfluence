@@ -25,7 +25,7 @@ else:
 print(title)
 
 title_arr = title.split(" ")
-week = int(title_arr[1][0:-2]) + 5
+week = int(title_arr[1][0:-2]) + 6
 with open("../week.txt", "w") as wk:
     wk.write(str(week))
 print(f"week {week}")
@@ -35,8 +35,6 @@ fix_text_arr = []
 for i in text_arr:
     if i != "":
         fix_text_arr.append(i)
-
-print(fix_text_arr)
 
 
 def find_word(arr, word):
@@ -55,15 +53,19 @@ for i, el in enumerate(fix_text_arr[second_index+1:]):
     try:
         int(el.split(" ")[0])
     except:
+        print(i, el)
         third_index = second_index + 1 + i
         break
 
 deps = fix_text_arr[first_index + 1:second_index]
 arrs = fix_text_arr[second_index + 1:third_index]
 
+print(first_index, second_index, third_index)
+
 deps = [dep.replace("\\", "") for dep in deps]
 arrs = [arr.replace("\\", "") for arr in arrs]
 
+print(deps)
 print(arrs)
 
 with open("../departures/{}.txt".format(week), "w") as departures:

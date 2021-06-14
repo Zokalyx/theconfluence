@@ -14,7 +14,7 @@ title = post.title
 text = post.selftext
 
 title_arr = title.split(" ")
-week = int(title_arr[1]) + 5
+week = int(title_arr[1]) + 6
 with open("../week.txt", "w") as wk:
     wk.write(str(week))
 print(f"week {week}")
