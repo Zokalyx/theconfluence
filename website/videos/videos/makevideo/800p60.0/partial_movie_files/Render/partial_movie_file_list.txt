@@ -1,4 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/White Python/Desktop/Fran/theconfluence/website/videos/videos/makevideo/800p60.0/partial_movie_files/Render/2479528188_3343956788_3129755441.mp4'
-file 'file:C:/Users/White Python/Desktop/Fran/theconfluence/website/videos/videos/makevideo/800p60.0/partial_movie_files/Render/3039726648_2836084062_2737351681.mp4'
-file 'file:C:/Users/White Python/Desktop/Fran/theconfluence/website/videos/videos/makevideo/800p60.0/partial_movie_files/Render/3039726648_380791168_1912078169.mp4'
