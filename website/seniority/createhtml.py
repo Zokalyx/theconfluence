@@ -6,7 +6,7 @@ w = open("../../data/week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
 w.close()
 
-wek = open("wk.txt", "r")
+wek = open("../leaderboard/wk.txt", "r")
 wk = int(wek.read())
 wek.close()
 
@@ -23,29 +23,16 @@ if wk == week:
 extra_text = ""
 
 
-comment_array = []
-com = open("../../data/misc/commented.csv", "r", newline="")
-reader = csv.reader(com)
-for row in reader:
-    comment_array.append(row)
-
-p = open("../../data/arrivals/" + str(week) + ".txt", "r") # Get population
-for last_line in p:
-    pass
-p.close()
-space = last_line.find(" ")
-pop = int(last_line[0:space])
-# pop = 162
-
 leaders = []
 
-pro = open("../../data/basic/pro.csv", "r", newline="")
-with pro:
-    reader = csv.reader(pro)
-    for i in range(pop):
-        ppl = next(reader)
-        leaders.append(ppl[len(ppl)-1])
-pro.close()
+num = 1
+
+with open("../../data/basic/probyuser.csv") as f:
+    reader = csv.reader(f)
+    for user in reader:
+        if user[-1] != '0':
+            leaders.append(f"{num}. {user[0]}")
+            num += 1
 
 before = """<!DOCTYPE html>
 <html lang="en">
@@ -54,7 +41,7 @@ before = """<!DOCTYPE html>
     <base href="https://zokalyx.github.io/theconfluence/">
 
     <!-- tab -->
-    <title>Leaderboard without sloths</title>
+    <title>Leaderboard</title>
     <link rel="shortcut icon" type="image/ico" href="website/images/favicon.ico"/>
 
     <!-- external files -->
@@ -84,11 +71,10 @@ before = """<!DOCTYPE html>
 
     <!-- main -->
     <h1>
-        Current standings
+        Current standings ignoring sloths
     </h1>
     <p class="important">
-        Tip: Use Ctrl+F to find a user <br>
-        <a href="seniority">List sorted by first joined (that is, ignoring sloths)</a> <br><br>
+        Tip: Use Ctrl+F to find a user <br><br>
 """
 
 after = """
@@ -111,18 +97,8 @@ after = """
 
 lead = open("index.html", "w")
 lead.write(before + extra_text)
-for i in range(pop):
-    lead.write(str(i+1) + ". " + leaders[i])
-    if wk == week:
-        if comment_array[i][1] == "True":
-            lead.write(" <a href=https://www.{} title='{} day{} ago' target=\"_parent\"><b>&checkmark;</b></a>".format(comment_array[i][2], floor(float(comment_array[i][3])), "" if floor(float(comment_array[i][3])) == 1  else "s"))
-        else:
-            lead.write(" <span style=\"color: #FF5901;\"><b>&cross;</b></span>")
+for leader in leaders:
+    lead.write(leader)
     lead.write("<br>\n")
 lead.write(after)
 lead.close()
-
-names = open("names.txt", "w")
-for leader in leaders[:5]:
-    names.write(leader+"\n")
-names.close()
