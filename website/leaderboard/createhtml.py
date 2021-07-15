@@ -88,7 +88,7 @@ before = """<!DOCTYPE html>
     </h1>
     <p class="important">
         Tip: Use Ctrl+F to find a user <br>
-        <a href="seniority">List sorted by first joined (that is, ignoring sloths)</a> <br><br>
+        <a href="website/seniority/">List sorted by first joined (that is, ignoring sloths)</a> <br><br>
 """
 
 after = """
