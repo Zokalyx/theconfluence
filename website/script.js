@@ -1,4 +1,4 @@
-let week = 72;
+let week = 73;
 let inception = 1583877600000;
 let updated = inception + week*604800000;
 let now = Date.now();
