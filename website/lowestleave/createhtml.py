@@ -106,7 +106,7 @@ before = """<!DOCTYPE html>
             and therefore stayed for at least two weeks. This is equivalent to the number of
             departures from people who are not new. Of course, it is expected that many of the
             new ones will not participate at all and leave - this is not necessarily true
-            for older members, thus "unexpected".
+            for older members, hence "unexpected".
         </p>
     </section>
     
