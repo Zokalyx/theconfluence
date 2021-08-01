@@ -22,6 +22,7 @@ python createhtml.py
 cd ..
 cd lowestleave
 python creategraph.py
+python subretention.py
 python createhtml.py
 cd ..
 cd population

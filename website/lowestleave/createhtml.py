@@ -2,14 +2,11 @@ import csv
 
 week = int(open("../../data/week.txt", "r").readline())  # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
 
-cur = []
 with open("../../data/basic/probyuser.csv") as po:
-    for line in po:
-        cur.append(line.split(","))
+    cur = list(csv.reader(po))
 
-names = []
-for c in cur:
-    names.append(c[0])
+names = [c[0].strip(" ") for c in cur]
+
 
 text = ""
 for i in range(week - 1, 0, -1):
@@ -18,7 +15,7 @@ for i in range(week - 1, 0, -1):
         arr = [i for i in file if i != "\n"]
         arr = [i.replace("\n", "") for i in arr]
         arr = [i.replace(".", "") for i in arr]
-        arr = [i + " (Rejoined)" if cur[names.index(i.split()[1])][-1] != "0\n" else i for i in arr]
+        arr = [i + " (Rejoined)" if cur[names.index(i.split()[1])][-1].strip() != "0" else i for i in arr]
         if len(arr) == 0:
             continue
         else:
@@ -93,6 +90,23 @@ before = """<!DOCTYPE html>
             The orange line represents the lowest flair number in any given set of departures. 
             <br>
             Below you can see who these users are as well as the second and third ones for each run.
+        </p>
+    </section>
+
+    <h1>
+        Unexpected depatures
+    </h1>
+    <img class="smallcontent" src="website/lowestleave/subretentionraw.png">
+    <img class="smallcontent" src="website/lowestleave/subretentionpercentage.png">
+    
+     <section class="content">
+        <span> Notes </span>
+        <p>
+            Unexpected departures are departures of people who have participated at least once
+            and therefore stayed for at least two weeks. This is equivalent to the number of
+            departures from people who are not new. Of course, it is expected that many of the
+            new ones will not participate at all and leave - this is not necessarily true
+            for older members, thus "unexpected".
         </p>
     </section>
     
