@@ -68,6 +68,13 @@ arrs = [arr.replace("\\", "") for arr in arrs]
 print(deps)
 print(arrs)
 
+arr_num = arrs[0][0] - 1
+print(f"\nInsert users manually - currently, first user in arrivals is {':'.join(arrs[0])}:\n")
+username = input(f"{arr_num}: ")
+while username:
+    arrs.insert(0, [arr_num, username])
+    arr_num -= 1
+
 with open("../departures/{}.txt".format(week), "w") as departures:
     for dep in deps:
         departures.write(dep)
