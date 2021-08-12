@@ -1,8 +1,11 @@
 import xlsxwriter
 import json
 import csv
+import pyautogui
 
 
+MAX_SCORER = 100
+TYPE_OFFSET = 5
 TOTAL_RACES = 8
 MIN_WEEK = 1
 RESULTS_STR = "results.txt"
@@ -57,6 +60,15 @@ def main():
             print(f"Created a backup as '{BACKUP_STR}' and saved" +
                 f" the empty scoreboard as '{SCOREBOARD_STR}'"
             )
+
+        # Autotype
+        elif option == "type":
+            print(f"Starting to type in {TYPE_OFFSET} second(s)! ({MAX_SCORER} numbers)")
+            autotype()
+
+        # Debug
+        elif option == "debug":
+            print(get_keystrokes(123))
 
         # Help
         elif option == "help":
@@ -193,7 +205,7 @@ class Scoreboard():
 
         # Handle each user
         for position, username in enumerate(results):
-            score = self.get_score(position + 1)
+            score = get_score(position + 1)
 
             # Already existing user
             if username in self.data:
@@ -425,6 +437,45 @@ class Competitors():
             f.writelines("\n".join(eligible))
 
 
+def get_score(position: int) -> int:
+    """
+    Scoring function
+    """
+
+    if position >= 1 and position <= MAX_SCORER:
+        return MAX_SCORER + 1 - position
+    else:
+        return 0
+
+
+def get_keystrokes(number: int) -> list[str]:
+    """
+    Converts a number into a sequence of keystrokes
+    """
+
+    ans = []
+    length = len(str(number))
+
+    for i in range(length):
+        ith_digit = number//pow(10, i) % 10
+        print(ith_digit)
+        ans.append(str(ith_digit))
+
+    return reversed(ans)
+
+
+def autotype() -> None:
+    """
+    Auto types the scores of each position, in descending order
+    """
+
+    pyautogui.sleep(TYPE_OFFSET)
+
+    for i in range(MAX_SCORER):
+        pyautogui.write(get_keystrokes(get_score(i+1)))
+        pyautogui.write(["enter"])
+
+
 def print_instructions() -> None:
     """
     Prints menu instructions
@@ -435,6 +486,8 @@ def print_instructions() -> None:
     print(f"add: Read from '{RESULTS_STR}' and add race")
     print("remove: Remove a race from the scoreboard")
     print("clear: Clear all the data and create backup")
+    print("type: Autofill scoring system in Marbles On Stream")
+    print("debug: Execute some debugging code")
     print("help: Show the menu options")
     print("quit: Exit the program")
 
