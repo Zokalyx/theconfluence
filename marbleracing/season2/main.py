@@ -12,6 +12,8 @@ RESULTS_STR = "results.txt"
 SCOREBOARD_STR = "scoreboard"
 BACKUP_STR = "backup"
 COMPETITORS_STR = "competitors.csv"
+RANDOM_STR = "random.csv"
+RANDOM_AMT = 200
 
 
 def main():
@@ -32,8 +34,13 @@ def main():
     option = input("Type here: ")
     while option != "quit":
 
+        # Get random
+        if option == "random":
+            create_random(RANDOM_STR, RANDOM_AMT)
+            print(f"Random list saved as '{RANDOM_STR}'!")
+
         # Get list
-        if option == "list":
+        elif option == "list":
             competitors.save_list(MIN_WEEK, COMPETITORS_STR)
             print(f"List saved as '{COMPETITORS_STR}'!")
 
@@ -299,14 +306,20 @@ class Scoreboard():
             # Loop through users
             row = 1
             for username, user in dataset.items():
-                # Flair
+                # Try to get flair (there might be a typo)
                 try:
-                    sheet.write(row, 0, self.competitors[username])
-                # Username not found, most likely a typo
+                    flair = self.competitors[username]
                 except KeyError:
                     print(f"ERROR: Username not found: '{username}'")
-                    print("Writing 'N/A'...")
-                    sheet.write(row, 0, "N/A")
+                    print("Not writing any data...")
+                    continue
+
+                # Skip people who left
+                if flair == 0:
+                    continue
+
+                # Flair
+                sheet.write(row, 0, flair)
 
                 # Username
                 sheet.write(row, 1, username)
@@ -493,17 +506,29 @@ def autoclick() -> None:
         pyautogui.click()
 
 
+def create_random(filename: str, amount: int):
+    """
+    Creates and saves a list of nameless marbles
+    """
+
+    with open(filename, "w") as f:
+        for i in range(amount):
+            f.write("Marble " + str(i + 1) + "\n")
+
+
 def print_instructions() -> None:
     """
     Prints menu instructions
     """
 
     print("Insert one of the following options")
+    print("random: Creates a list of nameless marbles to test races")
     print(f"list: Save list of competitors that stayed at least {MIN_WEEK} full week(s)")
     print(f"add: Read from '{RESULTS_STR}' and add race")
     print("remove: Remove a race from the scoreboard")
     print("clear: Clear all the data and create backup")
     print("type: Autofill scoring system in Marbles On Stream")
+    print("click: Autoclick for the Marbles On Stream configuration")
     print("debug: Execute some debugging code")
     print("help: Show the menu options")
     print("quit: Exit the program")
