@@ -66,9 +66,14 @@ def main():
             print(f"Starting to type in {TYPE_OFFSET} second(s)! ({MAX_SCORER} numbers)")
             autotype()
 
+        # Autoclick
+        elif option == "click":
+            print(f"Starting to click in {TYPE_OFFSET} second(s)! ({MAX_SCORER} times)")
+            autoclick()
+
         # Debug
         elif option == "debug":
-            print(get_keystrokes(123))
+            print("Nothing to debug")
 
         # Help
         elif option == "help":
@@ -458,7 +463,6 @@ def get_keystrokes(number: int) -> list[str]:
 
     for i in range(length):
         ith_digit = number//pow(10, i) % 10
-        print(ith_digit)
         ans.append(str(ith_digit))
 
     return reversed(ans)
@@ -466,14 +470,27 @@ def get_keystrokes(number: int) -> list[str]:
 
 def autotype() -> None:
     """
-    Auto types the scores of each position, in descending order
+    Auto types the scores of each position, in descending order.
+    Auto scrolls while doing so (otherwise, it glitches Marbles On Stream)
     """
 
     pyautogui.sleep(TYPE_OFFSET)
 
     for i in range(MAX_SCORER):
         pyautogui.write(get_keystrokes(get_score(i+1)))
-        pyautogui.write(["enter"])
+        pyautogui.write(["down"])
+        pyautogui.scroll(-160)
+        
+
+def autoclick() -> None:
+    """
+    Auto clicks for adding Marbles On Stream scores
+    """
+
+    pyautogui.sleep(TYPE_OFFSET)
+
+    for i in range(MAX_SCORER):
+        pyautogui.click()
 
 
 def print_instructions() -> None:
