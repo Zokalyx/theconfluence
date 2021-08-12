@@ -70,6 +70,6 @@ for i in range(len(mega)):
         plot_user(i, ax)
 for user in mega:
     if int(user[-1]) != 0:
-        ax.text(week-4 + 0.075, int(user[-1]) - 0.2, user[-1] + " " + user[0], fontsize = 1.5)
+        ax.text(week-len(brokenWeeks) + 0.075, int(user[-1]) - 0.2, user[-1] + " " + user[0], fontsize = 1.5)
 plt.savefig("highresvariant.png", dpi = 500, bbox_inches='tight')
 plt.savefig("lowresvariant.png", dpi = 150, bbox_inches="tight")

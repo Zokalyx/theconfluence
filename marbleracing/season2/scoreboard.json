@@ -1,1 +1,26 @@
-{}
+{
+    "MoscaMye": [
+        {
+            "position": 1,
+            "individual": 100,
+            "total": 100
+        },
+        {
+            "position": 1,
+            "individual": 100,
+            "total": 200
+        }
+    ],
+    "Zokalyx": [
+        {
+            "position": 2,
+            "individual": 99,
+            "total": 99
+        },
+        {
+            "position": 0,
+            "individual": 0,
+            "total": 99
+        }
+    ]
+}
