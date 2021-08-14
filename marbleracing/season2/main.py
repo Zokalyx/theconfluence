@@ -4,6 +4,8 @@ import csv
 import pyautogui
 
 
+TEST_MODE = False
+RACE_CUTOFF = 4
 MAX_SCORER = 100
 TYPE_OFFSET = 5
 TOTAL_RACES = 8
@@ -13,21 +15,20 @@ SCOREBOARD_STR = "scoreboard"
 BACKUP_STR = "backup"
 COMPETITORS_STR = "competitors.csv"
 RANDOM_STR = "random.csv"
-RANDOM_AMT = 200
 
 
 def main():
     """
-    Writes an .xlsx file containing the points and positions
-    of all competitors in the marble racing tournament.
-    Provides a menu system for it.
+    Menu for managing marble races
     """
+    global TEST_MODE
 
     competitors = Competitors("../../data/basic/probyuser.csv")
     scoreboard = Scoreboard(SCOREBOARD_STR + ".json", competitors.get_flair_dict())
 
     print("\n--- The Confluence Marble Racing Menu ---\n")
     print(f"{scoreboard.races} race(s) so far")
+    print(f"Test mode is {'ON' if TEST_MODE else 'OFF'}")
     print_instructions()
 
     print()
@@ -36,17 +37,17 @@ def main():
 
         # Get random
         if option == "random":
-            create_random(RANDOM_STR, RANDOM_AMT)
+            create_random(RANDOM_STR, read_int("Amount: "))
             print(f"Random list saved as '{RANDOM_STR}'!")
 
         # Get list
         elif option == "list":
-            competitors.save_list(MIN_WEEK, COMPETITORS_STR)
+            competitors.save_list(COMPETITORS_STR, scoreboard.races)
             print(f"List saved as '{COMPETITORS_STR}'!")
 
         # Add race
         elif option == "add":
-            scoreboard.add_race(RESULTS_STR)
+            scoreboard.add_race(RESULTS_STR, read_int("First marble to place as DNF (0 if none): "))
             scoreboard.save_all(SCOREBOARD_STR)
             print(f"Race added! ({scoreboard.races} total)")
             print(f"Updated scoreboard saved as '{SCOREBOARD_STR}'")
@@ -57,6 +58,11 @@ def main():
             scoreboard.save_all(SCOREBOARD_STR)
             print(f"Race removed! ({scoreboard.races} total)")
             print(f"Updated scoreboard saved as '{SCOREBOARD_STR}'")
+
+        # Save
+        elif option == "save":
+            scoreboard.save_all(SCOREBOARD_STR)
+            print(f"Scoreboard saved as '{SCOREBOARD_STR}'")
 
         # Clear all
         elif option == "clear":
@@ -81,6 +87,11 @@ def main():
         # Debug
         elif option == "debug":
             print("Nothing to debug")
+
+        # Toggle test
+        elif option == "test":
+            TEST_MODE = not TEST_MODE
+            print(f"Test mode is now {'ON' if TEST_MODE else 'OFF'}")
 
         # Help
         elif option == "help":
@@ -107,16 +118,15 @@ class Scoreboard():
         """
 
         self.competitors = competitors
+        self.dnf_marbles: list[int] = []
 
         with open(filename, "r") as f:
-            self.data: dict[str, list[dict[str, int]]] = json.load(f)
+            file_data = json.load(f)
         
-        # Count how many entries are in the first user
-        keys = list(self.data)
-        if len(keys) > 0:
-            self.races = len(self.data[keys[0]])
-        else:
-            self.races = 0
+        self.data: dict[str, list[dict[str, int]]] = file_data["marbles"]
+        self.dnf_marbles = file_data["dnf-marbles"]
+        
+        self.races = len(self.dnf_marbles)
 
 
     def __getitem__(self, username: str) -> list[int]:
@@ -146,7 +156,7 @@ class Scoreboard():
         elif option == "flair":
             sorting_key = lambda x: self.competitors[x[0]]
         elif option == "username":
-            sorting_key = lambda x: x[0]
+            sorting_key = lambda x: x[0].lower()
 
         # Create a list out of data to be sorted
         listed = list(self.data.items())
@@ -161,8 +171,9 @@ class Scoreboard():
 
         # Username not found when sorting by flair
         except KeyError as e:
-            print(f"ERROR: Username not found: {e}")
-            print("Defaulting to unsorted...")
+            if not TEST_MODE:
+                print(f"ERROR: Username not found: {e}")
+                print("Defaulting to unsorted...")
             return self.data
 
         # Convert to dict
@@ -181,6 +192,7 @@ class Scoreboard():
 
     def clear_all(self) -> None:
         self.data = {}
+        self.dnf_marbles = []
         self.races = 0
 
 
@@ -195,6 +207,8 @@ class Scoreboard():
 
         self.races -= 1
 
+        self.dnf_marbles.pop()
+
         # Delete everything if there are no races left
         if self.races == 0:
             self.data = {}
@@ -203,7 +217,7 @@ class Scoreboard():
                 user.pop()
 
 
-    def add_race(self, filename: str) -> None:
+    def add_race(self, filename: str, dnf_marble: int) -> None:
         """
         Reads a file containing the results of the last race and
         updates the competitors' data accordingly
@@ -211,13 +225,15 @@ class Scoreboard():
 
         self.races += 1
 
+        self.dnf_marbles.append(dnf_marble)
+
         # Read the file
         with open(filename, "r") as f:
             results = [ username.strip() for username in f.readlines() ]
 
         # Handle each user
         for position, username in enumerate(results):
-            score = get_score(position + 1)
+            score = get_score(position + 1, dnf_marble)
 
             # Already existing user
             if username in self.data:
@@ -263,7 +279,11 @@ class Scoreboard():
         """
 
         with open(filename, "w") as f:
-            json.dump(self.data, f, indent=4)
+            json.dump(
+                { "marbles": self.data, "dnf-marbles": self.dnf_marbles },
+                f,
+                indent=4
+            )
 
     
     def save_xlsx(self, filename: str) -> None:
@@ -285,23 +305,43 @@ class Scoreboard():
             sheet = workbook.add_worksheet(worksheet)
 
             # Format presets
-            center = workbook.add_format({"align": "center"})
-            bold = workbook.add_format({"bold": True, "align": "center"})
-            grey = workbook.add_format({"pattern": 1, "bg_color": "CCCCCC"})
+            bold = workbook.add_format({
+                "bold": True,
+                "bg_color": "00FFFF",
+                "align": "center",
+                "border": 1,
+                "align": "center"
+            })
+            normal = workbook.add_format({
+                "pattern": 1,
+                "bg_color": "FFFFFF",
+                "border": 1,
+                "align": "center"
+            })
+            redded = workbook.add_format({
+                "pattern": 1,
+                "bg_color": "EA9999",
+                "border": 1,
+                "align": "center"
+            })
+            greyed = workbook.add_format({
+                "pattern": 1,
+                "bg_color": "CCCCCC",
+                "border": 1,
+                "align": "center"
+            })
 
-            # Formatting
-            sheet.set_column(0, self.races + 3, 10, center)
-            sheet.set_column(1, 1, 20)
-            sheet.set_column(2, 3, 15)
+            # Column widths
+            sheet.set_column(1, 1, 25)
+            sheet.set_column(2, 3 + TOTAL_RACES, 15)
 
             # Titles row
-            sheet.set_row(0, 18, bold)
-            sheet.write(0, 0, "Flair")
-            sheet.write(0, 1, "Username")
-            sheet.write(0, 2, "Position")
-            sheet.write(0, 3, "Total Points")
+            sheet.write(0, 0, "Flair", bold)
+            sheet.write(0, 1, "Username", bold)
+            sheet.write(0, 2, "Position", bold)
+            sheet.write(0, 3, "Total Points", bold)
             for i in range(TOTAL_RACES):
-                sheet.write(0, 4 + i, f"Race {i+1}")
+                sheet.write(0, 4 + i, f"Race {i+1}", bold)
 
             # Loop through users
             row = 1
@@ -310,36 +350,56 @@ class Scoreboard():
                 try:
                     flair = self.competitors[username]
                 except KeyError:
-                    print(f"ERROR: Username not found: '{username}'")
-                    print("Not writing any data...")
-                    continue
+                    # Keep going when test mode is on
+                    if TEST_MODE:
+                        flair = "-"
+                    # Else, don't write anything
+                    else:
+                        print(f"ERROR: Username not found: '{username}'")
+                        print("Not writing any data...")
+                        continue
 
                 # Skip people who left
                 if flair == 0:
                     continue
 
                 # Flair
-                sheet.write(row, 0, flair)
+                sheet.write(row, 0, flair, normal)
 
                 # Username
-                sheet.write(row, 1, username)
+                sheet.write(row, 1, username, normal)
 
                 # Position
                 position = positions[username]
-                sheet.write(row, 2, f"{position}{self.get_end(position)}")
+                sheet.write(row, 2, f"{position}{self.get_end(position)}", normal)
 
                 # Total Points
-                sheet.write(row, 3, user[-1]["total"])
+                sheet.write(row, 3, user[-1]["total"], normal)
 
                 # Loop through race data
                 col = 4
                 for race in user:
-                    # Only write data if participated
+                    # Only write data if participatedd
                     if (pos := race["position"]) != 0:
-                        sheet.write(row, col, f"{pos}{self.get_end(pos)} (+{race['individual']})")
+                        # Check if DNF
+                        dnf_marble = self.dnf_marbles[col-4]
+                        if dnf_marble > 0 and pos >= dnf_marble:
+                            point_text = "DNF"
+                            formatting = redded
+                        else:
+                            point_text = f"{pos}{self.get_end(pos)}"
+                            formatting = normal
+                        
+                        sheet.write(
+                            row,
+                            col,
+                            f"{point_text} (+{race['individual']})",
+                            formatting
+                        )
+
                     # Else grey it out
                     else:
-                        sheet.write(row, col, "", grey)
+                        sheet.write(row, col, "-", greyed)
                     col += 1
 
                 row += 1
@@ -355,46 +415,18 @@ class Scoreboard():
         self.save_json(jsonfilename)
 
 
-    def get_score(self, position: int) -> int:
-        """
-        Returns the score corresponding to
-        a given position in a race
-        """
-
-        # Did not participate
-        if position == 0:
-            return 0
-
-        # Nice.
-        if position == 69:
-            return 6
-
-        if position <= 1:
-            return 30
-        elif position <= 3:
-            return 25
-        elif position <= 10:
-            return 20
-        elif position <= 20:
-            return 15
-        elif position <= 50:
-            return 10
-        elif position <= 100:
-            return 5
-        else:
-            return 0
-
-
     def get_end(self, number: int) -> str:
         """
         Returns "st" for 1, "nd" for 2, "rd" for 3 and "th" othewise
         """
 
-        if number == 1:
+        last_digit = number % 10
+
+        if last_digit == 1:
             return "st"
-        elif number == 2:
+        elif last_digit == 2:
             return "nd"
-        elif number == 3:
+        elif last_digit == 3:
             return "rd"
         else:
             return "th"
@@ -444,10 +476,15 @@ class Competitors():
         return eligible
 
 
-    def save_list(self, min_weeks: int, filename: str) -> None:
+    def save_list(self, filename: str, race: int) -> None:
         """
         Saves the list of eligible members to a file
         """
+
+        if race <= RACE_CUTOFF:
+            min_weeks = MIN_WEEK
+        else:
+            min_weeks = MIN_WEEK + (race - RACE_CUTOFF)
 
         eligible = self.get_elegible(min_weeks)
 
@@ -455,10 +492,14 @@ class Competitors():
             f.writelines("\n".join(eligible))
 
 
-def get_score(position: int) -> int:
+def get_score(position: int, dnf_marble: int) -> int:
     """
     Scoring function
     """
+
+    # Did not finish
+    if dnf_marble > 0 and position >= dnf_marble:
+        return 0
 
     if position >= 1 and position <= MAX_SCORER:
         return MAX_SCORER + 1 - position
@@ -483,7 +524,7 @@ def get_keystrokes(number: int) -> list[str]:
 
 def autotype() -> None:
     """
-    Auto types the scores of each position, in descending order.
+    Auto types the scores of each position, in descending order
     Auto scrolls while doing so (otherwise, it glitches Marbles On Stream)
     """
 
@@ -516,6 +557,22 @@ def create_random(filename: str, amount: int):
             f.write("Marble " + str(i + 1) + "\n")
 
 
+def read_int(message: str) -> None:
+    """
+    Fail-proof read integer from input
+    """
+
+    inp = input(message)
+    while True:
+        try:
+            number = int(inp)
+            break
+        except ValueError:
+            inp = input(message)
+    
+    return number
+
+
 def print_instructions() -> None:
     """
     Prints menu instructions
@@ -526,10 +583,12 @@ def print_instructions() -> None:
     print(f"list: Save list of competitors that stayed at least {MIN_WEEK} full week(s)")
     print(f"add: Read from '{RESULTS_STR}' and add race")
     print("remove: Remove a race from the scoreboard")
+    print("save: Save all data")
     print("clear: Clear all the data and create backup")
     print("type: Autofill scoring system in Marbles On Stream")
     print("click: Autoclick for the Marbles On Stream configuration")
     print("debug: Execute some debugging code")
+    print(f"test: Toggle test mode (currently {'ON' if TEST_MODE else 'OFF'}")
     print("help: Show the menu options")
     print("quit: Exit the program")
 
