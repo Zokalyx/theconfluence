@@ -68,8 +68,8 @@ arrs = [arr.replace("\\", "") for arr in arrs]
 print(deps)
 print(arrs)
 
-arr_num = arrs[0][0] - 1
-print(f"\nInsert users manually - currently, first user in arrivals is {':'.join(arrs[0])}:\n")
+arr_num = int(arrs[0].split()[0]) - 1
+print(f"\nInsert users manually - currently, first user in arrivals is {arrs[0]}:\n")
 username = input(f"{arr_num}: ")
 while username:
     arrs.insert(0, [arr_num, username])
