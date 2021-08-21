@@ -157,6 +157,8 @@ class Scoreboard():
             sorting_key = lambda x: self.competitors[x[0]]
         elif option == "username":
             sorting_key = lambda x: x[0].lower()
+        elif option == "last race":
+            sorting_key = lambda x: x[1][-1]["individual"]
 
         # Create a list out of data to be sorted
         listed = list(self.data.items())
@@ -166,7 +168,7 @@ class Scoreboard():
                 listed,
                 key=sorting_key,
                 # We only want descending order when sorting by points
-                reverse=(option == "points")   
+                reverse=(option == "points" or option == "last race")   
             ))
 
         # Username not found when sorting by flair
@@ -295,7 +297,7 @@ class Scoreboard():
 
         # Auxiliary
         positions = self.get_positions()
-        sheets = ("points", "username", "flair")
+        sheets = ("points", "username", "flair", "last race")
         looper = (
             (f"Sorted by {option}", self.get_sorted_by(option)) for option in sheets
         )
