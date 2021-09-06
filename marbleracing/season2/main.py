@@ -192,6 +192,31 @@ class Scoreboard():
         return { username: index + 1 for index, username in enumerate(sorted_list) }
 
 
+    def get_filtered_positions(self) -> dict[str, int]:
+        """
+        Returns a dict containing the current position of each user
+        only considering those that are still part of the competition
+        """
+
+        sorted_list = list(self.get_sorted_by("points"))
+
+        filtered_dict = {}
+        i = 1
+        for username in sorted_list:
+            try:
+                flair = self.competitors[username]
+            except KeyError:
+                continue
+            
+            if flair == 0:
+                continue
+
+            filtered_dict[username] = i
+            i += 1
+
+        return filtered_dict
+
+
     def clear_all(self) -> None:
         self.data = {}
         self.dnf_marbles = []
@@ -296,7 +321,7 @@ class Scoreboard():
         workbook = xlsxwriter.Workbook(filename)
 
         # Auxiliary
-        positions = self.get_positions()
+        positions = self.get_filtered_positions()
         sheets = ("points", "username", "flair", "last race")
         looper = (
             (f"Sorted by {option}", self.get_sorted_by(option)) for option in sheets
