@@ -508,10 +508,10 @@ class Competitors():
         Saves the list of eligible members to a file
         """
 
-        if race <= RACE_CUTOFF:
+        if race + 1 <= RACE_CUTOFF:
             min_weeks = MIN_WEEK
         else:
-            min_weeks = MIN_WEEK + (race - RACE_CUTOFF)
+            min_weeks = MIN_WEEK + (race + 1 - RACE_CUTOFF)
 
         eligible = self.get_elegible(min_weeks)
 
