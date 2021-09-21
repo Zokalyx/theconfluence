@@ -25,6 +25,11 @@
                 "position": 106,
                 "individual": 0,
                 "total": 127
+            },
+            {
+                "position": 58,
+                "individual": 43,
+                "total": 170
             }
         ],
         "superbcount": [
@@ -52,6 +57,11 @@
                 "position": 91,
                 "individual": 10,
                 "total": 200
+            },
+            {
+                "position": 15,
+                "individual": 86,
+                "total": 286
             }
         ],
         "wehooper4": [
@@ -79,6 +89,11 @@
                 "position": 71,
                 "individual": 30,
                 "total": 217
+            },
+            {
+                "position": 81,
+                "individual": 20,
+                "total": 237
             }
         ],
         "KelsConditional": [
@@ -106,6 +121,11 @@
                 "position": 65,
                 "individual": 36,
                 "total": 263
+            },
+            {
+                "position": 59,
+                "individual": 42,
+                "total": 305
             }
         ],
         "sorasfishing": [
@@ -133,6 +153,11 @@
                 "position": 54,
                 "individual": 47,
                 "total": 276
+            },
+            {
+                "position": 25,
+                "individual": 76,
+                "total": 352
             }
         ],
         "yourownmomv2": [
@@ -160,6 +185,11 @@
                 "position": 87,
                 "individual": 14,
                 "total": 225
+            },
+            {
+                "position": 75,
+                "individual": 26,
+                "total": 251
             }
         ],
         "Socially_Odd260": [
@@ -187,6 +217,11 @@
                 "position": 79,
                 "individual": 22,
                 "total": 210
+            },
+            {
+                "position": 4,
+                "individual": 97,
+                "total": 307
             }
         ],
         "Jason_Worthing": [
@@ -214,6 +249,11 @@
                 "position": 74,
                 "individual": 27,
                 "total": 204
+            },
+            {
+                "position": 86,
+                "individual": 15,
+                "total": 219
             }
         ],
         "Saintsrow123474": [
@@ -241,6 +281,11 @@
                 "position": 86,
                 "individual": 15,
                 "total": 195
+            },
+            {
+                "position": 24,
+                "individual": 77,
+                "total": 272
             }
         ],
         "Atiggerx33": [
@@ -268,12 +313,22 @@
                 "position": 109,
                 "individual": 0,
                 "total": 162
+            },
+            {
+                "position": 47,
+                "individual": 54,
+                "total": 216
             }
         ],
         "Sneakiest": [
             {
                 "position": 11,
                 "individual": 90,
+                "total": 90
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 90
             },
             {
@@ -322,6 +377,11 @@
                 "position": 98,
                 "individual": 3,
                 "total": 258
+            },
+            {
+                "position": 82,
+                "individual": 19,
+                "total": 277
             }
         ],
         "Clint28": [
@@ -333,6 +393,11 @@
             {
                 "position": 8,
                 "individual": 93,
+                "total": 181
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 181
             },
             {
@@ -376,6 +441,11 @@
                 "position": 52,
                 "individual": 49,
                 "total": 177
+            },
+            {
+                "position": 94,
+                "individual": 0,
+                "total": 177
             }
         ],
         "jumbledzebra": [
@@ -403,6 +473,11 @@
                 "position": 108,
                 "individual": 0,
                 "total": 145
+            },
+            {
+                "position": 64,
+                "individual": 37,
+                "total": 182
             }
         ],
         "PlasmaStark": [
@@ -430,6 +505,11 @@
                 "position": 102,
                 "individual": 0,
                 "total": 349
+            },
+            {
+                "position": 38,
+                "individual": 63,
+                "total": 412
             }
         ],
         "Timo6506": [
@@ -457,6 +537,11 @@
                 "position": 68,
                 "individual": 33,
                 "total": 363
+            },
+            {
+                "position": 43,
+                "individual": 58,
+                "total": 421
             }
         ],
         "sritik617": [
@@ -484,6 +569,11 @@
                 "position": 38,
                 "individual": 63,
                 "total": 278
+            },
+            {
+                "position": 6,
+                "individual": 95,
+                "total": 373
             }
         ],
         "Cit_63": [
@@ -511,6 +601,11 @@
                 "position": 13,
                 "individual": 88,
                 "total": 330
+            },
+            {
+                "position": 14,
+                "individual": 87,
+                "total": 417
             }
         ],
         "simcoecitra": [
@@ -538,6 +633,11 @@
                 "position": 104,
                 "individual": 0,
                 "total": 241
+            },
+            {
+                "position": 51,
+                "individual": 50,
+                "total": 291
             }
         ],
         "VibrantVioletGrace": [
@@ -565,6 +665,11 @@
                 "position": 22,
                 "individual": 79,
                 "total": 355
+            },
+            {
+                "position": 31,
+                "individual": 70,
+                "total": 425
             }
         ],
         "Elfishjuggler33": [
@@ -591,6 +696,11 @@
             {
                 "position": 55,
                 "individual": 46,
+                "total": 279
+            },
+            {
+                "position": 117,
+                "individual": 0,
                 "total": 279
             }
         ],
@@ -619,6 +729,11 @@
                 "position": 8,
                 "individual": 93,
                 "total": 233
+            },
+            {
+                "position": 3,
+                "individual": 98,
+                "total": 331
             }
         ],
         "Magnus-Artifex": [
@@ -640,6 +755,11 @@
             {
                 "position": 26,
                 "individual": 75,
+                "total": 220
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 220
             },
             {
@@ -673,6 +793,11 @@
                 "position": 23,
                 "individual": 78,
                 "total": 324
+            },
+            {
+                "position": 97,
+                "individual": 0,
+                "total": 324
             }
         ],
         "Annoelle": [
@@ -700,6 +825,11 @@
                 "position": 2,
                 "individual": 99,
                 "total": 296
+            },
+            {
+                "position": 46,
+                "individual": 55,
+                "total": 351
             }
         ],
         "I_no_verylittle": [
@@ -727,6 +857,11 @@
                 "position": 85,
                 "individual": 16,
                 "total": 163
+            },
+            {
+                "position": 88,
+                "individual": 13,
+                "total": 176
             }
         ],
         "Mr_Wafflz": [
@@ -753,6 +888,11 @@
             {
                 "position": 97,
                 "individual": 4,
+                "total": 217
+            },
+            {
+                "position": 96,
+                "individual": 0,
                 "total": 217
             }
         ],
@@ -781,6 +921,11 @@
                 "position": 89,
                 "individual": 12,
                 "total": 172
+            },
+            {
+                "position": 21,
+                "individual": 80,
+                "total": 252
             }
         ],
         "the_dh_junkie": [
@@ -808,6 +953,11 @@
                 "position": 95,
                 "individual": 6,
                 "total": 183
+            },
+            {
+                "position": 45,
+                "individual": 56,
+                "total": 239
             }
         ],
         "OrangeSockMonkey": [
@@ -835,6 +985,11 @@
                 "position": 34,
                 "individual": 67,
                 "total": 282
+            },
+            {
+                "position": 67,
+                "individual": 34,
+                "total": 316
             }
         ],
         "MoscaMye": [
@@ -862,6 +1017,11 @@
                 "position": 3,
                 "individual": 98,
                 "total": 296
+            },
+            {
+                "position": 50,
+                "individual": 51,
+                "total": 347
             }
         ],
         "T-R-W": [
@@ -889,6 +1049,11 @@
                 "position": 16,
                 "individual": 85,
                 "total": 321
+            },
+            {
+                "position": 33,
+                "individual": 68,
+                "total": 389
             }
         ],
         "Naima22": [
@@ -916,6 +1081,11 @@
                 "position": 46,
                 "individual": 55,
                 "total": 309
+            },
+            {
+                "position": 17,
+                "individual": 84,
+                "total": 393
             }
         ],
         "TK_Sleepytime": [
@@ -942,6 +1112,11 @@
             {
                 "position": 99,
                 "individual": 2,
+                "total": 163
+            },
+            {
+                "position": 102,
+                "individual": 0,
                 "total": 163
             }
         ],
@@ -970,6 +1145,11 @@
                 "position": 48,
                 "individual": 53,
                 "total": 226
+            },
+            {
+                "position": 93,
+                "individual": 0,
+                "total": 226
             }
         ],
         "AvgMick": [
@@ -996,6 +1176,11 @@
             {
                 "position": 72,
                 "individual": 29,
+                "total": 110
+            },
+            {
+                "position": 103,
+                "individual": 0,
                 "total": 110
             }
         ],
@@ -1024,6 +1209,11 @@
                 "position": 75,
                 "individual": 26,
                 "total": 298
+            },
+            {
+                "position": 57,
+                "individual": 44,
+                "total": 342
             }
         ],
         "Fluffybagel": [
@@ -1051,6 +1241,11 @@
                 "position": 110,
                 "individual": 0,
                 "total": 290
+            },
+            {
+                "position": 61,
+                "individual": 40,
+                "total": 330
             }
         ],
         "instit0r": [
@@ -1077,6 +1272,11 @@
             {
                 "position": 50,
                 "individual": 51,
+                "total": 275
+            },
+            {
+                "position": 108,
+                "individual": 0,
                 "total": 275
             }
         ],
@@ -1105,6 +1305,11 @@
                 "position": 76,
                 "individual": 25,
                 "total": 204
+            },
+            {
+                "position": 65,
+                "individual": 36,
+                "total": 240
             }
         ],
         "Kanexan": [
@@ -1132,6 +1337,11 @@
                 "position": 66,
                 "individual": 35,
                 "total": 171
+            },
+            {
+                "position": 63,
+                "individual": 38,
+                "total": 209
             }
         ],
         "DogMechanic": [
@@ -1142,6 +1352,11 @@
             },
             {
                 "position": 100,
+                "individual": 0,
+                "total": 58
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 58
             },
@@ -1186,6 +1401,11 @@
                 "position": 61,
                 "individual": 40,
                 "total": 190
+            },
+            {
+                "position": 29,
+                "individual": 72,
+                "total": 262
             }
         ],
         "kupaa": [
@@ -1213,12 +1433,22 @@
                 "position": 33,
                 "individual": 68,
                 "total": 176
+            },
+            {
+                "position": 115,
+                "individual": 0,
+                "total": 176
             }
         ],
         "moskayjoh": [
             {
                 "position": 46,
                 "individual": 55,
+                "total": 55
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 55
             },
             {
@@ -1267,6 +1497,11 @@
                 "position": 41,
                 "individual": 60,
                 "total": 179
+            },
+            {
+                "position": 35,
+                "individual": 66,
+                "total": 245
             }
         ],
         "Herald_Osbert": [
@@ -1294,6 +1529,11 @@
                 "position": 80,
                 "individual": 21,
                 "total": 101
+            },
+            {
+                "position": 11,
+                "individual": 90,
+                "total": 191
             }
         ],
         "Aurallius": [
@@ -1321,6 +1561,11 @@
                 "position": 116,
                 "individual": 0,
                 "total": 153
+            },
+            {
+                "position": 90,
+                "individual": 11,
+                "total": 164
             }
         ],
         "MidnightJ1200": [
@@ -1348,6 +1593,11 @@
                 "position": 5,
                 "individual": 96,
                 "total": 240
+            },
+            {
+                "position": 30,
+                "individual": 71,
+                "total": 311
             }
         ],
         "KreiaIncarnate": [
@@ -1364,6 +1614,11 @@
             {
                 "position": 90,
                 "individual": 11,
+                "total": 102
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 102
             },
             {
@@ -1402,6 +1657,11 @@
                 "position": 25,
                 "individual": 76,
                 "total": 226
+            },
+            {
+                "position": 118,
+                "individual": 0,
+                "total": 226
             }
         ],
         "IShotAGrapefruit7": [
@@ -1429,6 +1689,11 @@
                 "position": 62,
                 "individual": 39,
                 "total": 174
+            },
+            {
+                "position": 9,
+                "individual": 92,
+                "total": 266
             }
         ],
         "hackersbevy": [
@@ -1456,12 +1721,22 @@
                 "position": 24,
                 "individual": 77,
                 "total": 252
+            },
+            {
+                "position": 8,
+                "individual": 93,
+                "total": 345
             }
         ],
         "BandicootSecure": [
             {
                 "position": 55,
                 "individual": 46,
+                "total": 46
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 46
             },
             {
@@ -1510,6 +1785,11 @@
                 "position": 20,
                 "individual": 81,
                 "total": 250
+            },
+            {
+                "position": 19,
+                "individual": 82,
+                "total": 332
             }
         ],
         "VincentJoshuaET": [
@@ -1537,12 +1817,22 @@
                 "position": 101,
                 "individual": 0,
                 "total": 197
+            },
+            {
+                "position": 62,
+                "individual": 39,
+                "total": 236
             }
         ],
         "Pessimist2020": [
             {
                 "position": 58,
                 "individual": 43,
+                "total": 43
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 43
             },
             {
@@ -1591,6 +1881,11 @@
                 "position": 35,
                 "individual": 66,
                 "total": 192
+            },
+            {
+                "position": 73,
+                "individual": 28,
+                "total": 220
             }
         ],
         "CheepCheepChompYT": [
@@ -1618,6 +1913,11 @@
                 "position": 32,
                 "individual": 69,
                 "total": 153
+            },
+            {
+                "position": 85,
+                "individual": 16,
+                "total": 169
             }
         ],
         "Roomination": [
@@ -1645,6 +1945,11 @@
                 "position": 103,
                 "individual": 0,
                 "total": 98
+            },
+            {
+                "position": 49,
+                "individual": 52,
+                "total": 150
             }
         ],
         "jiggle-o": [
@@ -1672,6 +1977,11 @@
                 "position": 57,
                 "individual": 44,
                 "total": 176
+            },
+            {
+                "position": 113,
+                "individual": 0,
+                "total": 176
             }
         ],
         "yankeebelles": [
@@ -1682,6 +1992,11 @@
             },
             {
                 "position": 121,
+                "individual": 0,
+                "total": 38
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 38
             },
@@ -1726,6 +2041,11 @@
                 "position": 44,
                 "individual": 57,
                 "total": 209
+            },
+            {
+                "position": 76,
+                "individual": 25,
+                "total": 234
             }
         ],
         "Pzwang4": [
@@ -1753,6 +2073,11 @@
                 "position": 18,
                 "individual": 83,
                 "total": 166
+            },
+            {
+                "position": 83,
+                "individual": 18,
+                "total": 184
             }
         ],
         "luri7555": [
@@ -1779,6 +2104,11 @@
             {
                 "position": 9,
                 "individual": 92,
+                "total": 239
+            },
+            {
+                "position": 114,
+                "individual": 0,
                 "total": 239
             }
         ],
@@ -1807,12 +2137,22 @@
                 "position": 6,
                 "individual": 95,
                 "total": 229
+            },
+            {
+                "position": 48,
+                "individual": 53,
+                "total": 282
             }
         ],
         "TheMelonOwl": [
             {
                 "position": 68,
                 "individual": 33,
+                "total": 33
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 33
             },
             {
@@ -1861,6 +2201,11 @@
                 "position": 67,
                 "individual": 34,
                 "total": 144
+            },
+            {
+                "position": 27,
+                "individual": 74,
+                "total": 218
             }
         ],
         "s1gnalZer0": [
@@ -1888,6 +2233,11 @@
                 "position": 100,
                 "individual": 1,
                 "total": 81
+            },
+            {
+                "position": 87,
+                "individual": 14,
+                "total": 95
             }
         ],
         "deadwlkn": [
@@ -1915,6 +2265,11 @@
                 "position": 43,
                 "individual": 58,
                 "total": 205
+            },
+            {
+                "position": 80,
+                "individual": 21,
+                "total": 226
             }
         ],
         "background_spider": [
@@ -1942,6 +2297,11 @@
                 "position": 19,
                 "individual": 82,
                 "total": 150
+            },
+            {
+                "position": 69,
+                "individual": 32,
+                "total": 182
             }
         ],
         "PrismRanger": [
@@ -1969,6 +2329,11 @@
                 "position": 30,
                 "individual": 71,
                 "total": 202
+            },
+            {
+                "position": 7,
+                "individual": 94,
+                "total": 296
             }
         ],
         "Vanilla_Princess": [
@@ -1994,6 +2359,11 @@
             },
             {
                 "position": 107,
+                "individual": 0,
+                "total": 163
+            },
+            {
+                "position": 106,
                 "individual": 0,
                 "total": 163
             }
@@ -2023,6 +2393,11 @@
                 "position": 4,
                 "individual": 97,
                 "total": 180
+            },
+            {
+                "position": 37,
+                "individual": 64,
+                "total": 244
             }
         ],
         "H2Joee": [
@@ -2044,6 +2419,11 @@
             {
                 "position": 2,
                 "individual": 99,
+                "total": 171
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 171
             },
             {
@@ -2077,6 +2457,11 @@
                 "position": 17,
                 "individual": 84,
                 "total": 191
+            },
+            {
+                "position": 66,
+                "individual": 35,
+                "total": 226
             }
         ],
         "moosepile": [
@@ -2102,6 +2487,11 @@
             },
             {
                 "position": 112,
+                "individual": 0,
+                "total": 129
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 129
             }
@@ -2131,6 +2521,11 @@
                 "position": 37,
                 "individual": 64,
                 "total": 233
+            },
+            {
+                "position": 42,
+                "individual": 59,
+                "total": 292
             }
         ],
         "weeghostie00": [
@@ -2142,6 +2537,11 @@
             {
                 "position": 22,
                 "individual": 79,
+                "total": 100
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 100
             },
             {
@@ -2185,6 +2585,11 @@
                 "position": 114,
                 "individual": 0,
                 "total": 76
+            },
+            {
+                "position": 55,
+                "individual": 46,
+                "total": 122
             }
         ],
         "thefifthangel141": [
@@ -2211,6 +2616,11 @@
             {
                 "position": 90,
                 "individual": 11,
+                "total": 161
+            },
+            {
+                "position": 111,
+                "individual": 0,
                 "total": 161
             }
         ],
@@ -2239,6 +2649,11 @@
                 "position": 26,
                 "individual": 75,
                 "total": 285
+            },
+            {
+                "position": 44,
+                "individual": 57,
+                "total": 342
             }
         ],
         "InspirobotBot": [
@@ -2266,6 +2681,11 @@
                 "position": 63,
                 "individual": 38,
                 "total": 199
+            },
+            {
+                "position": 68,
+                "individual": 33,
+                "total": 232
             }
         ],
         "zirky": [
@@ -2293,6 +2713,11 @@
                 "position": 45,
                 "individual": 56,
                 "total": 259
+            },
+            {
+                "position": 36,
+                "individual": 65,
+                "total": 324
             }
         ],
         "Archy99": [
@@ -2320,6 +2745,11 @@
                 "position": 1,
                 "individual": 100,
                 "total": 235
+            },
+            {
+                "position": 56,
+                "individual": 45,
+                "total": 280
             }
         ],
         "Zokalyx": [
@@ -2347,6 +2777,11 @@
                 "position": 117,
                 "individual": 0,
                 "total": 50
+            },
+            {
+                "position": 54,
+                "individual": 47,
+                "total": 97
             }
         ],
         "a_coward_irl": [
@@ -2374,12 +2809,22 @@
                 "position": 70,
                 "individual": 31,
                 "total": 82
+            },
+            {
+                "position": 109,
+                "individual": 0,
+                "total": 82
             }
         ],
         "jef__fay": [
             {
                 "position": 89,
                 "individual": 12,
+                "total": 12
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 12
             },
             {
@@ -2428,6 +2873,11 @@
                 "position": 83,
                 "individual": 18,
                 "total": 94
+            },
+            {
+                "position": 34,
+                "individual": 67,
+                "total": 161
             }
         ],
         "write-csv": [
@@ -2455,6 +2905,11 @@
                 "position": 29,
                 "individual": 72,
                 "total": 202
+            },
+            {
+                "position": 77,
+                "individual": 24,
+                "total": 226
             }
         ],
         "Man-akle": [
@@ -2482,6 +2937,11 @@
                 "position": 73,
                 "individual": 28,
                 "total": 146
+            },
+            {
+                "position": 84,
+                "individual": 17,
+                "total": 163
             }
         ],
         "cniinc": [
@@ -2509,6 +2969,11 @@
                 "position": 111,
                 "individual": 0,
                 "total": 143
+            },
+            {
+                "position": 1,
+                "individual": 100,
+                "total": 243
             }
         ],
         "Almighty_Elephant": [
@@ -2536,6 +3001,11 @@
                 "position": 36,
                 "individual": 65,
                 "total": 280
+            },
+            {
+                "position": 39,
+                "individual": 62,
+                "total": 342
             }
         ],
         "yo-whatupmofo": [
@@ -2563,6 +3033,11 @@
                 "position": 82,
                 "individual": 19,
                 "total": 133
+            },
+            {
+                "position": 71,
+                "individual": 30,
+                "total": 163
             }
         ],
         "IAmTheClayman": [
@@ -2590,6 +3065,11 @@
                 "position": 115,
                 "individual": 0,
                 "total": 192
+            },
+            {
+                "position": 22,
+                "individual": 79,
+                "total": 271
             }
         ],
         "Thejusko": [
@@ -2617,6 +3097,11 @@
                 "position": 39,
                 "individual": 62,
                 "total": 219
+            },
+            {
+                "position": 41,
+                "individual": 60,
+                "total": 279
             }
         ],
         "hairysonorth": [
@@ -2644,6 +3129,11 @@
                 "position": 12,
                 "individual": 89,
                 "total": 174
+            },
+            {
+                "position": 16,
+                "individual": 85,
+                "total": 259
             }
         ],
         "CommaDelimitedList": [
@@ -2671,6 +3161,11 @@
                 "position": 119,
                 "individual": 0,
                 "total": 114
+            },
+            {
+                "position": 89,
+                "individual": 12,
+                "total": 126
             }
         ],
         "dede-javu": [
@@ -2697,6 +3192,11 @@
             {
                 "position": 31,
                 "individual": 70,
+                "total": 172
+            },
+            {
+                "position": 116,
+                "individual": 0,
                 "total": 172
             }
         ],
@@ -2725,6 +3225,11 @@
                 "position": 64,
                 "individual": 37,
                 "total": 190
+            },
+            {
+                "position": 12,
+                "individual": 89,
+                "total": 279
             }
         ],
         "Connir": [
@@ -2752,11 +3257,21 @@
                 "position": 84,
                 "individual": 17,
                 "total": 167
+            },
+            {
+                "position": 112,
+                "individual": 0,
+                "total": 167
             }
         ],
         "8Legs-2Tentacles": [
             {
                 "position": 103,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -2806,6 +3321,11 @@
                 "position": 11,
                 "individual": 90,
                 "total": 187
+            },
+            {
+                "position": 53,
+                "individual": 48,
+                "total": 235
             }
         ],
         "CrixusDaGaul": [
@@ -2832,6 +3352,11 @@
             {
                 "position": 77,
                 "individual": 24,
+                "total": 158
+            },
+            {
+                "position": 92,
+                "individual": 0,
                 "total": 158
             }
         ],
@@ -2860,6 +3385,11 @@
                 "position": 94,
                 "individual": 7,
                 "total": 184
+            },
+            {
+                "position": 95,
+                "individual": 0,
+                "total": 184
             }
         ],
         "pl233": [
@@ -2886,6 +3416,11 @@
             {
                 "position": 49,
                 "individual": 52,
+                "total": 284
+            },
+            {
+                "position": 91,
+                "individual": 0,
                 "total": 284
             }
         ],
@@ -2914,6 +3449,11 @@
                 "position": 59,
                 "individual": 42,
                 "total": 111
+            },
+            {
+                "position": 23,
+                "individual": 78,
+                "total": 189
             }
         ],
         "Netherpizza": [
@@ -2939,6 +3479,11 @@
             },
             {
                 "position": 118,
+                "individual": 0,
+                "total": 141
+            },
+            {
+                "position": 101,
                 "individual": 0,
                 "total": 141
             }
@@ -2968,6 +3513,11 @@
                 "position": 93,
                 "individual": 8,
                 "total": 110
+            },
+            {
+                "position": 107,
+                "individual": 0,
+                "total": 110
             }
         ],
         "FrozenExpanse": [
@@ -2995,6 +3545,11 @@
                 "position": 81,
                 "individual": 20,
                 "total": 196
+            },
+            {
+                "position": 2,
+                "individual": 99,
+                "total": 295
             }
         ],
         "ZackTheSmack": [
@@ -3022,6 +3577,11 @@
                 "position": 40,
                 "individual": 61,
                 "total": 151
+            },
+            {
+                "position": 72,
+                "individual": 29,
+                "total": 180
             }
         ],
         "fireamoe": [
@@ -3049,6 +3609,11 @@
                 "position": 14,
                 "individual": 87,
                 "total": 213
+            },
+            {
+                "position": 10,
+                "individual": 91,
+                "total": 304
             }
         ],
         "saraena": [
@@ -3076,6 +3641,11 @@
                 "position": 53,
                 "individual": 48,
                 "total": 79
+            },
+            {
+                "position": 13,
+                "individual": 88,
+                "total": 167
             }
         ],
         "datanas": [
@@ -3103,11 +3673,21 @@
                 "position": 105,
                 "individual": 0,
                 "total": 76
+            },
+            {
+                "position": 79,
+                "individual": 22,
+                "total": 98
             }
         ],
         "MyNewAlt5836484": [
             {
                 "position": 116,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -3157,11 +3737,21 @@
                 "position": 15,
                 "individual": 86,
                 "total": 86
+            },
+            {
+                "position": 110,
+                "individual": 0,
+                "total": 86
             }
         ],
         "AlocasterTV": [
             {
                 "position": 118,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -3211,6 +3801,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 0
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 0
             }
         ],
         "Pharmacodynamical": [
@@ -3227,6 +3822,11 @@
             {
                 "position": 36,
                 "individual": 65,
+                "total": 136
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 136
             },
             {
@@ -3265,6 +3865,11 @@
                 "position": 51,
                 "individual": 50,
                 "total": 181
+            },
+            {
+                "position": 32,
+                "individual": 69,
+                "total": 250
             }
         ],
         "boardatwork1111": [
@@ -3291,6 +3896,11 @@
             {
                 "position": 10,
                 "individual": 91,
+                "total": 171
+            },
+            {
+                "position": 105,
+                "individual": 0,
                 "total": 171
             }
         ],
@@ -3319,6 +3929,11 @@
                 "position": 88,
                 "individual": 13,
                 "total": 147
+            },
+            {
+                "position": 5,
+                "individual": 96,
+                "total": 243
             }
         ],
         "tundrawolf89": [
@@ -3334,6 +3949,11 @@
             },
             {
                 "position": 114,
+                "individual": 0,
+                "total": 65
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 65
             },
@@ -3373,6 +3993,11 @@
                 "position": 21,
                 "individual": 80,
                 "total": 232
+            },
+            {
+                "position": 104,
+                "individual": 0,
+                "total": 232
             }
         ],
         "Forretressqt": [
@@ -3400,6 +4025,11 @@
                 "position": 42,
                 "individual": 59,
                 "total": 195
+            },
+            {
+                "position": 18,
+                "individual": 83,
+                "total": 278
             }
         ],
         "JebSenrab": [
@@ -3427,6 +4057,11 @@
                 "position": 60,
                 "individual": 41,
                 "total": 116
+            },
+            {
+                "position": 74,
+                "individual": 27,
+                "total": 143
             }
         ],
         "Darkayne23": [
@@ -3454,6 +4089,11 @@
                 "position": 27,
                 "individual": 74,
                 "total": 302
+            },
+            {
+                "position": 26,
+                "individual": 75,
+                "total": 377
             }
         ],
         "rubybirdy": [
@@ -3481,6 +4121,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 212
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 212
             }
         ],
         "DildoFaggins_69": [
@@ -3492,6 +4137,11 @@
             {
                 "position": 28,
                 "individual": 73,
+                "total": 73
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 73
             },
             {
@@ -3535,6 +4185,11 @@
                 "position": 78,
                 "individual": 23,
                 "total": 132
+            },
+            {
+                "position": 70,
+                "individual": 31,
+                "total": 163
             }
         ],
         "jd60889": [
@@ -3562,6 +4217,11 @@
                 "position": 47,
                 "individual": 54,
                 "total": 177
+            },
+            {
+                "position": 99,
+                "individual": 0,
+                "total": 177
             }
         ],
         "Pea_lly": [
@@ -3578,6 +4238,11 @@
             {
                 "position": 87,
                 "individual": 14,
+                "total": 66
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 66
             },
             {
@@ -3616,6 +4281,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 28
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 28
             }
         ],
         "Lupixs": [
@@ -3626,6 +4296,11 @@
             },
             {
                 "position": 81,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -3670,6 +4345,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 0
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 0
             }
         ],
         "Pabs23": [
@@ -3697,6 +4377,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 66
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 66
             }
         ],
         "No_Echo6555": [
@@ -3707,6 +4392,11 @@
             },
             {
                 "position": 115,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -3751,6 +4441,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 0
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 0
             }
         ],
         "Furfty": [
@@ -3778,6 +4473,11 @@
                 "position": 7,
                 "individual": 94,
                 "total": 190
+            },
+            {
+                "position": 40,
+                "individual": 61,
+                "total": 251
             }
         ],
         "yamez420": [
@@ -3805,6 +4505,11 @@
                 "position": 28,
                 "individual": 73,
                 "total": 189
+            },
+            {
+                "position": 52,
+                "individual": 49,
+                "total": 238
             }
         ],
         "Breadynator": [
@@ -3832,6 +4537,11 @@
                 "position": 96,
                 "individual": 5,
                 "total": 175
+            },
+            {
+                "position": 28,
+                "individual": 73,
+                "total": 248
             }
         ],
         "salsaastronaut": [
@@ -3859,6 +4569,11 @@
                 "position": 92,
                 "individual": 9,
                 "total": 154
+            },
+            {
+                "position": 60,
+                "individual": 41,
+                "total": 195
             }
         ],
         "djasonpenney": [
@@ -3886,6 +4601,11 @@
                 "position": 113,
                 "individual": 0,
                 "total": 73
+            },
+            {
+                "position": 78,
+                "individual": 23,
+                "total": 96
             }
         ],
         "-Zubber": [
@@ -3902,6 +4622,11 @@
             {
                 "position": 34,
                 "individual": 67,
+                "total": 67
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 67
             },
             {
@@ -3940,6 +4665,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 5
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 5
             }
         ],
         "MKE1969": [
@@ -3967,6 +4697,11 @@
                 "position": 69,
                 "individual": 32,
                 "total": 117
+            },
+            {
+                "position": 20,
+                "individual": 81,
+                "total": 198
             }
         ],
         "notmeagain111": [
@@ -3982,6 +4717,11 @@
             },
             {
                 "position": 116,
+                "individual": 0,
+                "total": 0
+            },
+            {
+                "position": 0,
                 "individual": 0,
                 "total": 0
             },
@@ -4021,6 +4761,11 @@
                 "position": 0,
                 "individual": 0,
                 "total": 76
+            },
+            {
+                "position": 0,
+                "individual": 0,
+                "total": 76
             }
         ],
         "BruceInc": [
@@ -4042,6 +4787,11 @@
             {
                 "position": 52,
                 "individual": 49,
+                "total": 49
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 49
             },
             {
@@ -4075,6 +4825,11 @@
                 "position": 56,
                 "individual": 45,
                 "total": 91
+            },
+            {
+                "position": 100,
+                "individual": 0,
+                "total": 91
             }
         ],
         "Leaf671": [
@@ -4096,6 +4851,11 @@
             {
                 "position": 67,
                 "individual": 34,
+                "total": 34
+            },
+            {
+                "position": 0,
+                "individual": 0,
                 "total": 34
             },
             {
@@ -4129,6 +4889,11 @@
                 "position": 58,
                 "individual": 43,
                 "total": 43
+            },
+            {
+                "position": 98,
+                "individual": 0,
+                "total": 43
             }
         ]
     },
@@ -4137,6 +4902,7 @@
         76,
         120,
         120,
-        115
+        115,
+        91
     ]
 }
