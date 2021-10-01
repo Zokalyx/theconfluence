@@ -62,8 +62,8 @@ arrs = fix_text_arr[second_index + 1:third_index]
 
 print(first_index, second_index, third_index)
 
-deps = [dep.replace("\\", "") for dep in deps]
-arrs = [arr.replace("\\", "") for arr in arrs]
+deps = [dep.replace("\\", "").strip() for dep in deps]
+arrs = [arr.replace("\\", "").strip() for arr in arrs]
 
 print(deps)
 print(arrs)
