@@ -57,13 +57,15 @@ with raw:
         if numrow:
             apparentpeople = numrow[len(numrow)-1]
 
+        # print("week " + str(i+1) + " " + str(people))
+
         # write the arrivals in their corresponding place from that week onwards (someone else will have to take their place)
         for j in range(len(numrow)):
             for k in range(i,week):
                 mega[int(numrow[j])-1][k+1] = namerow[j]
 
         if int(apparentpeople) != people: # Debugging
-            print("week " + str(i+1) + ": expected " + str(people) + " people instead of " + apparentpeople)
+            print("week " + str(i+1) + ": expected " + apparentpeople + " people instead of " + str(people))
 raw.close()
 
 # save the processed csv file with mega
