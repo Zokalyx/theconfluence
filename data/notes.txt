@@ -93,3 +93,6 @@ above 106 have been adjusted to make way for 107 The_Maggot_Guy
 
 154 chovybizzasser was eliminated, but under the number 111, which corresponded
 to another user.
+
+201 A_PCMR_member was removed to prevent 201 members in arrival 85 and departure 86.
+Yes my code is bad and won't handle having less members than a previous run. Sorry
