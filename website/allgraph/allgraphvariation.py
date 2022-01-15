@@ -41,7 +41,9 @@ def separate(array):
             start_new = True
     return [ans, starting]
 
-brokenWeeks = (93, 63, 53, 40, 34, 10 ,4)
+with open("../../data/broken.txt") as b:
+    brokenWeeks = list(reversed([int(wk) - 2 for wk in b.readlines()]))
+
 for row in mega:
     for wk in brokenWeeks:
         row.pop(wk+1)

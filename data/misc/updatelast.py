@@ -2,6 +2,9 @@ import csv
 import praw
 from os import environ as env
 
+with open("../broken.txt", "r") as b:
+    broken = len(b.read().split("\n"))
+
 w = open("../week.txt", "r")
 week = int(w.readline()) # = (Run [1-5]; Run + 1 [6-10]; Run + 2 [11+])
 w.close()
@@ -45,6 +48,6 @@ for post in profile.new(limit=10):
         post.delete()
         break
 
-profile.submit("Last (" + str(week - 7) + ")", text)
+profile.submit("Last (" + str(week - broken) + ")", text)
 
 print("Done")

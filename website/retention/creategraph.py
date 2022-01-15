@@ -52,7 +52,10 @@ for i in range(len(percentage)):
     percentage[i] *= 100
 
 #fix broken weeks
-brokenWeeks = (4, 10, 34, 40, 53, 63, 93)
+
+with open("../../data/broken.txt") as b:
+    brokenWeeks = [int(wk) - 2 for wk in b.readlines()]
+
 for broken in brokenWeeks:
     if broken + 2 == week:
         percentage[broken] = percentage[broken-1]

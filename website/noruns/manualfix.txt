@@ -1,0 +1,4 @@
+Whenever a run is skipped, modify:
+- data/broken.txt
+- website/noruns/index.html
+- website/converter/script.js (change two numbers in the beginning and definition of weekToRun and runToWeek
