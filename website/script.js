@@ -50,6 +50,7 @@ function initMap() {
 
     const locations = [
         { lat: -36.342356, lng: -60.524218 },
+        { lat: 53.480, lng: -2.242 },
     ];
   
     const map = new google.maps.Map(document.getElementById("map"), {
