@@ -24,6 +24,17 @@ function resize() {
     }
 }
 
+/* adjust logo image for map site (annoying...) */
+function resize() {
+    if ($(window).width() < $(window).height()) {
+        $("#home2").attr("src", "../images/mobilelogo.png");
+        $("#github2").css("display", "none");
+    } else {
+        $("#home2").attr("src", "../images/logo.png");
+        $("#github2").css("display", "block");
+    }
+}
+
 /* load all functions */
 function loaded() {
     resize();
@@ -32,3 +43,24 @@ function loaded() {
 
 /* events */
 $(window).on('resize', resize);
+
+/* Map stuff */
+// Initialize and add the map
+function initMap() {
+
+    const locations = [
+        { lat: -36.342356, lng: -60.524218 },
+    ];
+  
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 1,
+      center: { lat: 0, lng: 0 },
+    });
+  
+    locations.forEach(location => {
+        new google.maps.Marker({
+          position: location,
+          map: map,
+        })
+    });
+  }
