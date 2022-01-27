@@ -50,15 +50,18 @@ $(window).on('resize', resize);
 function initMap() {
 
     const locations = [
+        { lat: 39.959, lng: -83.003 },
         { lat: 61.897, lng: 9.399 },
         { lat: 39.340, lng: -120.825 },
         { lat: 33.760, lng: -84.399 },
+        { lat: 30.148, lng: -85.683 },
         { lat: -36.342, lng: -60.524 },
         { lat: 53.480, lng: -2.242 },
         { lat: 39.960, lng: -83.004 },
         { lat: 57.553, lng: -102.197 },
         { lat: 39.988, lng: -75.201 },
         { lat: -27.473, lng: 153.021 },
+        { lat: 40.662, lng: -73.969 },
         { lat: 45.438, lng: 11.892 },
         { lat: 35.706, lng: -86.571 },
         { lat: 43.636, lng: -79.373 },
@@ -67,6 +70,7 @@ function initMap() {
         { lat: 44.991, lng: -93.269 },
         { lat: 49.273, lng: -123.106 },
         { lat: 42.628, lng: -114.461 },
+        { lat: 51.207, lng: 0.864 },
     ];
   
     const map = new google.maps.Map(document.getElementById("map"), {
