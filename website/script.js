@@ -25,7 +25,7 @@ function resize() {
 }
 
 /* adjust logo image for map site (annoying...) */
-function resize() {
+function resize2() {
     if ($(window).width() < $(window).height()) {
         $("#home2").attr("src", "../images/mobilelogo.png");
         $("#github2").css("display", "none");
@@ -38,6 +38,7 @@ function resize() {
 /* load all functions */
 function loaded() {
     resize();
+    resize2();
     showDays();
 }
 
