@@ -49,9 +49,10 @@ $(window).on('resize', resize);
 function initMap() {
 
     const locations = [
-        { lat: -36.342356, lng: -60.524218 },
+        { lat: 33.760, lng: -84.399 },
+        { lat: -36.342, lng: -60.524 },
         { lat: 53.480, lng: -2.242 },
-        { lat: 42.628, lng: -114.461 }, 
+        { lat: 42.628, lng: -114.461 },
     ];
   
     const map = new google.maps.Map(document.getElementById("map"), {
