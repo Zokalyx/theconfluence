@@ -33,12 +33,6 @@ def main():
         sys.exit("Bot couldn't Login. Terminate Script")
 
     while True:
-        # Sleep for 5 seconds because While True is active waiting
-        # As long as this Scripts runs it will use one CPU Thread
-        # When we sleep other Processes can use the CPU Thread
-        # 5 seconds of delay to run the Arrivals / Departures
-        # will not change the wanted behavior
-        time.sleep(5)
         # Read inbox and filter
         for unread in reddit.inbox.unread(limit=1):
             author = unread.author
