@@ -32,72 +32,76 @@ def main():
         # This prevents the script to call reddit.inbox.unread(limit=1) because reddit is undefined
         sys.exit("Bot couldn't Login. Terminate Script")
 
-    while True:
-        # Read inbox and filter
-        for unread in reddit.inbox.unread(limit=1):
-            author = unread.author
-            unread.mark_read()
+    # Read inbox and filter
+    # The Stream removes the need to active wait with a while true
+    # This means other Process can use CPU Time which wasn't possible before
+    # This changes the behavior. Now only new Messages while get read
+    # When the bot isn't running the run commands won't be accessed after the fact
+    # and a new one must be issued
+    for unread in reddit.inbox.stream(skip_existing=True):
+        author = unread.author
+        unread.mark_read()
 
-            # Filter
-            if author.name not in WHITELIST:
+        # Filter
+        if author.name not in WHITELIST:
+            break
+
+        # Send first message
+        print("Sending 1st Message to", author.name)
+        if not DEBUG:
+            author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
+        status_text = ""
+
+        # Calculate departures
+        try:
+            summary_dep, detailed_dep, retention, newrun, starting, arrs, r_list = departures()
+        except Exception as e:
+            print(e.with_traceback())
+            summary_dep = "There was an error getting departures.\n"
+            detailed_dep = "There was an error getting departures.\n"
+            retention = "?"
+            newrun = "?"
+            starting = 0
+            arrs = 100
+            r_list = []
+            status_text += "There was an issue getting departures :(\n"
+
+        # Calculate arrivals
+        try:
+            summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
+        except Exception as e:
+            print(e)
+            summary_arr = "There was an error getting arrivals.\n\n"
+            detailed_arr = "There was an error getting arrivals.\n\n"
+            if status_text == "":
+                status_text += "There was an issue getting arrivals :(\n"
+            else:
+                print("Sending total failure message to", author.name)
+                if not DEBUG:
+                    author.message("Oops...", "There was some problem and I couldn't get departures or arrivals. Sorry!")
                 break
 
-            # Send first message
-            print("Sending 1st Message to", author.name)
-            if not DEBUG:
-                author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
-            status_text = ""
+        # Create summary text
+        summary = "**Departures:**\n\n" + summary_dep + "**Arrivals:**\n\n" + summary_arr
 
-            # Calculate departures
-            try:
-                summary_dep, detailed_dep, retention, newrun, starting, arrs, r_list = departures()
-            except Exception as e:
-                print(e.with_traceback())
-                summary_dep = "There was an error getting departures.\n"
-                detailed_dep = "There was an error getting departures.\n"
-                retention = "?"
-                newrun = "?"
-                starting = 0
-                arrs = 100
-                r_list = []
-                status_text += "There was an issue getting departures :(\n"
+        # Only proceed if DEBUG is disabled
+        if DEBUG:
+            print("DEBUG mode is on, will not post - printing summary instead:")
+            print(summary)
+            break
 
-            # Calculate arrivals
-            try:
-                summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
-            except Exception as e:
-                print(e)
-                summary_arr = "There was an error getting arrivals.\n\n"
-                detailed_arr = "There was an error getting arrivals.\n\n"
-                if status_text == "":
-                    status_text += "There was an issue getting arrivals :(\n"
-                else:
-                    print("Sending total failure message to", author.name)
-                    if not DEBUG:
-                        author.message("Oops...", "There was some problem and I couldn't get departures or arrivals. Sorry!")
-                    break
+        # Post results
+        print("Posting results")
+        try:
+            post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
+        except Exception:
+            status_text += "There was an error posting results, so here's the results:\n" + summary
 
-            # Create summary text
-            summary = "**Departures:**\n\n" + summary_dep + "**Arrivals:**\n\n" + summary_arr
-
-            # Only proceed if DEBUG is disabled
-            if DEBUG:
-                print("DEBUG mode is on, will not post - printing summary instead:")
-                print(summary)
-                break
-
-            # Post results
-            print("Posting results")
-            try:
-                post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
-            except Exception:
-                status_text += "There was an error posting results, so here's the results:\n" + summary
-
-            # Send final status
-            status_text += "Results are posted in my profile. See you next time :)"
-            print("Sending final status to", author.name)
-            print(status_text)
-            author.message("Results ready", status_text)
+        # Send final status
+        status_text += "Results are posted in my profile. See you next time :)"
+        print("Sending final status to", author.name)
+        print(status_text)
+        author.message("Results ready", status_text)
 
 
 def departures():
