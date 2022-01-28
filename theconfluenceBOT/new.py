@@ -1,6 +1,6 @@
+import sys
 import praw
 from praw.models import MoreComments
-from prawcore.exceptions import Forbidden
 
 import random
 import time
@@ -29,9 +29,16 @@ def main():
         print("Logged in as theconfluenceBOT!")
     except Exception as e:
         print(e)
+        # This prevents the script to call reddit.inbox.unread(limit=1) because reddit is undefined
+        sys.exit("Bot couldn't Login. Terminate Script")
 
     while True:
-
+        # Sleep for 5 seconds because While True is active waiting
+        # As long as this Scripts runs it will use one CPU Thread
+        # When we sleep other Processes can use the CPU Thread
+        # 5 seconds of delay to run the Arrivals / Departures
+        # will not change the wanted behavior
+        time.sleep(5)
         # Read inbox and filter
         for unread in reddit.inbox.unread(limit=1):
             author = unread.author
@@ -89,7 +96,7 @@ def main():
             print("Posting results")
             try:
                 post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
-            except Exception as e:
+            except Exception:
                 status_text += "There was an error posting results, so here's the results:\n" + summary
 
             # Send final status
@@ -114,6 +121,8 @@ def departures():
         print("Logged in as Zokalyx!")
     except Exception as e:
         print(e)
+        # Prevents the use of an undefined reddit object
+        sys.exit("Zokalyx login in departures failed.")
 
     # Get departures
     ref_list, departures, remaining, lastrun, lastpop = get_departures(reddit)
@@ -144,7 +153,7 @@ def get_departures(reddit):
 
     # Get times
     s = time.time()  # Current time
-    smm = s - 1.5*1296000  # Current time minus three weeks
+    smm = s - 1.5 * 1296000  # Current time minus three weeks
 
     # Find last run post
     sub = reddit.subreddit("TheConfluence")
@@ -227,9 +236,9 @@ def get_departures(reddit):
     # Logic
     for n in reversed(departures):
         if n[1]:
-            lastrundata.pop(int(n[0])-1)  # Keeps the remaining users
+            lastrundata.pop(int(n[0]) - 1)  # Keeps the remaining users
         else:
-            lastruncopy.pop(int(n[0])-1)  # Keeps the departing users
+            lastruncopy.pop(int(n[0]) - 1)  # Keeps the departing users
 
     return reference_list, lastruncopy, lastrundata, lastrun_sub, lastpop
 
@@ -284,24 +293,24 @@ def get_arrivals_text(randoms, starting, with_detail, extras=None):
     """
 
     text = ""
-    for i, random in enumerate(randoms):
+    for i, rand in enumerate(randoms):
         if with_detail:
             if starting:
                 text += f"{starting + i} "
-            text += f"{random['name']} r/{random['sub']} [Post](https://redd.it/{random['post-id']})"
-            if random["is-OP"]:
+            text += f"{rand['name']} r/{rand['sub']} [Post](https://redd.it/{rand['post-id']})"
+            if rand["is-OP"]:
                 text += " (OP)"
         else:
             if starting:
                 text += f"{starting + i} "
-            text += f"{random['name']}"
+            text += f"{rand['name']}"
         text += "\n\n"
 
     if with_detail:
-        text += "**Extra random users if you need to add or replace some:**\n\n"
-        for i, random in enumerate(extras):
-            text += f"{random['name']} r/{random['sub']} [Post](https://redd.it/{random['post-id']})"
-            if random["is-OP"]:
+        text += "**Extra rand users if you need to add or replace some:**\n\n"
+        for i, rand in enumerate(extras):
+            text += f"{rand['name']} r/{rand['sub']} [Post](https://redd.it/{rand['post-id']})"
+            if rand["is-OP"]:
                 text += " (OP)"
             text += "\n\n"
 
@@ -339,7 +348,10 @@ def get_random_redditor(reddit, current_members):
     """
 
     # Random posts from which to choose
-    sub_name, posts = get_random_posts(reddit)
+    try:
+        sub_name, posts = get_random_posts(reddit)
+    except Exception as e:
+        raise e
 
     # If sub is r/all, 25% chance of directly adding OP
     if sub_name == "all":
@@ -410,27 +422,27 @@ def get_random_posts(reddit):
     Returns a random subreddit according to the algorithm
     """
 
+    sub = None
     rand = random.randint(0, 9)
-
+    
     # 80% chance of random subreddit
     if rand < 8:
         sub = reddit.random_subreddit(nsfw=False)
-        # 50-50 chance of sorting by new or hot
+    # 10% chance of r/popular
+    elif rand < 9:
+        sub = reddit.subreddit("popular")
+    # 10% chance of r/all
+    elif rand < 10:
+        sub = reddit.subreddit("all")
+
+    if sub is not None:
         hot_or_new = random.randint(0, 1)
+        # 50-50 chance of sorting by new or hot
         if hot_or_new == 0:
             return sub.display_name, sub.hot(limit=10)
         else:
             return sub.display_name, sub.new(limit=10)
-
-    # 10% chance of r/popular
-    elif rand < 9:
-        sub = reddit.subreddit("popular")
-        return "popular", sub.new(limit=10)
-
-    # 10% chance of r/all
-    elif rand < 10:
-        sub = reddit.subreddit("all")
-        return "all", sub.hot(limit=10)
+    raise Exception("Sub couldn't be read")
 
 
 def login_as(username):
