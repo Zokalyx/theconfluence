@@ -50,6 +50,7 @@ $(window).on('resize', resize);
 function initMap() {
 
     const locations = [
+        { lat: 32.776, lng: -96.797 },
         { lat: 40.605, lng: -73.935 },
         { lat: 39.959, lng: -83.003 },
         { lat: 41.499, lng: -81.693 },
