@@ -24,8 +24,7 @@ BLACKLIST = [
 WHITELIST = [
     "Zokalyx",
     "MoscaMye",
-    "theconfluencer",
-    "Thejusko"
+    "theconfluencer"
 ]
 
 DEBUG = False
@@ -82,7 +81,6 @@ def main():
             r_list = []
             status_text += "There was an issue getting departures :(\n"
 
-        sys.exit(0)
         # Calculate arrivals
         try:
             summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
@@ -109,17 +107,17 @@ def main():
 
         # Post results
         LOGGER.info("Posting results")
-        # try:
-        #    post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
-        # except Exception as e:
-        #    LOGGER.error(e)
-        #    status_text += "There was an error posting results, so here's the results:\n" + summary
+        try:
+            post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
+        except Exception as e:
+            LOGGER.error(e)
+            status_text += "There was an error posting results, so here's the results:\n" + summary
 
         # Send final status
         status_text += "Results are posted in my profile. See you next time :)"
         LOGGER.info(f"Sending final status to {author.name}")
         LOGGER.info(status_text)
-        # author.message("Results ready", status_text)
+        author.message("Results ready", status_text)
 
 
 def departures():
