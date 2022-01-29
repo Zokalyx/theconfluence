@@ -7,6 +7,15 @@ import time
 import math
 from datetime import datetime
 from os import environ as env
+import logging
+
+
+LOG_FORMAT = "%(levelname)-8s |%(asctime)-25s| %(name)-45s | %(funcName)-25s at line %(lineno)-5s:%(message)s\n"
+logging.basicConfig(
+    filename="/dev/stdout", filemode="w", level=logging.INFO, format=LOG_FORMAT
+)
+
+LOGGER = logging.getLogger(__name__)
 
 BLACKLIST = [
     "AutoModerator"
@@ -16,7 +25,6 @@ WHITELIST = [
     "MoscaMye",
     "theconfluencer"
 ]
-EXTRA_RANDOMS = 10
 
 DEBUG = False
 
@@ -26,9 +34,9 @@ def main():
     # Login to BOT's account
     try:
         reddit = login_as("theconfluenceBOT")
-        print("Logged in as theconfluenceBOT!")
+        LOGGER.info("Logged in as theconfluenceBOT!")
     except Exception as e:
-        print(e)
+        LOGGER.error(e)
         # This prevents the script to call reddit.inbox.unread(limit=1) because reddit is undefined
         sys.exit("Bot couldn't Login. Terminate Script")
 
@@ -47,7 +55,7 @@ def main():
             break
 
         # Send first message
-        print("Sending 1st Message to", author.name)
+        LOGGER.info(f"Sending 1st Message to {author.name}")
         if not DEBUG:
             author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
         status_text = ""
@@ -56,7 +64,7 @@ def main():
         try:
             summary_dep, detailed_dep, retention, newrun, starting, arrs, r_list = departures()
         except Exception as e:
-            print(e)
+            LOGGER.error(e)
             summary_dep = "There was an error getting departures.\n"
             detailed_dep = "There was an error getting departures.\n"
             retention = "?"
@@ -70,13 +78,13 @@ def main():
         try:
             summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
         except Exception as e:
-            print(e)
+            LOGGER.error(e)
             summary_arr = "There was an error getting arrivals.\n\n"
             detailed_arr = "There was an error getting arrivals.\n\n"
             if status_text == "":
                 status_text += "There was an issue getting arrivals :(\n"
             else:
-                print("Sending total failure message to", author.name)
+                LOGGER.info(f"Sending total failure message to {author.name}")
                 if not DEBUG:
                     author.message("Oops...", "There was some problem and I couldn't get departures or arrivals. Sorry!")
                 break
@@ -86,21 +94,22 @@ def main():
 
         # Only proceed if DEBUG is disabled
         if DEBUG:
-            print("DEBUG mode is on, will not post - printing summary instead:")
-            print(summary)
+            LOGGER.debug("DEBUG mode is on, will not post - printing summary instead:")
+            LOGGER.info(summary)
             break
 
         # Post results
-        print("Posting results")
+        LOGGER.info("Posting results")
         try:
             post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
-        except Exception:
+        except Exception as e:
+            LOGGER.error(e)
             status_text += "There was an error posting results, so here's the results:\n" + summary
 
         # Send final status
         status_text += "Results are posted in my profile. See you next time :)"
-        print("Sending final status to", author.name)
-        print(status_text)
+        LOGGER.info(f"Sending final status to {author.name}")
+        LOGGER.info(status_text)
         author.message("Results ready", status_text)
 
 
@@ -111,14 +120,14 @@ def departures():
     See https://i.imgur.com/P3BTMKJ.jpeg for a visual description of the process.
     """
 
-    print("Getting departures...")
+    LOGGER.info("Getting departures...")
 
     # Log in with Zokalyx's account
     try:
         reddit = login_as("Zokalyx")
-        print("Logged in as Zokalyx!")
+        LOGGER.info("Logged in as Zokalyx!")
     except Exception as e:
-        print(e)
+        LOGGER.error(e)
         # Prevents the use of an undefined reddit object
         raise Exception(e)
     # Get departures
@@ -134,11 +143,9 @@ def departures():
     starting = len(remaining) + 1
     arrs = 200 - starting + 1
 
-    print()
-    print("New Run:", newrun)
-    print("Retention:", retention)
-    print("Remaining Users:", starting - 1)
-    print()
+    LOGGER.info(f"New Run: {newrun}")
+    LOGGER.info(f"Retention: {retention}")
+    LOGGER.info(f"Remaining Users: {starting -1}")
 
     return summary, detailed, retention, newrun, starting, arrs, ref_list
 
@@ -212,7 +219,7 @@ def get_departures(reddit):
             break
 
         # Log
-        print(post.title, str(math.trunc(10 * ((s - post.created_utc) / (s - smm) * 100)) / 10), "%")
+        LOGGER.info(post.title + " " + str(math.trunc(10 * ((s - post.created_utc) / (s - smm) * 100)) / 10) + " %")
 
         # Remove author from departures if it was posted after the last run post
         if post.created_utc > last_run_start:
@@ -274,7 +281,7 @@ def arrivals(reddit, starting, amount, current_members):
     See https://i.imgur.com/lWHrfAN.jpeg for a visual description of the process.
     """
 
-    print("Getting arrivals...")
+    LOGGER.info("Getting arrivals...")
     randoms = get_randoms(reddit, amount, current_members)
     extras = get_randoms(reddit, 10, current_members)
 
@@ -328,13 +335,13 @@ def get_randoms(reddit, amount, current_members):
         try:
             redditor = get_random_redditor(reddit, current_members)
         except Exception as e:
-            print(e)
+            LOGGER.error(e)
             continue
 
         # Add
         randoms.append(redditor)
         count += 1
-        print(redditor["name"], str(round(count / amount * 100)), "%")
+        LOGGER.info(redditor["name"] + " " + str(round(count / amount * 100)) + " %")
 
     return randoms
 
@@ -464,7 +471,7 @@ def login_as(username):
             user_agent="The Confluence Bot"
         )
     else:
-        print("Unknown user!")
+        LOGGER.warn("Unknown user!")
         raise Exception("unknown user error")
 
 
