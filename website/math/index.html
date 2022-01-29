@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="https://zokalyx.github.io/theconfluence/">
+
+    <!-- tab -->
+    <title>Confluence math</title>
+    <link rel="shortcut icon" type="image/ico" href="website/images/favicon.ico"/>
+
+    <!-- external files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="website/script.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="website/style.css">
+</head>
+<body onload="loaded()">
+    <div id="wrapper">
+    <!-- header -->
+    <header>
+        <a href="https://zokalyx.github.io/theconfluence">
+            <img id="home" src="">
+        </a>
+        <a id="github" href="https://github.com/Zokalyx/theconfluence">
+            <img class="external" src="website/images/github.png">
+        </a>
+        <a href="https://www.reddit.com/r/TheConfluence/comments/fg6m9o">
+            <img class="external" src="website/images/discord.png">
+        </a>
+        <a href="https://www.reddit.com/r/TheConfluence">
+            <img class="external" src="website/images/reddit.png">
+        </a>
+        <span id="days">
+        </span>
+    </header>
+
+    <!-- main -->
+    <h1>
+        Confluence math
+    </h1>
+    <section class="content">
+        <span>Introduction</span>
+        <p>
+            Ever since I joined The Confluence, I wanted to analyse <a href="website/retention">retention</a> in the subreddit.
+            That's why I created this site! Even though there are many statistics in here, none of them was what I originally wanted to do.
+            In this page I explore how I modeled the subreddit and how future retentions can be predicted. I tried to make the math as simple and clear as possible.
+            But it still contains some "advanced" topics, so no shame in skipping to the conclusions!
+        </p>
+    </section>
+
+    <section class="content">
+        <span>Goal</span>
+        <p>
+            Our main goal is to have an explicit formula for calculating retention in a given week. It should match current data, but also be able to predict
+            future retentions. So, how does one go about solving this problem? Here you will see my solution which is based on linear algebra.
+            I must make clear that I'm not an expert at all in these topics! Just an amateur; I'm open to criticism and corrections.
+        </p>
+    </section>
+
+    <section class="content">
+        <span>Set up</span>
+        <p>
+            In any linear algebra problem, you start with a set of linear equations. So, here's the plan: keep track of variables corresponding to "new" and "old" users.
+            My first go at this also included tracking
+            "joining" and "leaving" users, but that lead to <a href="https://www.wolframalpha.com/input/?i=eigenvalues+%7B%7B0%2C+-1%2C+0%2C+0%2C+1%7D%2C+%7B0%2C+1%2C+1%2C+-1%2C+0%7D%2C+%7Bk%2C+0%2C+0%2C+0%2C+0%7D%2C+%7B0%2C+s%2C+0%2C+0%2C+0%7D%2C+%7B0%2C+0%2C+0%2C+0%2C+1%7D%7D">this disaster</a>.
+            <br><br>
+            So, let's forget about those two variables and focus only on the "new" and "old" users (after all, my previous attempt contained a lot of redundant equations).
+            New users would those that have just joined, and old would be the ones that already were in the subreddit when those new users joined.
+            <br><br>
+            Let's define \(n_w\) as the number of new users, where \(w\) is the week number. Similarly, \(o_w\) for old users.
+            Actually, to simplify the numbers, let's use the <i>percentage</i> of corresponding people, so that both variables range from 0 to 1.
+            The equations I constructed were the following:
+            $$
+            n_{w+1} = 1 - o_w
+            $$
+            $$
+            o_{w+1} = o_{w} - So_w + Kn_w
+            $$
+            Let's make sense out of them. The first one says that the amount of new people is given by the "the negative" of how many people there were in the last week.
+            An example will help: Imagine the sub is full (\(o_w = 1 = 100\%\)). Then there is no space for new members (\(n_{w+1} = 0\))!
+            <br><br>
+            The second equation is a bit more complex, but nothing extremely hard. What the equation says is that the amount of "old" members
+            depends on how many members there were last week (obviously), but there are also some additions and subtractions. The second term means that
+            a percentage of the old people in last week will leave. This percentage is given by the factor \(S\), which ranges from 0 to 1. Similarly, there will be
+            an increase in old people proportional to the amount of new people that entered last week. The constant of proportionality in this case is \(K\).
+            <br><br>
+            Before going on, we see that we can make one more simplification. What if we "plug in" equation 1 into equation 2? Also, let's change the name of \(o\) to \(p\).
+            $$
+            p_{w+1} = p_{w} - Sp_w + K(1 - p_w)
+            $$
+            Ah, a single equation, much better. But, it is not linear... why, you might ask? Well, if we rearrange the equation, we get:
+            $$
+            p_{w+1} = (1 - K - S)p + K 
+            $$
+            You see that little \(K\) at the end? Well, as weird as it sounds, that makes the equation non linear. (Keep in mind that <i>linear</i> in this context is not referring to <i>lines</i>!)
+            But there's a little trick we can do. What if I wrote this instead?
+            $$
+            p_{w+1} = (1 - K - S)p_w + K \cdot \mathbb 1_w
+            $$
+            $$
+            \mathbb 1_{w+1} = \mathbb 1_w
+            $$
+            This new term is just the number one, but expressed as a variable (from now on I will just write 1).
+            If we express it as a variable, now we have a linear system.
+            The good thing about linear system of equations is that we can write them in matrix form: 
+            $$
+            \begin{bmatrix} p_{w+1} \\ 1 \end{bmatrix} = \begin{bmatrix} (1 - K - S) & K \\ 0 & 1 \end{bmatrix}
+            \begin{bmatrix} p_{w} \\ 1 \end{bmatrix}
+            $$
+        </p>
+    </section>
+
+    <section class="content">
+        <span>Eigenvectors and eigenvalues</span>
+        <p>
+            We now proceed to study this matrix. The best way to do so might be to find to find its eigenvectors and eigenvalues.
+            In particular, we expect an eigenvalue of 1, which corresponds to the long term solution of the system.
+            If we ask our dear Wolfram Alpha to perform <a href="https://www.wolframalpha.com/input/?i=eigenvalues+%7B%7B1-s-k%2C+k%7D%2C+%7B0%2C+1%7D%7D+">
+            the calculation</a> we see that this is the case, and the eigenvector is:
+            $$
+            v_1 = 
+            \begin{bmatrix}
+            \frac{K}{K+S} 
+            \\ 1
+            \end{bmatrix}
+            $$
+            For example, if \(K = \frac{1}{2}\) and \(S = \frac{1}{3}\) we would expect that in the long run, \(p_\infty = \frac{2}{5}\). That means that 
+            if the confluence is "capped" at 200 members, then there would be 80 new people every week, or equivalently, \(\frac{120}{200} = 60 \%\) retention.
+            <br><br>
+            What about the other eigenvector? Since its eigenvalue is \( 1 - K - S \), which is less than 1 (as we would hope) this vector is associated
+            with the transitory solution. Anyways, let's write the solution to the system by decomposing it into a linear combination of its eigenvectors.
+            Notice the \(1^w\) and \((1 - K - S)^w\) factors: these are the eigenvalues.
+            $$
+            \begin{bmatrix} p_w \\ \mathbb 1 \end{bmatrix} = C_1 1^w \begin{bmatrix} \frac{K}{K+S} \\ 1 \end{bmatrix} + C_2 (1 - K - S)^w \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+            $$
+            Where \(C_1\) and \(C_2\) are some constants. In fact, we can quickly find out the value of \(C_1\). Since \(\mathbb 1 = 1\)
+            always, then \(C_1 = 1\). With that out of the way, let's focus on what we really care about, \(p\):
+            $$
+            p_w = \frac{K}{K + S} + C_2 (1 - (K + S))^w
+            $$
+            We're almost done! But... there's a problem. We don't know \(K\) and \(S\)!
+        </p>
+    </section>
+
+    <section class="content">
+        <span>Finding the constants</span>
+        <p>
+            This is the messiest part of the process, because I haven't found a good way to do this. But this is my idea:
+            plot the equation from the previous section in desmos and adjust the values of \(C_2\), \(K\) and \(S\) until they're
+            close enough to the data points. <a href="https://www.desmos.com/calculator/ymtuxlweqx">This is the plot I managed
+            to make</a>. As you can see, the best values of the constants I could get were \(K = 0.023\) and \(S = 0.01\).
+            The value of the other constant is not that relevant since it doesn't impact the long term results.
+        </p>
+    </section>
+
+    <img class="smallcontent" src="website/math/graph.png">
+
+    <section class="content">
+        <span>Conclusions</span>
+        <p>
+            I predict retention won't change much. Based on the values I chose, retention will stay around
+            69% or so. Of course there may be fluctuations, but it will always remain around that value - also, this is not
+            a hard rule, anything that happens inside of the subreddit, or reddit itself might "change the values of the constants"
+            or modify the system and this prediction could be totally wrong. But if I had to guess, this would be what I'd bet on.
+            So don't bash me if this does not hold, and don't use it as a fact.
+            <br><br>
+            Even if you didn't understand or read the math, think of it in this way. It's impossible to have 100% retention. There's
+            always someone who's gonna leave. And on the other extreme, it's impossible to have 0% retention. There's always someone
+            who's gonna stay. So there's gotta be some point in the middle where there is an "equilibrium". What I'm trying to say
+            is that this "equilibrium" point lies on 69% retention.
+            <br><br>
+            I hope you found this somewhat interesting, and please send any feedback if you have anything to say. Thanks for reading!
+        </p>
+    </section>
+
+    </div>
+    <!-- footer -->
+    <footer>
+        <div id="container">
+            <img id="shh" src="website/images/shh.png">
+            <p id="secret">
+                This is a private community, so keep this a secret ;) <br>
+                Website design and content by u/Zokalyx
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
