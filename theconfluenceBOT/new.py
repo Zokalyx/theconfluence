@@ -120,8 +120,7 @@ def departures():
     except Exception as e:
         print(e)
         # Prevents the use of an undefined reddit object
-        sys.exit("Zokalyx login in departures failed.")
-
+        raise Exception(e)
     # Get departures
     ref_list, departures, remaining, lastrun, lastpop = get_departures(reddit)
 
@@ -422,10 +421,11 @@ def get_random_posts(reddit):
 
     sub = None
     rand = random.randint(0, 9)
-    
+    hot_or_new = 0
     # 80% chance of random subreddit
     if rand < 8:
         sub = reddit.random_subreddit(nsfw=False)
+        hot_or_new = random.randint(0, 1)
     # 10% chance of r/popular
     elif rand < 9:
         sub = reddit.subreddit("popular")
@@ -434,7 +434,6 @@ def get_random_posts(reddit):
         sub = reddit.subreddit("all")
 
     if sub is not None:
-        hot_or_new = random.randint(0, 1)
         # 50-50 chance of sorting by new or hot
         if hot_or_new == 0:
             return sub.display_name, sub.hot(limit=10)
