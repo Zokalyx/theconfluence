@@ -35,7 +35,7 @@ def main():
     # Read inbox and filter
     # The Stream removes the need to active wait with a while true
     # This means other Process can use CPU Time which wasn't possible before
-    # This changes the behavior. Now only new Messages while get read
+    # This changes the behavior. Now only new Messages will get read
     # When the bot isn't running the run commands won't be accessed after the fact
     # and a new one must be issued
     for unread in reddit.inbox.stream(skip_existing=True):
