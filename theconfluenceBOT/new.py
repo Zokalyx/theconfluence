@@ -230,6 +230,10 @@ def get_departures(reddit):
     for post in newest:
         if "Last" in post.title:
             lastrun_bot = post.title.split("(")[1].split(")")[0]
+            try:
+                lastrun_bot = int(lastrun_bot)
+            except ValueError:
+                raise ValueError("Last Bot Run Number is malformed")
             auxlastrundata = post.selftext.split("\n\n")
             lastrundata = []
             lastruncopy = []
