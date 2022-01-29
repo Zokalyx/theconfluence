@@ -56,7 +56,7 @@ def main():
         try:
             summary_dep, detailed_dep, retention, newrun, starting, arrs, r_list = departures()
         except Exception as e:
-            print(e.with_traceback())
+            print(e)
             summary_dep = "There was an error getting departures.\n"
             detailed_dep = "There was an error getting departures.\n"
             retention = "?"
