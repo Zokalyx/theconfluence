@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 import praw
 from praw.models import MoreComments
@@ -8,7 +9,7 @@ import math
 from datetime import datetime
 from os import environ as env
 import logging
-
+from praw.exceptions import RedditAPIException
 
 LOG_FORMAT = "%(levelname)-8s |%(asctime)-25s| %(name)-45s | %(funcName)-25s at line %(lineno)-5s:%(message)s\n"
 logging.basicConfig(
@@ -23,7 +24,8 @@ BLACKLIST = [
 WHITELIST = [
     "Zokalyx",
     "MoscaMye",
-    "theconfluencer"
+    "theconfluencer",
+    "Thejusko"
 ]
 
 DEBUG = False
@@ -52,12 +54,18 @@ def main():
 
         # Filter
         if author.name not in WHITELIST:
+            LOGGER.warn(f"Run starter {author.name} isn't in Whitelist. Won't start Run")
             break
+
+        LOGGER.info(f"Run initiated by {author.name} with subject: {unread.subject} and body: {unread.body}")
 
         # Send first message
         LOGGER.info(f"Sending 1st Message to {author.name}")
         if not DEBUG:
-            author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
+            try:
+                author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
+            except RedditAPIException as e:
+                LOGGER.error(e)
         status_text = ""
 
         # Calculate departures
@@ -74,6 +82,7 @@ def main():
             r_list = []
             status_text += "There was an issue getting departures :(\n"
 
+        sys.exit(0)
         # Calculate arrivals
         try:
             summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
@@ -100,17 +109,17 @@ def main():
 
         # Post results
         LOGGER.info("Posting results")
-        try:
-            post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
-        except Exception as e:
-            LOGGER.error(e)
-            status_text += "There was an error posting results, so here's the results:\n" + summary
+        # try:
+        #    post_results(reddit, newrun, retention, summary, detailed_arr, detailed_dep)
+        # except Exception as e:
+        #    LOGGER.error(e)
+        #    status_text += "There was an error posting results, so here's the results:\n" + summary
 
         # Send final status
         status_text += "Results are posted in my profile. See you next time :)"
         LOGGER.info(f"Sending final status to {author.name}")
         LOGGER.info(status_text)
-        author.message("Results ready", status_text)
+        # author.message("Results ready", status_text)
 
 
 def departures():
@@ -127,11 +136,15 @@ def departures():
         reddit = login_as("Zokalyx")
         LOGGER.info("Logged in as Zokalyx!")
     except Exception as e:
-        LOGGER.error(e)
         # Prevents the use of an undefined reddit object
         raise Exception(e)
     # Get departures
-    ref_list, departures, remaining, lastrun, lastpop = get_departures(reddit)
+    try:
+        ref_list, departures, remaining, lastrun, lastpop = get_departures(reddit)
+    except ValueError as e:
+        raise Exception(e)
+    except Exception as e:
+        raise Exception(e)
 
     # Get texts
     summary = get_departures_text(departures)
@@ -150,6 +163,53 @@ def departures():
     return summary, detailed, retention, newrun, starting, arrs, ref_list
 
 
+def getLastConfluenceRunNumber(reddit):
+    """
+        Returns the date of the last Confluence Run
+        This gets determined by cheking the title of the stickied Run post in hot
+
+        Parameters:
+        argument1 (praw): reddit
+
+        Returns:
+        tuple[int, int]
+    """
+
+    confluence = reddit.subreddit("TheConfluence")
+    hotPosts = confluence.hot(limit=5)
+    for run in hotPosts:
+        if run.stickied:
+            if "run" in run.title.lower():
+                LOGGER.info(f"Currently checking {run.title} for last Run Information...")
+                lastRunStart = run.created_utc
+                LOGGER.info(f"Comparing against: {datetime.utcfromtimestamp(lastRunStart).strftime('%Y-%m-%d %H:%M:%S')}")
+
+                # Split the Submission title into a list at every whitespace
+                titleParts = run.title.lower().split()
+                
+                # Get index of run since the run number is always the word before that
+                index = False
+                if "run" in titleParts:
+                    index = titleParts.index("run") - 1
+                elif "run!" in titleParts:
+                    index = titleParts.index("run!") - 1
+               
+                if index is False:
+                    raise Exception("Run number couldn't be determined")
+                
+                # -2 since the run number always end with nd / th / st (example 92nd)
+                lastRunNumber = titleParts[index][:len(titleParts[index]) - 2]
+                
+                try:
+                    lastRunNumber = int(lastRunNumber)
+                except ValueError:
+                    raise ValueError("Last Confluence Run Number is malformed")
+                
+                LOGGER.info(f"LastRunNumber from r/TheConfluence is {lastRunNumber}")
+                return lastRunNumber, lastRunStart
+    raise Exception("Run Post to determine the Run Number wasn't found")
+
+
 def get_departures(reddit):
     """
     Returns a list of departures
@@ -159,32 +219,13 @@ def get_departures(reddit):
     s = time.time()  # Current time
     smm = s - 1.5 * 1296000  # Current time minus three weeks
 
-    # Find last run post
-    sub = reddit.subreddit("TheConfluence")
-    runs = sub.hot(limit=5)
-    for run in runs:
-        if run.stickied:
-            if "Run" in run.title or "Run!" in run.title or "run" in run.title or "run!" in run.title:
-                print(run.title)
-                last_run_start = run.created_utc
-                print("Comparing against:", datetime.utcfromtimestamp(last_run_start).strftime('%Y-%m-%d %H:%M:%S'))
-
-                # Parse title
-                string = run.title
-                string_arr = string.split()
-
-                if "Run" in string_arr:
-                    index = string_arr.index("Run") - 1
-                elif "Run!" in string_arr:
-                    index = string_arr.index("Run!") - 1
-                elif "run" in string_arr:
-                    index = string_arr.index("run") - 1
-                elif "run!" in string_arr:
-                    index = string_arr.index("run!") - 1
-                
-                lastrun_sub = string_arr[index][:len(string_arr[index]) - 2]
-
-                break
+    # Find last run Number
+    try:
+        lastRunNumberSub, lastRunStartSub = getLastConfluenceRunNumber(reddit)
+    except ValueError as e:
+        raise ValueError(e)
+    except Exception as e:
+        raise Exception(e)
 
     # Find LAST post
     bot_profile = reddit.subreddit("U_theconfluenceBOT")
@@ -201,7 +242,7 @@ def get_departures(reddit):
             lastpop = len(lastrundata)
 
     # Check if runs are the same
-    if lastrun_sub != lastrun_bot:
+    if lastRunNumberSub != lastrun_bot:
         raise Exception("There is a mismatch between run numbers")
 
     # Process posts
@@ -211,7 +252,9 @@ def get_departures(reddit):
         reference_list.append(row[1])
         departures.append([row[0], True])
 
-    posts = sub.new(limit=500)
+
+    confluence = reddit.subreddit("TheConfluence")
+    posts = confluence.new(limit=500)
     for post in posts:
 
         # Stop after having gone over 3 weeks
@@ -222,7 +265,7 @@ def get_departures(reddit):
         LOGGER.info(post.title + " " + str(math.trunc(10 * ((s - post.created_utc) / (s - smm) * 100)) / 10) + " %")
 
         # Remove author from departures if it was posted after the last run post
-        if post.created_utc > last_run_start:
+        if post.created_utc > lastRunStartSub:
             if post.author in reference_list:
                 ind = reference_list.index(post.author)
                 departures[ind][1] = False
@@ -232,7 +275,7 @@ def get_departures(reddit):
 
         # Remove author from departures if it was posted after the last run post
         for comment in comments.list():
-            if comment.created_utc > last_run_start:
+            if comment.created_utc > lastRunStartSub:
                 if comment.author in reference_list:
                     ind = reference_list.index(comment.author)
                     departures[ind][1] = False
@@ -244,7 +287,7 @@ def get_departures(reddit):
         else:
             lastruncopy.pop(int(n[0]) - 1)  # Keeps the departing users
 
-    return reference_list, lastruncopy, lastrundata, lastrun_sub, lastpop
+    return reference_list, lastruncopy, lastrundata, lastRunNumberSub, lastpop
 
 
 def get_new_flairs_text(remaining):
