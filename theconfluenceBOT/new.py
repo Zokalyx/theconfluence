@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 import sys
 import praw
-from praw.models import MoreComments
-
 import random
 import time
 import math
+import logging
+from praw.models import MoreComments
+from praw.exceptions import RedditAPIException
 from datetime import datetime
 from os import environ as env
-import logging
-from praw.exceptions import RedditAPIException
 
 LOG_FORMAT = "%(levelname)-8s |%(asctime)-25s| %(name)-45s | %(funcName)-25s at line %(lineno)-5s:%(message)s\n"
 logging.basicConfig(
