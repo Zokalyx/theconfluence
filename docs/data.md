@@ -1,4 +1,4 @@
-# Data - 29/1/2021
+# Data - 29/1/2022
 
 The `/data` directory contains the data corresponding to all arrivals and departures, plus a handful of related scripts.
 This scripts always generate every file starting from week 1, which means that deleting current `.csv` files won't cause any issues.
