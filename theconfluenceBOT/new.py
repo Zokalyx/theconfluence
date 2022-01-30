@@ -10,7 +10,7 @@ from praw.exceptions import RedditAPIException
 from datetime import datetime
 from os import environ as env
 
-LOG_FORMAT = "%(levelname)-8s |%(asctime)-25s| %(name)-45s | %(funcName)-25s at line %(lineno)-5s:%(message)s\n"
+LOG_FORMAT = "%(levelname)-8s | %(name)-25s | %(funcName)-25s at line %(lineno)-5s\n%(message)s"
 logging.basicConfig(
     filename="/dev/stdout", filemode="w", level=logging.INFO, format=LOG_FORMAT
 )
@@ -21,13 +21,13 @@ BLACKLIST = [
     "AutoModerator"
 ]
 WHITELIST = [
-    "Zokalyx",
     "MoscaMye",
     "theconfluencer"
 ]
-
-DEBUG = False
-
+DEBUGGERS = [
+    "Zokalyx",
+    "Thejusko"
+]
 
 def main():
 
@@ -51,17 +51,30 @@ def main():
         unread.mark_read()
 
         # Filter
-        if author.name not in WHITELIST:
-            LOGGER.warn(f"Run starter {author.name} isn't in Whitelist. Won't start Run")
+        if author.name not in WHITELIST + DEBUGGERS:
+            LOGGER.warn(f"Run starter {author.name} isn't in Whitelist or Debugger list. Won't start Run")
             break
 
-        LOGGER.info(f"Run initiated by {author.name} with subject: {unread.subject} and body: {unread.body}")
+        debug = author.name in DEBUGGERS
+
+        # Do an "official" run (to test the posts of the bot) if keyword "official"
+        # is used in the body or subject, even if the user is a debugger
+        if "official" in unread.subject.lower() or "official" in unread.body.lower():
+            debug = False
+
+        run_description = "Debug" if debug else "Official"
+        LOGGER.info(f"{run_description} run initiated by {author.name} with subject: {unread.subject} and body: {unread.body}")
 
         # Send first message
         LOGGER.info(f"Sending 1st Message to {author.name}")
-        if not DEBUG:
+        if not debug:
             try:
                 author.message("Working on it", "Message received, I'm processing the data. I'll message you again once I'm done!")
+            except RedditAPIException as e:
+                LOGGER.error(e)
+        else:
+            try:
+                author.message("Debug run initiated", "No data will be posted or updated")
             except RedditAPIException as e:
                 LOGGER.error(e)
         status_text = ""
@@ -80,6 +93,10 @@ def main():
             r_list = []
             status_text += "There was an issue getting departures :(\n"
 
+        # Only get 10 arrivals in debug mode to save time
+        if debug:
+            arrs = 10
+
         # Calculate arrivals
         try:
             summary_arr, detailed_arr = arrivals(reddit, starting, arrs, r_list)
@@ -91,18 +108,19 @@ def main():
                 status_text += "There was an issue getting arrivals :(\n"
             else:
                 LOGGER.info(f"Sending total failure message to {author.name}")
-                if not DEBUG:
+                if not debug:
                     author.message("Oops...", "There was some problem and I couldn't get departures or arrivals. Sorry!")
                 break
 
         # Create summary text
         summary = "**Departures:**\n\n" + summary_dep + "**Arrivals:**\n\n" + summary_arr
 
-        # Only proceed if DEBUG is disabled
-        if DEBUG:
-            LOGGER.debug("DEBUG mode is on, will not post - printing summary instead:")
+        # Only proceed if run was started in official (not debug) mode
+        if debug:
+            LOGGER.info("Run was started on debug mode, will not post - printing summary instead:")
             LOGGER.info(summary)
-            break
+            author.message("Debug results ready", summary)
+            continue
 
         # Post results
         LOGGER.info("Posting results")
