@@ -1,8 +1,12 @@
-# Bot - 29/1/2022
+# Bot - 30/1/2022
 
 [The Confluence Bot](https://www.reddit.com/user/TheconfluenceBOT) is a Reddit bot that checks which users did not comment or post during the last week. Additionally, it picks random users to be invited into the subreddit.
 
 The bot has a [details and FAQ](https://www.reddit.com/user/theconfluenceBOT/comments/ks2m4w/instructions_and_faq/) post.
+
+## New bot
+
+New bot is in development. Read the latest [new design draft](https://github.com/Zokalyx/theconfluence/blob/main/theconfluenceBOT/newdesign.md).
 
 ## Instructions
 
