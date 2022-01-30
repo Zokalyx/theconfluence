@@ -9,7 +9,7 @@ The following titles correspond to each subdirectory.
 
 There are currently four files that aren't placed inside of a specific folder because they are used by all of the scripts here.
 
-- `broken.txt`: contains the numbers corresponding to weeks that did not have a run
+- `broken.txt`: contains the numbers corresponding to weeks that did not have a run. Read [this](#notes) for instructions as to what to do when a run is skipped.
 - `notes.txt`: has a "detective log" of past issues with the `.csv` files
 - `shh.txt`: has keys used to log in to Reddit - this file must be `.gitignore`d
 - `week.txt`: has the number of the current week
@@ -132,3 +132,13 @@ The website has a little counter at the top that shows how many days have passed
 ## Check comment
 
 `checkcomment.py` checks if a user commented since the last run started and saves the results in `commented.csv`. **This file is not currently used**, it was used to show in the website a checkmark next to users that did comment. But this required being run manually and it was not very practical.
+
+---
+
+## Notes
+
+When a run is skipped, modify the following files:
+
+- Add the week number to `data/broken.txt`
+- Add a corresponding entry in the website: `website/noruns/index.html`
+- Update `website/converter/script.js`. In this file, two numbers at the beginning have to be changed. Also, the definitions of `weekToRun` and `runToWeek` should be updated.
