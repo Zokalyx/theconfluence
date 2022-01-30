@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import os
 import sys
 import praw
 import random
@@ -11,9 +12,16 @@ from datetime import datetime
 from os import environ as env
 
 LOG_FORMAT = "%(levelname)-8s | %(name)-25s | %(funcName)-25s at line %(lineno)-5s\n%(message)s"
-logging.basicConfig(
-    filename="/dev/stdout", filemode="w", level=logging.INFO, format=LOG_FORMAT
-)
+
+# Different logging for Windows
+if os.name == "nt":
+    logging.basicConfig(
+        filemode="w", level=logging.INFO, format=LOG_FORMAT
+    )
+else:
+    logging.basicConfig(
+        filename="/dev/stdout", filemode="w", level=logging.INFO, format=LOG_FORMAT
+    )
 
 LOGGER = logging.getLogger(__name__)
 
