@@ -2,6 +2,8 @@ import numpy as np
 from pathlib import Path
 import csv
 import math
+from os import environ
+from dotenv import load_dotenv
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, RegularPolygon
@@ -14,13 +16,11 @@ from matplotlib.transforms import Affine2D
 from datetime import datetime
 import praw
 
-with open("../../data/shh.txt", "r") as secret:
-    secrets = secret.readlines()
-
+load_dotenv()
 reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
-                     client_secret=secrets[1],
+                     client_secret=environ["ZOKA_TOKEN"],
                      username="Zokalyx",
-                     password=secrets[0].strip(),
+                     password=environ["ZOKA_PASS"],
                      user_agent="theconfluenceBOT")
 
 posts = []  # List containing all the post data (important = id)

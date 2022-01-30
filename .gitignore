@@ -5,3 +5,4 @@ __pycache__
 /data/shh.txt
 /data/misc/posts.csv
 .idea/*
+.env

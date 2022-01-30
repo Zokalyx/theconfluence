@@ -1,13 +1,14 @@
 import praw
 import re
+from os import environ
+from dotenv import load_dotenv
 
-with open("../shh.txt", "r") as secret:
-    secrets = secret.readlines()
+load_dotenv()
 
 reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
-                     client_secret=secrets[1],
+                     client_secret=environ["ZOKA_TOKEN"],
                      username="Zokalyx",
-                     password=secrets[0].strip(),
+                     password=environ["ZOKA_PASS"],
                      user_agent="theconfluenceBOT")
 
 sub = reddit.subreddit("TheConfluence")

@@ -4,6 +4,9 @@ import csv
 import math
 from pathlib import Path
 
+from os import environ
+from dotenv import load_dotenv
+
 s = time.time()  # time
 smm = s - 2592000  # time minus one month
 smm = s - 1296000 # time minus two weeks
@@ -24,13 +27,12 @@ with open("../basic/pro.csv", "r") as pro:
         links.append("")
         times.append(0)
 
-with open("../shh.txt", "r") as secret:
-    secrets = secret.readlines()
+load_dotenv()
 
 reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
-                     client_secret=secrets[1],
+                     client_secret=environ["ZOKA_TOKEN"],
                      username="Zokalyx",
-                     password=secrets[0].strip(),
+                     password=environ["ZOKA_PASS"],
                      user_agent="theconfluenceBOT")
 
 last_run_start = 0

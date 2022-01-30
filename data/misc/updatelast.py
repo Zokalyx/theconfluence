@@ -1,6 +1,9 @@
 import csv
 import praw
-from os import environ as env
+from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()
 
 with open("../broken.txt", "r") as b:
     broken = len(b.read().split("\n"))
@@ -36,9 +39,9 @@ for i in range(len(leaders)):
 print("Updating 'Last' post")
 
 reddit = praw.Reddit(client_id="0S1WpGMeuyOQkg",
-                     client_secret=env["BOT_TOKEN"],
+                     client_secret=environ["BOT_TOKEN"],
                      username="theconfluenceBOT",
-                     password=env["BOT_PASS"],
+                     password=environ["BOT_PASS"],
                      user_agent="theconfluenceBOT")
 reddit.validate_on_submit = True
 profile = reddit.subreddit("U_theconfluenceBOT")
