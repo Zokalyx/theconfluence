@@ -4,6 +4,10 @@
 
 The bot has a [details and FAQ](https://www.reddit.com/user/theconfluenceBOT/comments/ks2m4w/instructions_and_faq/) post.
 
+## Instructions
+
+The bot will respond to users in the `DEBUGGERS` or `WHITELIST` lists. If a user belongs to the former, it will execute a dry run, and no posts will be submitted, unless the body of the message or its title contains the keyword `official`. Official runs result in new posts.
+
 ## Arrivals
 
 The selection process is random, but it follows an algorithm:
