@@ -1,4 +1,4 @@
-# The Confluence Website
+# The Confluence Repo
 
 This repo contains code for arrivals and departures processing, the website and the bot.
 
