@@ -1,5 +1,7 @@
 # The Confluence Website
 
+This repo contains code for arrivals and departures processing, the website and the bot.
+
 ## [Website](https://zokalyx.github.io/theconfluence/)
 
 Features that may get added: 
@@ -15,3 +17,7 @@ Features that may get added:
 - Page for links to all of the posts about runs.
 
 Suggestions are always welcome (u/Zokalyx)
+
+## [Bot](https://www.reddit.com/user/TheconfluenceBOT)
+
+TODO
