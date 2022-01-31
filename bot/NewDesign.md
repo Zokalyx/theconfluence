@@ -108,6 +108,10 @@ The bot should only accept calls from whitelisted members. This should be the or
 - If a new or the original DM or a comment posted on this last post contains some special keyword, make the bot update the flairs. Also add the option to add and remove users from the subreddit.
 - If posts corresponding to the same run are already posted, delete those.
 
+## Reminders
+
+A cool feature might be to implement a system that reminds users if they haven't posted yet, say, 24hs before the new run. This feature, of course, would be optional and individual.
+
 ## Note
 
 I have a `posts.csv` file containing many old posts, going back to the start of the subreddit. These have been obtained by using the technique of scanning up to 1000 posts from individual users of the subreddit (so I can't guarantee I have them all, because there's probably at least one user that has more than 1000 posts since their oldest post in the sub). But I can send it if it's useful.
