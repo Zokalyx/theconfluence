@@ -40,10 +40,8 @@ Tables would consist of:
 - Username
 - Database insertion date
 - URL **(Currently not in DB)**
-- Last activity date **(Currently not in DB)**
-- Oldest activity date **(Currently not in DB)**
-- Oldest comment ID [Foreign] **(Currently not in DB)**
-- Oldest post ID [Foreign] **(Currently not in DB)**
+- Last comment ID [Foreign] **(Currently not in DB)**
+- Last post ID [Foreign] **(Currently not in DB)**
 - Member status **(Currently not in DB)**
 - Flair number **(Currently not in DB)**
 
