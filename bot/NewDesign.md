@@ -92,7 +92,7 @@ While the bot is continually scanning for posts, it will find the one correspond
 - When this happens, save that post as the new `lastrun`.
 - Scrape the post for the list of departures and arrivals.
 - Update the database, removing the membership of those in departures.
-- Update the database, giving the membership to those in arrivaly. Possibly create new entries in the database if user did not exist.
+- Update the database, giving the membership to those in arrivals. Possibly create new entries in the database if user did not exist.
 - Update the flair numbers of every user (arrivals is easy, just use the numbers in the post; it is for existing users that some math has to be done).
 
 Additionally, the bot might also update the flair numbers, add and remove users from the sub. This should, at least for some time, be an optional feature until it is well tested and accepted by u/theconfluencer.
