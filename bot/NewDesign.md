@@ -83,7 +83,7 @@ for redditor in redditors:
 print(departures)
 ```
 
-No database updates should have happend by now, because the ultimate source of modifications are posts by `u/theconfluencer`.
+No database updates should have happened by now, because the ultimate source of modifications are posts by `u/theconfluencer`.
 
 ## Updating the database
 
