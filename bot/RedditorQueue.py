@@ -68,7 +68,7 @@ class RedditorQueue(Queue):
         while not self.empty():
             yield self.get()
 
-    def fillQueue(self, minAmount) -> None:
+    def fill(self, minAmount) -> None:
         """
             Fills this queue until there are a minimum amount of redditors in it
 
@@ -79,7 +79,7 @@ class RedditorQueue(Queue):
         if minAmount > self.maxsize:
             minAmount = self.maxsize
         # Fill
-        while self.qsize < minAmount:
+        while self.qsize() < minAmount:
             self.cycle()
 
     def cycle(self) -> None:
@@ -295,3 +295,8 @@ for i in t.generator():
 print("\n--Empty queue--")
 for i in t.generator():
     print(i.name)
+
+# Test fill method
+print("\n--Filling--")
+t.fill(3)
+print(t.qsize())
