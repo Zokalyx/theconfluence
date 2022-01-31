@@ -49,6 +49,8 @@ Tables would consist of:
 
 ## Arrivals
 
+### Relevant files: [`redditorqueue.py`](https://github.com/Zokalyx/theconfluence/blob/main/newbot/redditorqueue.py)
+
 Following the [algorithm](https://github.com/Zokalyx/theconfluence/blob/main/docs/theconfluenceBOT.md), the bot would have a **queue** of 200 redditors in memory, adding a new one (and popping another one) every 1 minute. This way, whenever the bot is called for its duty, it will readily return 200 redditors. With this frequency, every redditor in the list would have been picked in the last 3 hours or so. This frequency can be adjusted if necessary.
 
 To reduce performance as much as possible, this can be scheduled to start 24h before a run is supposed to happen (leaving some margin in case u/theconfluencer decides to do the run early).
