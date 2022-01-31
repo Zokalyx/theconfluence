@@ -40,8 +40,8 @@ Tables would consist of:
 - Username
 - Database insertion date
 - URL **(Currently not in DB)**
-- Last comment ID [Foreign] **(Currently not in DB)**
-- Last post ID [Foreign] **(Currently not in DB)**
+- Last comment ID [Foreign] **(Currently not in DB | Or should this be found on-the-spot?)**
+- Last post ID [Foreign] **(Currently not in DB | Same as last)**
 - Member status **(Currently not in DB)**
 - Flair number **(Currently not in DB)**
 
@@ -91,9 +91,9 @@ While the bot is continually scanning for posts, it will find the one correspond
 - Scrape the post for the list of departures and arrivals.
 - Update the database, removing the membership of those in departures.
 - Update the database, giving the membership to those in arrivals. Possibly create new entries in the database if user did not exist.
-- Update the flair numbers of every user (arrivals is easy, just use the numbers in the post; it is for existing users that some math has to be done).
+- Update the flair numbers of every user in the database (arrivals is easy, just use the numbers in the post; it is for existing users that some math has to be done).
 
-Additionally, the bot might also update the flair numbers, add and remove users from the sub. This should, at least for some time, be an optional feature until it is well tested and accepted by u/theconfluencer.
+Additionally, the bot might also update the flair numbers, add and remove users from the subreddit itself. This should, at least for some time, be an optional feature until it is well tested and accepted by u/theconfluencer.
 
 ## Calling the bot
 
@@ -104,7 +104,7 @@ The bot should only accept calls from whitelisted members. This should be the or
   - Summary: contains retention, departures and arrivals.
   - Detailed arrivals: contains the original post or comment the redditor was selected from. This should also contain a few extra randoms in case u/theconfluencer needs to replace some user for any reason.
 - u/theconfluencer posts the weekly run post.
-- Bot posts the new flair numbers for the convenience of `u/theconfluencer`
+- Bot posts the new flair numbers for the convenience of u/theconfluencer
 - If a new or the original DM or a comment posted on this last post contains some special keyword, make the bot update the flairs. Also add the option to add and remove users from the subreddit.
 - If posts corresponding to the same run are already posted, delete those.
 
