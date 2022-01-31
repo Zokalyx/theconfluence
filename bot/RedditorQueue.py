@@ -122,8 +122,8 @@ class RedditorQueue(Queue):
         """
 
         try:
-            sub = self.getRandomSub()
-            post, pickOp = self.getRandomPost(sub)
+            sub, category = self.getRandomSub()
+            post, pickOp = self.getRandomPost(sub, category)
         except Exception as e:
             raise e
 
@@ -141,7 +141,7 @@ class RedditorQueue(Queue):
 
         return RedditorInfo(redditor.name, sub.display_name, post.id, pickOp, commentId)
         
-    def getRandomSub(self) -> Subreddit:
+    def getRandomSub(self) -> Tuple[Subreddit, str]:
         """
             Returns a random subreddit instance
         """
@@ -151,21 +151,23 @@ class RedditorQueue(Queue):
 
         # 80% chance of random subreddit
         if rand < 8:
+            category = "random"
             sub = self.reddit.random_subreddit(nsfw=self.allowNsfw)
-            hot_or_new = random.randint(0, 1)
         # 10% chance of r/popular
         elif rand < 9:
+            category = "popular"
             sub = self.reddit.subreddit("popular")
         # 10% chance of r/all
         elif rand < 10:
+            category = "all"
             sub = self.reddit.subreddit("all")
 
         if sub is None:
             raise Exception("Sub couldn't be read")
 
-        return sub
+        return sub, category
 
-    def getRandomPost(self, sub: Subreddit) -> Tuple[Submission, bool]:
+    def getRandomPost(self, sub: Subreddit, category: str) -> Tuple[Submission, bool]:
         """
             Picks a random post from a given subreddit
         """
@@ -173,11 +175,11 @@ class RedditorQueue(Queue):
         pickOp = False
 
         # Decide filter
-        if sub.display_name == "all":
+        if category == "all":
             filterByHot = True
             rand = random.randint(0, 4)
             pickOp = (rand == 0)
-        elif sub.display_name == "popular":
+        elif category == "popular":
             filterByHot = False
         else:
             rand = random.randint(0, 1)
