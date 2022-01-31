@@ -20,4 +20,6 @@ Suggestions are always welcome (u/Zokalyx)
 
 ## [Bot](https://www.reddit.com/user/TheconfluenceBOT)
 
-TODO
+Read the docs for the current bot documentation.
+
+A new, improved bot with access to a proper database is in development.
