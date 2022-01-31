@@ -526,7 +526,7 @@ def login_as(username):
     """
     if username == "theconfluenceBOT":
         return praw.Reddit(
-            client_id="0S1WpGMeuyOQkg",
+            client_id=env["BOT_ID"],
             client_secret=env["BOT_TOKEN"],
             username="theconfluenceBOT",
             password=env["BOT_PASS"],
@@ -534,7 +534,7 @@ def login_as(username):
         )
     elif username == "Zokalyx":
         return praw.Reddit(
-            client_id="xskzciRXmoU-JA",
+            client_id=env["ZOKA_ID"],
             client_secret=env["ZOKA_TOKEN"],
             username="Zokalyx",
             password=env["ZOKA_PASS"],

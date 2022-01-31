@@ -38,7 +38,7 @@ for i in range(len(leaders)):
 
 print("Updating 'Last' post")
 
-reddit = praw.Reddit(client_id="0S1WpGMeuyOQkg",
+reddit = praw.Reddit(client_id=environ["BOT_ID"],
                      client_secret=environ["BOT_TOKEN"],
                      username="theconfluenceBOT",
                      password=environ["BOT_PASS"],

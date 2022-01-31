@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-reddit = praw.Reddit(client_id="xskzciRXmoU-JA",
+reddit = praw.Reddit(client_id=environ["ZOKA_ID"],
                      client_secret=environ["ZOKA_TOKEN"],
                      username="Zokalyx",
                      password=environ["ZOKA_PASS"],
