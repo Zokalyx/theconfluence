@@ -114,4 +114,4 @@ The bot should only accept calls from whitelisted members. This should be the or
 
 I have a `posts.csv` file containing many old posts, going back to the start of the subreddit. These have been obtained by using the technique of scanning up to 1000 posts from individual users of the subreddit (so I can't guarantee I have them all, because there's probably at least one user that has more than 1000 posts since their oldest post in the sub). But I can send it if it's useful.
 
-If this technique is going to be used, the full list of members can be used - they can be obtained by scraping u/theconfluencer's posts or by using `probyuser.csv` (probably better).
+If this technique is going to be used, the full list of members will be needed, and they can be obtained by scraping u/theconfluencer's posts or by using `probyuser.csv` (probably better).
