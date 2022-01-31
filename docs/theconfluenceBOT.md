@@ -6,7 +6,7 @@ The bot has a [details and FAQ](https://www.reddit.com/user/theconfluenceBOT/com
 
 ## New bot
 
-New bot is in development. Read the latest [new design draft](https://github.com/Zokalyx/theconfluence/blob/main/theconfluenceBOT/newdesign.md).
+New bot is in development. Read the latest [new design draft](https://github.com/Zokalyx/theconfluence/blob/main/bot/newdesign.md).
 
 ## Instructions
 
