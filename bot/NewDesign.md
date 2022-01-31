@@ -5,7 +5,7 @@ These are my ideas as to how to implement the new bot.
 
 ## Schemas
 
-The bot would continuously check comments and posts from the Confluence (as streams) and save them in the database.
+The bot would continuously check comments and posts from the Confluence (as streams) and save them in the database. Ideally, the bot should be part of the subreddit so that there's no need to login into multiple accounts (one for the bot and one for another account).
 
 Tables would consist of:
 
@@ -108,6 +108,7 @@ The bot should only accept calls from whitelisted members. This should be the or
 - u/theconfluencer posts the weekly run post.
 - Bot posts the new flair numbers for the convenience of `u/theconfluencer`
 - If a new or the original DM or a comment posted on this last post contains some special keyword, make the bot update the flairs. Also add the option to add and remove users from the subreddit.
+- If posts corresponding to the same run are already posted, delete those.
 
 ## Note
 
