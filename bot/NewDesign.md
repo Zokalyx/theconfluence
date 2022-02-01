@@ -111,6 +111,8 @@ The bot should only accept calls from whitelisted members. This should be the or
 
 ## Reminders
 
+### Relevant files: [`Reminder.py`](Reminder.py)
+
 A cool feature might be to implement a system that reminds users if they haven't posted yet, say, 24hs before the new run. This feature, of course, would be optional and individual.
 
 ## Note
