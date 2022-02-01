@@ -142,3 +142,4 @@ When a run is skipped, modify the following files:
 - Add the week number to `data/broken.txt`
 - Add a corresponding entry in the website: `website/noruns/index.html`
 - Update `website/converter/script.js`. In this file, two numbers at the beginning have to be changed. Also, the definitions of `weekToRun` and `runToWeek` should be updated.
+- Update `retrieverun.py`, the part where week is calculated
