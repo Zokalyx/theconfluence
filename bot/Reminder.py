@@ -44,11 +44,9 @@ def remind() -> None:
         query = "SELECT createdUtc FROM submissions WHERE authorId = %s ORDER BY createdUtc DESC LIMIT 1"
         lastPostTime = db.fetchAll(query, (redditId,))
 
-        # Entries might be null
-        noTime = False
-        # User never interacted
+        # User never interacted (entries are null)
         if not lastCommentTime and not lastPostTime:
-            noTime = True
+            lastTime = None
         # User posted but didn't comment
         elif not lastCommentTime and lastPostTime:
             lastTime = lastPostTime[0][0]
@@ -62,7 +60,7 @@ def remind() -> None:
         reminder = False
 
         # No interactions ever
-        if noTime:
+        if lastTime is None:
             reminder = True
         # Else compare times
         elif lastTime < lastRunTime:
@@ -72,6 +70,10 @@ def remind() -> None:
         if reminder:
             LOGGER.info(f"Sending reminder to {name}")
             # redditor: Redditor = reddit.redditor(redditId)
-            # redditor.message("Friendly reminder", "You haven't posted or commented in The Confluence since the last run started.\n\nReply with \"stop\" to stop receiving reminders.")
+            # redditor.message(
+            #     "Friendly reminder",
+            #     "You haven't posted or commented in The Confluence since the last run started.\n\nReply with \"stop\" to stop receiving reminders."
+            # )
 
-remind()
+# Testing
+# remind()
