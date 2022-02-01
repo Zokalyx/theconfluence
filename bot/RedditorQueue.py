@@ -49,7 +49,7 @@ class RedditorQueue(Queue):
         reddit: Reddit,
         blacklist: Optional[list[str]] = [],
         allowNsfw: Optional[bool] = False
-    ) -> Queue[RedditorInfo]:
+    ):
         """
             Creates a RedditorQueue
 
