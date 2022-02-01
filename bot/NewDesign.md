@@ -38,12 +38,11 @@ Tables would consist of:
 - Database ID
 - User ID
 - Username
-- Database insertion date
-- URL **(Currently not in DB)**
-- Last comment ID [Foreign] **(Currently not in DB | Or should this be found on-the-spot?)**
-- Last post ID [Foreign] **(Currently not in DB | Same as last)**
 - Member status **(Currently not in DB)**
 - Flair number **(Currently not in DB)**
+- Reminder subscription **(Currently not in DB | Read [reminders](#reminders))**
+- URL **(Currently not in DB)**
+- Database insertion date
 
 ## Arrivals
 
