@@ -1,6 +1,7 @@
 import logging
 import random
 import DbHandler
+import time
 from queue import Queue
 from praw import Reddit
 from praw.models import Submission, Redditor, Comment, Subreddit, MoreComments
@@ -62,13 +63,15 @@ class RedditorQueue(Queue):
         self.allowNsfw = allowNsfw
         self.db = DbHandler.DbHandler()
         self._cache = []
+        self._cacheMaxSeconds = 3600  # One hour
+        self._lastCacheUpdate = 0
         super().__init__(maxsize)
 
-    def generator(self) -> Iterator[str]:
+    def __iter__(self) -> Iterator[str]:
         """
-            Returns a generator over all redditors in queue
+            Implements iteration over the queue
 
-            If generator is iterated over, queue gets cleared
+            Iterating consumes the queue
         """
         while not self.empty():
             yield self.get()
@@ -87,6 +90,31 @@ class RedditorQueue(Queue):
         while self.qsize() < minAmount:
             self.cycle()
 
+    def getList(self, amount) -> list[RedditorInfo]:
+        """
+            Returns a certain amount of random redditors or more and
+            saves them in the cache, in case this function is called
+            again in a short amount of time
+        """
+        # Sanitize input
+        if amount > self.maxsize:
+            amount = self.maxsize
+
+        # Use cache if available
+        # Check that cache has not "expired"
+        if time.time() - self._lastCacheUpdate < self._cacheMaxSeconds:
+            # Check that there are enough members in cache
+            if len(self._cache) >= amount:
+                return self._cache
+
+        # Otherwise, fill if necessary and use queue
+        self.fill(amount)
+        redditorList = [randomRedditor for randomRedditor in self]
+        # Save to cache
+        self._cache = redditorList
+        self._lastCacheUpdate = time.time()
+        return redditorList
+        
     def cycle(self) -> None:
         """
             Finds a random redditor to add to the queue
@@ -279,8 +307,21 @@ print("--Queue functionality--")
 t = RedditorQueue(200, reddit)
 for i in range(10):
     t.put_nowait(i)
-for i in t.generator():
+for i in t:
     print(i)
+
+# Cache functionality
+print("\n--Cache--")
+t = RedditorQueue(10, reddit)
+t._cacheMaxSeconds = 1
+for i in range(10):
+    t.put_nowait(i)
+print("Fresh:", t.getList(999))
+print("Cached:", t.getList(999))
+time.sleep(1)
+print("Cache expired:", t.getList(999))
+
+exit()
 
 # Database checks
 print("\n--Database checks--")
@@ -295,12 +336,12 @@ print(t.getRedditor().name)
 print("\n--Cycle twice--")
 t.cycle()
 t.cycle()
-for i in t.generator():
+for i in t:
     print(i.name)
 
 # Test empty queue
 print("\n--Empty queue--")
-for i in t.generator():
+for i in t:
     print(i.name)
 
 # Test fill method
