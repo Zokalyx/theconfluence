@@ -90,25 +90,25 @@ class RedditorQueue(Queue):
         while self.qsize() < minAmount:
             self.cycle()
 
-    def getList(self, amount) -> list[RedditorInfo]:
+    def getList(self, minAmount) -> list[RedditorInfo]:
         """
             Returns a certain amount of random redditors or more and
             saves them in the cache, in case this function is called
             again in a short amount of time
         """
         # Sanitize input
-        if amount > self.maxsize:
-            amount = self.maxsize
+        if minAmount > self.maxsize:
+            minAmount = self.maxsize
 
         # Use cache if available
         # Check that cache has not "expired"
         if time.time() - self._lastCacheUpdate < self._cacheMaxSeconds:
             # Check that there are enough members in cache
-            if len(self._cache) >= amount:
+            if len(self._cache) >= minAmount:
                 return self._cache
 
         # Otherwise, fill if necessary and use queue
-        self.fill(amount)
+        self.fill(minAmount)
         redditorList = [randomRedditor for randomRedditor in self]
         # Save to cache
         self._cache = redditorList
@@ -320,8 +320,6 @@ print("Fresh:", t.getList(999))
 print("Cached:", t.getList(999))
 time.sleep(1)
 print("Cache expired:", t.getList(999))
-
-exit()
 
 # Database checks
 print("\n--Database checks--")
