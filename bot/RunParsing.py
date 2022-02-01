@@ -12,7 +12,7 @@ def startsWithNumber(line: str) -> bool:
     return pattern.match(line)
 
 
-def cycleWhileNumber(lines: list[str], startIndex: int) -> Tuple[list[str], int]:
+def cycleWhileNumber(lines: list[str], startIndex: int) -> Tuple[list[Tuple[int, str]], int]:
     """
         Returns a list of consecutive lines that contain a number at
         the beginning, starting from the specified index
@@ -36,22 +36,22 @@ def cycleWhileNumber(lines: list[str], startIndex: int) -> Tuple[list[str], int]
         # Save second word (1st is number, 2nd is name, 3rd might be something random)
         # EG: 36 luri7555 cake
         # Also, underscores are always prefixed by a backslash, replace them
-        try:
-            saved.append(line.split()[1].replace("\\", ""))
-        except IndexError as e:
-            LOGGER.error("The following line couldn't be parsed:")
-            LOGGER.error(line)
-
-        # TODO: Should this be saved?
         number = int(line.split()[0])
+        try:
+            username = line.split()[1].replace("\\", "")
+        except IndexError as e:
+            LOGGER.error(f"The following line couldn't be parsed:\n{line}")
+
+        saved.append((number, username))
 
     return saved, index
 
 
-def parseRun(text: str) -> Tuple[list[str], list[str]]:
+def parseRun(text: str) -> Tuple[list[Tuple[int, str]], list[Tuple[int, str]]]:
     """
         Parses the text corresponding to a Run Post and returns
-        a list of usernames corresponding to departures and arrivals
+        a list of usernames and their flair numbers corresponding
+        to departures and arrivals
     """
 
     lines = [line.strip() for line in text.split("\n")]
