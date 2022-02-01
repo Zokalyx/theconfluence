@@ -1,9 +1,13 @@
+import logging
 import random
 import DbHandler
 from queue import Queue
 from praw import Reddit
 from praw.models import Submission, Redditor, Comment, Subreddit, MoreComments
 from typing import Iterator, Optional, Tuple
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class RedditorInfo:
@@ -57,6 +61,7 @@ class RedditorQueue(Queue):
         self.blacklist = blacklist
         self.allowNsfw = allowNsfw
         self.db = DbHandler.DbHandler()
+        self._cache = []
         super().__init__(maxsize)
 
     def generator(self) -> Iterator[str]:
@@ -94,7 +99,7 @@ class RedditorQueue(Queue):
                 redditor = self.getRedditor()
                 break
             except Exception as e:
-                print(e)
+                LOGGER.error(e)
         # Once redditor info was successfully obtained, add it
         if self.full():
             self.get()
@@ -242,7 +247,7 @@ class RedditorQueue(Queue):
         query = """
             SELECT name FROM redditors WHERE name = %s
         """
-        print("WARNING: `checkMembership` doesn't yet do what it's supposed to do")
+        LOGGER.error("`checkMembership` doesn't yet do what it's supposed to do")
         return (len(self.db.fetchAll(query, (name,))) > 0)
 
         # query = """
