@@ -47,7 +47,7 @@ Tables would consist of:
 
 ## Arrivals
 
-### Relevant files: [`redditorqueue.py`](https://github.com/Zokalyx/theconfluence/blob/main/newbot/redditorqueue.py)
+### Relevant files: [`redditorqueue.py`](RedditorQueue.py)
 
 Following the [algorithm](https://github.com/Zokalyx/theconfluence/blob/main/docs/theconfluenceBOT.md), the bot would have a **queue** of 200 redditors in memory, adding a new one (and popping another one) every 1 minute. This way, whenever the bot is called for its duty, it will readily return 200 redditors. With this frequency, every redditor in the list would have been picked (at most) in the last 3 hours or so. This frequency can be adjusted if necessary.
 
@@ -96,6 +96,8 @@ While the bot is continually scanning for posts, it will find the one correspond
 Additionally, the bot might also update the flair numbers, add and remove users from the subreddit itself. This should, at least for some time, be an optional feature until it is well tested and accepted by u/theconfluencer.
 
 ## Calling the bot
+
+### Relevant files: [`RunParsing.py`](RunParsing.py)
 
 The bot should only accept calls from whitelisted members. This should be the order of events.
 
