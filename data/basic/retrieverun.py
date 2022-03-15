@@ -120,6 +120,7 @@ username = input(f"{arr_num}: ")
 while username:
     arrs.insert(0, (arr_num, username))
     arr_num -= 1
+    username = input(f"{arr_num}: ")
 
 with open("../departures/{}.txt".format(week), "w") as departures:
     for dep in deps:
