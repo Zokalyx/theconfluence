@@ -4,9 +4,9 @@ $(document).ready(function() {
        "max" : week
     });
     $("#info_week").html(week)
-    $("#info_run").html(week-8)
+    $("#info_run").html(week-12)
     $("#run_place").attr({
-       "max" : week - 8
+       "max" : week - 12
     });
 });
 
@@ -70,8 +70,16 @@ function weekToRun(week) {
         ans = week - 6;
     } else if (week < 107) {
         ans = week - 7;
-    } else {
+    } else if (week < 111) {
         ans = week - 8;
+    } else if (week < 112) {
+        ans = week - 9;
+    } else if (week < 113) {
+        ans = week - 10;
+    } else if (week < 114) {
+        ans = week - 11;
+    } else {
+        ans = week - 12;
     }
     return ans;
 }
@@ -93,8 +101,10 @@ function runToWeek(run) {
 	    ans = run - (-6);
     } else if (run < 100){
         ans = run - (-7);
+    } else if (run < 103){
+        ans = 110
     } else {
-        ans = run - (-8);
+        ans = run - (-11);
     }
     return ans;
 }

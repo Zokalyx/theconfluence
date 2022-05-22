@@ -104,7 +104,7 @@ else:
 print(title)
 
 title_arr = title.split(" ")
-week = int(title_arr[1][0:-2]) + 8
+week = int(title_arr[1][0:-2]) + 12
 with open("../week.txt", "w") as wk:
     wk.write(str(week))
 print(f"week {week}")
